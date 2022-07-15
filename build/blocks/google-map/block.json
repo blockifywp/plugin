@@ -1,0 +1,72 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "blockify/google-map",
+  "title": "Google Map",
+  "category": "blockify",
+  "icon": "location-alt",
+  "textdomain": "blockify",
+  "supports": {
+    "align": true,
+    "alignWide": true,
+    "spacing": {
+      "margin": true
+    },
+    "__experimentalBorder": {
+      "width": true,
+      "style": true,
+      "color": true,
+      "radius": true,
+      "__experimentalDefaultControls": {
+        "width": true,
+        "color": true
+      }
+    }
+  },
+  "attributes": {
+    "apiKey": {
+      "type": "string",
+      "default": "AIzaSyAdNy_lBnfX6KyUxeoeOC0Lp2t_4y24QUk"
+    },
+    "lat": {
+      "type": "integer",
+      "default": 12.1212
+    },
+    "lng": {
+      "type": "integer",
+      "default": 12.1212
+    },
+    "address": {
+      "type": "string",
+      "default": "New York, NY, USA"
+    },
+    "zoom": {
+      "type": "integer",
+      "default": 9
+    },
+    "height": {
+      "type": "string",
+      "default": "300px"
+    },
+    "width": {
+      "type": "string",
+      "default": "100%"
+    },
+    "lightStyle": {
+      "type": "string",
+      "default": "default"
+    },
+    "darkStyle": {
+      "type": "string",
+      "default": "night-mode"
+    },
+    "darkMode": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "editorScript": "file:index.js",
+  "script": "file:script.js",
+  "editorStyle": "file:editor.css",
+  "style": "file:style.css"
+}

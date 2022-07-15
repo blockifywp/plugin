@@ -1,0 +1,46 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "blockify/divider",
+  "title": "Divider",
+  "icon": "editor-insertmore",
+  "category": "blockify",
+  "textdomain": "blockify",
+  "keywords": [
+    "Popup"
+  ],
+  "supports": {
+    "align": [
+      "full",
+      "wide"
+    ],
+    "alignWide": true
+  },
+  "attributes": {
+    "height": {
+      "type": "string",
+      "default": "120px"
+    },
+    "foregroundColor": {
+      "type": "string",
+      "default": "currentColor"
+    },
+    "foregroundGradient": {
+      "type": "string"
+    },
+    "backgroundColor": {
+      "type": "string"
+    },
+    "backgroundGradient": {
+      "type": "string"
+    },
+    "svgPath": {
+      "type": "string",
+      "default": "M1000 120H0L1000 0v120z"
+    }
+  },
+  "editorScript": "file:index.js",
+  "script": "file:script.js",
+  "editorStyle": "file:editor.css",
+  "style": "file:style.css"
+}
