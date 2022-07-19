@@ -3,6 +3,7 @@
   "apiVersion": 2,
   "name": "blockify/accordion",
   "title": "Accordion",
+  "description": "A simple, customizable, accordion/faq block.",
   "category": "blockify",
   "icon": "list-view",
   "textdomain": "blockify",

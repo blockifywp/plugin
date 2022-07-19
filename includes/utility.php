@@ -17,7 +17,6 @@ use function filemtime;
 use function get_theme_support;
 use function in_array;
 use function implode;
-use function is_array;
 use function json_encode;
 use function libxml_clear_errors;
 use function libxml_use_internal_errors;

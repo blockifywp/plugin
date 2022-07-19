@@ -1,7 +1,8 @@
 # Blockify Plugin
 
-Full site editing theme framework and block toolkit.
-Visit [https://wordpress.org/plugins/blockify](https://wordpress.org/plugins/blockify)
+Full site editing theme framework and block toolkit. Full documentation coming soon!
+
+Visit [https://wordpress.org/plugins/blockify](https://wordpress.org/plugins/blockify) for more information.
 
 ## Installation
 
@@ -11,11 +12,16 @@ Visit [https://wordpress.org/plugins/blockify](https://wordpress.org/plugins/blo
 
 ## Theme Developers
 
-Blockify was built for you! Add the code snippet below to your parent or child theme to configure your settings:
+Blockify was built for you! It should work out of the box with any standard FSE theme. Just add the code snippet below to your parent theme, child theme or custom plugin to begin configuring your settings:
 
 ```php
-// Configure block toolkit.
+// Filter Blockify config.
 add_theme_support( 'blockify', [
+
+    // Remove all blocks except icon.
+    'blocks' => [
+        'icon',
+    ],   
 
 	// Modify default block supports.
 	'blockSupports' => [
@@ -24,7 +30,7 @@ add_theme_support( 'blockify', [
 		],
 	],
 
-	// Block styles to be registered with JS.
+	// Block styles to be registered correctly with JS.
 	'blockStyles'   => [
 		'unregister' => [
 			[

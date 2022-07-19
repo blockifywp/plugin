@@ -4,7 +4,10 @@ declare( strict_types=1 );
 
 namespace Blockify;
 
+use function array_map;
+use function basename;
 use function str_contains;
+use const GLOB_ONLYDIR;
 
 $defaults = [];
 
@@ -344,6 +347,23 @@ $defaults['darkMode'] = [
 	'neutral-50'  => 'neutral-700',
 	'neutral-25'  => 'neutral-800',
 	'white'       => 'neutral-900',
+];
+
+$defaults['blocks'] = [
+	'accordion',
+	'breadcrumbs',
+	'counter',
+	'divider',
+	// 'google-map',
+	'icon',
+	// 'newsletter',
+	'slider',
+	'tabs',
+];
+
+$defaults['extensions'] = [
+	// 'templateParts',
+	'pageTitle',
 ];
 
 return $defaults;

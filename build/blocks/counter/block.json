@@ -57,7 +57,7 @@
     },
     "duration": {
       "type": "string",
-      "default": "3"
+      "default": "2"
     },
     "delay": {
       "type": "string",

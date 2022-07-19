@@ -3,7 +3,7 @@ Contributors: blockify
 Requires at least: 6.0
 Tested up to: 6.0
 Requires PHP: 7.4
-Stable tag: 0.0.6
+Stable tag: 0.0.7
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate Link:
@@ -22,7 +22,7 @@ Every block and extension included has been carefully chosen, in order to extend
 
 Block extensions are additional controls added to core blocks. They are helpful with site building, allowing you finer control over each blocks appearance. Almost every control and block has been built with 100% native WordPress components, and PHP filters are provided for developers.
 
-- **NEW! Box Shadow:** Create box shadows on almost any type of block.
+- **Box Shadow:** Create box shadows on almost any type of block.
 
 - **Absolute Positioning:** Change the positioning of almost any block, giving you almost unlimited control over your design.
 
@@ -50,9 +50,9 @@ Block extensions are additional controls added to core blocks. They are helpful 
 
 ### Full Site Editing
 
-- **NEW! Google Fonts:** Automatically downloads and locally serves Google Fonts selected in the site editor. The Blockify theme provides an example selection of variable Google fonts for you to choose from and select from the site editor.
+- **Google Fonts:** Automatically downloads and locally serves Google Fonts selected in the site editor. The Blockify theme provides an example selection of variable Google fonts for you to choose from and select from the site editor.
 
-- **NEW! Template Parts:** Easily control the display of template parts on a per page level. This reduces the amount of templates required by themes.
+- **Template Parts:** Easily control the display of template parts on a per page level. This reduces the amount of templates required by themes.
 
 ### Extra Features
 
@@ -67,6 +67,10 @@ Block extensions are additional controls added to core blocks. They are helpful 
 - **Code Splitting:** All CSS and JS assets are separated and conditionally loaded only when required by a page.
 
 - **Hook System:** Every line of code in Blockify can be modified with hooks. There are plenty of actions and filters provided for developers to customize almost every aspect of the editor with plain old PHP.
+
+### Coming Soon
+
+- **Mailchimp:** Mailchimp integration with the newsletter block is almost ready.
 
 ### Pro (coming soon!)
 
@@ -113,8 +117,13 @@ Glad you asked! It couldn't be easier, simply copy and paste the code snippet be
 
 
 `
-// Configure block toolkit.
+// Filter Blockify config.
 add_theme_support( 'blockify', [
+
+    // Remove all blocks except icon.
+    'blocks' => [
+        'icon',
+    ],
 
 	// Modify default block supports.
 	'blockSupports' => [
@@ -123,7 +132,7 @@ add_theme_support( 'blockify', [
 		],
 	],
 
-	// Block styles to be registered with JS.
+	// Block styles to be registered correctly with JS.
 	'blockStyles'   => [
 		'unregister' => [
 			[
@@ -158,7 +167,17 @@ Parent themes, child themes and plugins can all be used to modify the default be
 2. Example of block extensions
 3. Example of text formats
 
+== Copyright ==
+
+This plugin, like WordPress, is licensed under the GPL.
+
+© Copyright 2022 BlockifyWP.
+
 == Changelog ==
+
+= 0.0.7 - July 19, 2022=
+* Add: Accordion bloc description
+* Update: Add blocks to config
 
 = 0.0.6 - July 19, 2022=
 * Add: Block descriptions
@@ -177,7 +196,3 @@ Parent themes, child themes and plugins can all be used to modify the default be
 
 = 0.0.1 - June 20, 2022=
 * Initial commit:
-
-== Copyright ==
-
-This plugin, like WordPress, is licensed under the GPL.

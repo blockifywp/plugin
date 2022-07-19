@@ -86,10 +86,16 @@ function render_newsletter_block( string $content, array $block ): string {
 	return $content;
 }
 
-
 add_action( 'admin_post_blockify_newsletter', NS . 'handle_form_submission' );
-add_action( 'admin_post_nopriv_blockify_newsletter', NS . 'handle_form_submission' );
-
+/**
+ * Handles form submissions (creates new WordPress subscriber).
+ *
+ * @since 0.0.1
+ *
+ * @todo Add mailchimp support.
+ *
+ * @return void
+ */
 function handle_form_submission(): void {
 	$referer = isset( $_POST['_wp_http_referer'] ) ? esc_url( $_POST['_wp_http_referer'] ) : '';
 

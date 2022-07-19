@@ -28,15 +28,7 @@ add_action( 'init', NS . 'register_block_types' );
  * @return void
  */
 function register_block_types(): void {
-	$block_types = [];
-
-	foreach ( glob( DIR . 'build/blocks/*', GLOB_ONLYDIR ) as $dir ) {
-		$block_types[] = basename( $dir );
-	}
-
-	$block_types = apply_filters( 'blockify_blocks', $block_types );
-
-	foreach ( $block_types as $block_type ) {
+	foreach ( get_config( 'blocks' ) as $block_type ) {
 		register_block_type( DIR . 'build/blocks/' . $block_type );
 	}
 }

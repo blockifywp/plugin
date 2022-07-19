@@ -1,11 +1,12 @@
 <?php
 /**
- * Plugin Name: Blockify
+ * Plugin Name: Blockify - FSE Theme Framework, Block Library and Toolkit.
+ *
  * Plugin URI:  https://blockifywp.com/
- * Description: Full site editing theme framework, patterns, blocks, extensions and more.
+ * Description: A lightweight (1kb) block library and toolkit that supercharges Full Site Editing themes.
  * Author:      Blockify
  * Author URI:  https://blockifywp.com/about/
- * Version:     0.0.6
+ * Version:     0.0.7
  * License:     GPLv2-or-Later
  * Text Domain: blockify
  */
@@ -14,6 +15,7 @@ declare( strict_types=1 );
 
 namespace Blockify;
 
+use function is_readable;
 use const DIRECTORY_SEPARATOR;
 use const PHP_VERSION;
 use function add_action;
@@ -48,5 +50,8 @@ function load(): void {
 	require_once DIR . 'includes/settings.php';
 	require_once DIR . 'includes/enqueue.php';
 
-	array_map( fn( $file ) => require_once $file, glob( DIR . 'includes/blocks/*.php' ) );
+	array_map(
+		fn( $file ) => require_once $file,
+		glob( __DIR__ . '/includes/*.php' )
+	);
 }
