@@ -1,6 +1,7 @@
 # Blockify Plugin
 
 Full site editing theme framework and block toolkit.
+Visit [https://wordpress.org/plugins/blockify](https://wordpress.org/plugins/blockify)
 
 ## Installation
 
@@ -10,31 +11,40 @@ Full site editing theme framework and block toolkit.
 
 ## Theme Developers
 
-Follow the steps below to enable Blockify support and configure your settings.
-
-1. Add theme support:
+Blockify was built for you! Add the code snippet below to your parent or child theme to configure your settings:
 
 ```php
+// Configure block toolkit.
 add_theme_support( 'blockify', [
-    'blockSupports' => [
-        'core/paragraph' => [
-            'alignWide' => true,
-        ],   
-    ],
-    'blockStyles' => [
-        'unregister' => [
-            [
-		        'type' => 'core/separator',
-		        'name' => [ 'wide', 'dots' ],
-	        ]
-        ],
-        'register' => [
-            [
-			    'type'  => 'core/button',
-			    'name'  => 'secondary',
-			    'label' => __( 'Secondary', 'blockify' ),
-		    ]
-        ]
-    ]  
+
+	// Modify default block supports.
+	'blockSupports' => [
+		'core/paragraph' => [
+			'alignWide' => true,
+		],
+	],
+
+	// Block styles to be registered with JS.
+	'blockStyles'   => [
+		'unregister' => [
+			[
+				'type' => 'core/separator',
+				'name' => [ 'wide', 'dots' ],
+			],
+		],
+		'register'   => [
+			[
+				'type'  => 'core/button',
+				'name'  => 'secondary',
+				'label' => __( 'Secondary', 'blockify' ),
+			],
+		],
+	],
+
+	// Colors to swap (requires pro).
+	'darkMode'      => [
+		'black' => 'white',
+		'white' => 'black',
+	],
 ] );
 ```
