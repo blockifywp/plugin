@@ -3,7 +3,7 @@
   "apiVersion": 2,
   "name": "blockify/newsletter",
   "title": "Newsletter",
-  "description": "Displays a newsletter block.",
+  "description": "Displays a newsletter block. NOTE: This block is still experimental.",
   "icon": "email",
   "category": "blockify",
   "textdomain": "blockify",

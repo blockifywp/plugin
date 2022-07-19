@@ -3,6 +3,7 @@
   "apiVersion": 2,
   "name": "blockify/google-map",
   "title": "Google Map",
+  "description": "Lightweight yet customizable Google Map block. NOTE: This block is still experimental.",
   "category": "blockify",
   "icon": "location-alt",
   "textdomain": "blockify",

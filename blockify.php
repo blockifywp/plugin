@@ -5,7 +5,7 @@
  * Description: Full site editing theme framework, patterns, blocks, extensions and more.
  * Author:      Blockify
  * Author URI:  https://blockifywp.com/about/
- * Version:     0.0.5
+ * Version:     0.0.6
  * License:     GPLv2-or-Later
  * Text Domain: blockify
  */

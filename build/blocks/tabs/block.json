@@ -3,6 +3,7 @@
   "apiVersion": 2,
   "name": "blockify/tabs",
   "title": "Tabs",
+  "description": "Simple and useful tabbed content section block.",
   "icon": "table-row-after",
   "category": "blockify",
   "textdomain": "blockify",

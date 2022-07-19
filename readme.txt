@@ -3,7 +3,7 @@ Contributors: blockify
 Requires at least: 6.0
 Tested up to: 6.0
 Requires PHP: 7.4
-Stable tag: 0.0.5
+Stable tag: 0.0.6
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate Link:
@@ -159,6 +159,9 @@ Parent themes, child themes and plugins can all be used to modify the default be
 3. Example of text formats
 
 == Changelog ==
+
+= 0.0.6 - July 19, 2022=
+* Add: Block descriptions
 
 = 0.0.5 - July 19, 2022=
 * Add: Screenshots

@@ -3,6 +3,7 @@
   "apiVersion": 2,
   "name": "blockify/counter",
   "title": "Counter",
+  "description": "Counts up or down from one number to another.",
   "icon": "clock",
   "category": "blockify",
   "textdomain": "blockify",

@@ -3,6 +3,7 @@
   "apiVersion": 2,
   "name": "blockify/icon",
   "title": "Icon",
+  "description": "A lightweight, yet powerful icon block. Default icons include Dashicons, Social icons and WordPress editor icons.",
   "icon": "star-empty",
   "category": "blockify",
   "textdomain": "blockify",

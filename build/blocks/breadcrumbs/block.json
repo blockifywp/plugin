@@ -3,6 +3,7 @@
   "apiVersion": 2,
   "name": "blockify/breadcrumbs",
   "title": "Breadcrumbs",
+  "description": "Displays page and post breadcrumbs. This block will be removed if WordPress core adds a breadcrumbs block.",
   "icon": "controls-back",
   "category": "blockify",
   "textdomain": "blockify",

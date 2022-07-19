@@ -3,6 +3,7 @@
   "apiVersion": 2,
   "name": "blockify/divider",
   "title": "Divider",
+  "description": "Separates page sections with different shapes and styles.",
   "icon": "editor-insertmore",
   "category": "blockify",
   "textdomain": "blockify",
