@@ -4,6 +4,8 @@ declare( strict_types=1 );
 
 namespace Blockify;
 
+use const DIRECTORY_SEPARATOR;
+use const WP_CONTENT_DIR;
 use function add_action;
 use function add_editor_style;
 use function apply_filters;
@@ -13,11 +15,12 @@ use function end;
 use function explode;
 use function file_exists;
 use function file_get_contents;
+use function filemtime;
 use function function_exists;
 use function glob;
-use function implode;
 use function in_array;
 use function is_a;
+use function plugin_dir_url;
 use function sprintf;
 use function str_contains;
 use function str_replace;
@@ -26,7 +29,6 @@ use function wp_add_inline_style;
 use function wp_enqueue_style;
 use function wp_get_global_styles;
 use function wp_get_global_settings;
-use const DIRECTORY_SEPARATOR;
 
 add_action( 'enqueue_block_editor_assets', NS . 'enqueue_editor_scripts_styles' );
 /**
@@ -38,10 +40,14 @@ add_action( 'enqueue_block_editor_assets', NS . 'enqueue_editor_scripts_styles' 
  */
 function enqueue_editor_scripts_styles(): void {
 	wp_dequeue_style( 'wp-block-library-theme' );
+	wp_add_inline_style( 'global-styles', get_inline_css() );
 
-	enqueue_asset( 'index.js' );
 	enqueue_asset( 'editor.css' );
-	enqueue_asset( 'script.js' );
+	enqueue_asset( 'index.js', [
+		'deps' => [ 'wp-edit-site' ],
+	] );
+
+	wp_localize_script( 'blockify-index', 'blockify', get_script_data() );
 }
 
 add_action( 'after_setup_theme', NS . 'add_editor_styles' );
@@ -57,8 +63,8 @@ function add_editor_styles(): void {
 
 	add_editor_style( $plugin_dir . 'build/style.css' );
 
-	foreach ( glob( DIR . 'build/styles/*.css' ) as $core_block_style ) {
-		add_editor_style( 'build/styles/' . basename( $core_block_style ) );
+	foreach ( glob( DIR . 'build/core/**/style-style.css' ) as $file ) {
+		add_editor_style( $plugin_dir . 'build/core/' . basename( dirname( $file ) ) . '/style-style.css' );
 	}
 
 	add_editor_style( 'style.css' );
@@ -75,24 +81,56 @@ add_action( 'wp_enqueue_scripts', NS . 'enqueue_scripts_styles' );
 function enqueue_scripts_styles(): void {
 	global $wp_styles;
 
+	$inline = apply_filters( 'blockify_load_inline_css', true );
+
 	wp_dequeue_style( 'wp-block-library-theme' );
-	enqueue_asset( 'style.css' );
-	enqueue_asset( 'script.js' );
+	wp_add_inline_style( 'global-styles', get_inline_css() );
 
-	// Block styles.
-	if ( is_a( $wp_styles, 'WP_Styles' ) ) {
-		foreach ( $wp_styles->registered as $handle => $style ) {
-			if ( isset( array_flip( $wp_styles->queue )[ $handle ] ) ) {
-				$slug = str_replace( 'wp-block-', '', $handle );
-				$file = DIR . 'build/styles/' . $slug . '.css';
+	if ( $inline ) {
+		wp_add_inline_style(
+			'global-styles',
+			file_get_contents( DIR . 'build/style.css' )
+		);
+	} else {
+		enqueue_asset( 'style.css' );
+	}
 
-				if ( file_exists( $file ) ) {
-					wp_add_inline_style(
+	if ( ! is_a( $wp_styles, 'WP_Styles' ) ) {
+		return;
+	}
+
+	foreach ( $wp_styles->registered as $handle => $style ) {
+		if ( ! isset( array_flip( $wp_styles->queue )[ $handle ] ) ) {
+			continue;
+		}
+
+		$slug = str_replace( 'wp-block-', '', $handle );
+		$file = DIR . 'build/core/' . $slug . '/style-style.css';
+
+		if ( file_exists( $file ) ) {
+			if ( $inline ) {
+				wp_add_inline_style(
+					$handle,
+					file_get_contents( $file )
+				);
+			} else {
+				wp_enqueue_style(
+					'blockify-core-' . $slug,
+					plugin_dir_url( FILE ) . 'build/core/' . $slug . '/style-style.css',
+					[
 						$handle,
-						file_get_contents( $file )
-					);
-				}
+						...get_asset_deps( "core/$slug/style" ),
+					],
+					get_asset_version( "core/$slug/style" ),
+				);
+				enqueue_asset( "core/$slug/script.js" );
 			}
+		}
+
+		if ( file_exists( DIR . 'build/core/' . $slug . '/script.js' ) ) {
+			enqueue_asset( "core/$slug/script.js", [
+				'deps' => [],
+			] );
 		}
 	}
 }
@@ -111,51 +149,61 @@ function enqueue_google_fonts(): void {
 		return;
 	}
 
-	$script        = require DIR . 'build/script.asset.php';
 	$global_styles = wp_get_global_styles();
+	$google_fonts  = [];
+
+	if ( isset( $global_styles['blocks']['core/heading']['typography']['fontFamily'] ) ) {
+		$google_fonts[ $global_styles['blocks']['core/heading']['typography']['fontFamily'] ] = $global_styles['blocks']['core/heading']['typography']['fontWeight'];
+	}
 
 	if ( isset( $global_styles['typography']['fontFamily'] ) ) {
-		$setting = $global_styles['typography']['fontFamily'];
+		$google_fonts[ $global_styles['typography']['fontFamily'] ] = $global_styles['typography']['fontWeight'];
+	}
 
-		if ( str_contains( $setting, 'var(--' ) ) {
-			$explode = explode( '--', str_replace( ')', '', $setting ) );
+	foreach ( $google_fonts as $google_font => $font_weight ) {
+		if ( str_contains( $google_font, 'var(--' ) ) {
+			$explode_font = explode( '--', str_replace( ')', '', $google_font ) );
 		} else {
-			$explode = explode( '|', $setting );
+			$explode_font = explode( '|', $google_font );
 		}
 
-		$slug = end( $explode );
-
-		/**
-		 * Allows optimization of font weight resources.
-		 *
-		 * @var string $slug
-		 */
-		$font_weights = apply_filters( 'blockify_font_weights', [
-			100,
-			200,
-			300,
-			400,
-			500,
-			600,
-			700,
-			800,
-			900,
-		], $slug );
-
-		if ( ! in_array( $slug, [ 'sans-serif', 'serif', 'monospace' ] ) ) {
-			$name = ucwords( str_replace( '-', '+', $slug ) );
-
-			wp_enqueue_style(
-				'blockify-' . $slug,
-				wptt_get_webfont_url( sprintf(
-					'https://fonts.googleapis.com/css2?family=%s:wght@%s&display=swap',
-					$name,
-					implode( ';', $font_weights )
-				) ),
-				[ SLUG ],
-				$script['version']
-			);
+		if ( str_contains( $font_weight, 'var(--' ) ) {
+			$explode_weight = explode( '--', str_replace( ')', '', $font_weight ) );
+		} else {
+			$explode_weight = explode( '|', $font_weight );
 		}
+
+		$slug   = end( $explode_font );
+		$weight = end( $explode_weight );
+
+		if ( in_array( $slug, [ 'sans-serif', 'serif', 'monospace' ] ) ) {
+			return;
+		}
+
+		$font_weights = [
+			'thin'        => 100,
+			'extra-light' => 200,
+			'light'       => 300,
+			'regular'     => 400,
+			'medium'      => 500,
+			'semi-bold'   => 600,
+			'bold'        => 700,
+			'extra-bold'  => 800,
+			'black'       => 900,
+		];
+
+		$name = str_replace( ' ', '+', ucwords( str_replace( [ '-', '' ], ' ', $slug ) ) );
+
+		wp_enqueue_style(
+			'blockify-font-' . $slug,
+			wptt_get_webfont_url( sprintf(
+				'https://fonts.googleapis.com/css2?family=%s:wght@%s&display=swap',
+				$name,
+				$font_weights[ $weight ] ?? 400
+			) ),
+			[ 'global-styles' ],
+			filemtime( WP_CONTENT_DIR . '/fonts' )
+		);
 	}
 }
 
@@ -174,27 +222,24 @@ function admin_scripts_styles() {
 	if ( $conditions ) {
 		enqueue_asset( 'index.js' );
 		enqueue_asset( 'editor.css' );
+		wp_localize_script( 'blockify-index', 'blockify', get_script_data() );
 	}
 }
 
-add_filter( 'blockify_index_data', NS . 'add_editor_data' );
 /**
- * Adds plugin data for editor scripts.
+ * Returns default plugin script data.
  *
- * @since 0.0.2
- *
- * @param array $data
+ * @since 0.0.1
  *
  * @return array
  */
-function add_editor_data( array $data ): array {
-	$data['ajaxUrl'] = admin_url( 'admin-ajax.php' );
-	$data['nonce']   = wp_create_nonce( 'blockify' );
-
-	return $data;
+function get_script_data(): array {
+	return array_merge_recursive( [
+		'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+		'nonce'   => wp_create_nonce( 'blockify' ),
+	], get_config() );
 }
 
-add_filter( 'blockify_style_inline', NS . 'add_default_custom_properties', 99 );
 /**
  * Adds custom properties.
  *
@@ -202,21 +247,21 @@ add_filter( 'blockify_style_inline', NS . 'add_default_custom_properties', 99 );
  *
  * @param string $css
  *
- * @return void
+ * @return string
  */
-function add_default_custom_properties( string $css ): string {
+function get_inline_css( string $css = '' ): string {
 	$settings = wp_get_global_settings();
 
-	$css .= ':root{' . css_rules_to_string( [
-			'--wp--custom--font-stack--sans-serif' => '-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif',
-			'--wp--custom--font-stack--serif'      => 'Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol',
-			'--wp--custom--font-stack--monospace'  => 'Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace',
-		] ) . '}';
+	$scrollbar_width = get_os() === 'windows' ? '12px' : '15px';
+	$content_size    = $settings['layout']['contentSize'] ?? '768px';
+	$wide_size       = $settings['layout']['wideSize'] ?? '1280px';
+	$css             = $css . <<<CSS
+	body {
+		--scrollbar--width: $scrollbar_width;
+		--wp--custom--layout--content-size: $content_size;
+		--wp--custom--layout--wide-size: $wide_size;
+	}
+CSS;
 
-	$css .= 'body{' . css_rules_to_string( [
-			'--wp--custom--layout--content-size' => $settings['layout']['contentSize'] ?? '768px',
-			'--wp--custom--layout--wide-size'    => $settings['layout']['wideSize'] ?? '1280px',
-		] ) . '}';
-
-	return $css;
+	return apply_filters( 'blockify_inline_css', minify_css( $css ) );
 }

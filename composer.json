@@ -1,6 +1,6 @@
 {
     "name": "blockify/plugin",
-    "type": "library",
+    "type": "wordpress-plugin",
     "authors": [
         {
             "name": "Blockify",

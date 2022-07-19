@@ -16,6 +16,7 @@
   "supports": {
     "align": true,
     "alignWide": true,
+    "boxShadow": true,
     "inserter": true,
     "color": {
       "background": true,

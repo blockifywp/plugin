@@ -9,6 +9,7 @@
   "supports": {
     "align": true,
     "alignWide": true,
+    "boxShadow": true,
     "spacing": {
       "margin": true
     },

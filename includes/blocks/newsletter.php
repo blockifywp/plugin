@@ -143,7 +143,7 @@ function handle_form_submission(): void {
 		$redirect_page = get_permalink( (int) $_POST['redirect_page'] );
 	}
 
-	if ( $insert_user && ! get_user_by( 'email', $user_email ) ) {
+	if ( $insert_user && ! get_user_by( 'email', $user_email ) && isset( $user_data['user_login'] ) ) {
 		$user = wp_insert_user( apply_filters( SLUG . 'insert_user_data', $user_data ) );
 
 		if ( $agreement ) {

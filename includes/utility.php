@@ -6,36 +6,30 @@ namespace Blockify;
 
 use DOMDocument;
 use DOMElement;
-use function add_filter;
 use function apply_filters;
+use function array_key_exists;
+use function array_merge_recursive;
 use function array_values;
-use function basename;
-use function dirname;
+use function defined;
+use function explode;
 use function file_exists;
 use function filemtime;
-use function get_stylesheet_directory;
-use function get_stylesheet_directory_uri;
-use function get_template_directory;
-use function get_template_directory_uri;
-use function is_admin;
+use function get_theme_support;
+use function in_array;
+use function implode;
+use function is_array;
 use function json_encode;
 use function libxml_clear_errors;
 use function libxml_use_internal_errors;
-use function plugin_dir_url;
-use function str_contains;
-use function trim;
-use function explode;
-use function str_replace;
-use function in_array;
-use function implode;
-use function defined;
 use function mb_convert_encoding;
+use function php_uname;
+use function plugin_dir_url;
 use function preg_match;
 use function preg_replace;
+use function str_replace;
+use function trim;
 use function wp_enqueue_script;
 use function wp_enqueue_style;
-use function wp_parse_args;
-use const DIRECTORY_SEPARATOR;
 
 const CAMEL_CASE    = 'camel';
 const PASCAL_CASE   = 'pascal';
@@ -269,25 +263,6 @@ function css_rules_to_array( string $css ): array {
 }
 
 /**
- * Converts
- *
- * @since 0.0.2
- *
- * @param array $rules
- *
- * @return string
- */
-function css_rules_to_string( array $rules ): string {
-	$css = '';
-
-	foreach ( $rules as $property => $value ) {
-		$css .= $property . ':' . $value . ';';
-	}
-
-	return $css;
-}
-
-/**
  * Returns an attribute value from a HTML element string, with fallback.
  *
  * @since 0.0.2
@@ -388,25 +363,20 @@ function console_log( $data ): void {
  * @since 0.0.2
  *
  * @param string $base File basename relative to build directory. E.g style.css.
+ * @param array  $args Default args to merge.
  *
  * @return void
  */
-function enqueue_asset( string $base ): void {
-	$build   = DIR . 'build/';
-	$file    = $build . $base;
+function enqueue_asset( string $base, array $args = [] ): void {
 	$explode = explode( '.', $base );
-	$name    = $explode[0];
+	$name    = str_replace( '/', '-', $explode[0] );
 	$type    = str_replace( '.', '', $explode[1] ) ?? '';
-	$asset   = file_exists( $file ) ? require $build . $name . '.asset.php' : [
-		'dependencies' => [],
-		'version'      => filemtime( $file ),
-	];
 
 	$args = [
 		'handle'  => 'blockify-' . $name,
 		'src'     => plugin_dir_url( FILE ) . 'build/' . $base,
-		'deps'    => $asset['dependencies'],
-		'version' => $asset['version'],
+		'deps'    => [ ...( $args['deps'] ?? [] ), ...get_asset_deps( $name ) ],
+		'version' => $args['version'] ?? get_asset_version( $name ),
 	];
 
 	if ( $type === 'css' ) {
@@ -420,26 +390,152 @@ function enqueue_asset( string $base ): void {
 
 	} else if ( $type === 'js' ) {
 		wp_enqueue_script( ...array_values( $args ) );
-
-		$localize = [
-			'handle' => $args['handle'],
-			'object' => SLUG,
-			'data'   => apply_filters( "blockify_{$name}_data", [] ),
-		];
-
-		if ( ! empty( $localize['data'] ) ) {
-			wp_localize_script( ...array_values( $localize ) );
-		}
 	}
 }
 
 /**
- * Returns active style variation.
+ * Returns PHP asset file.
  *
- * @since 0.0.2
+ * @since 0.0.9
+ *
+ * @param string $name
+ *
+ * @return array
+ */
+function get_asset_file( string $name ): array {
+	static $files = [];
+
+	if ( ! array_key_exists( $name, $files ) ) {
+		$file           = DIR . 'build/' . $name . '.asset.php';
+		$files[ $name ] = file_exists( $file ) ? require $file : [
+			'dependencies' => [],
+			'version'      => (string) filemtime( DIR ),
+		];
+	}
+
+	return $files[ $name ];
+}
+
+/**
+ * Returns asset dependencies.
+ *
+ * @since 0.0.9
+ *
+ * @param string $name
+ *
+ * @return array
+ */
+function get_asset_deps( string $name ): array {
+	return get_asset_file( $name )['dependencies'];
+}
+
+/**
+ * Returns asset version.
+ *
+ * @since 0.0.9
+ *
+ * @param string $name
  *
  * @return string
  */
-function get_style_variation(): string {
-	return wp_get_global_settings()['custom']['variation'] ?? 'default';
+function get_asset_version( string $name ): string {
+	return get_asset_file( $name )['version'];
+}
+
+/**
+ * Parses and registers PHP from file.
+ *
+ * @since 0.0.8
+ *
+ * @param string $file
+ *
+ * @return void
+ */
+function register_block_pattern_from_file( string $file ): void {
+	$headers = get_file_data( $file, [
+		'categories'  => 'Categories',
+		'title'       => 'Title',
+		'slug'        => 'Slug',
+		'block_types' => 'Block Types',
+	] );
+
+	$categories = explode( ',', $headers['categories'] );
+
+	ob_start();
+	include $file;
+	$content = ob_get_clean();
+
+	$pattern = [
+		'title'      => $headers['title'],
+		'content'    => $content,
+		'categories' => [ ...$categories ],
+	];
+
+	if ( $headers['block_types'] ) {
+		$pattern['blockTypes'] = $headers['block_types'];
+	}
+
+	foreach ( $categories as $category ) {
+		register_block_pattern_category( $category, [
+			'label' => ucwords( $category ),
+		] );
+	}
+
+	register_block_pattern( $headers['slug'], $pattern );
+}
+
+/**
+ * Detects the current operating system.
+ *
+ * @since 0.0.9
+ *
+ * @return string
+ */
+function get_os(): string {
+	$user_agent = $_SERVER['HTTP_USER_AGENT'] ?? '';
+
+	if ( ! $user_agent ) {
+		return php_uname( 's' );
+	}
+
+	if ( preg_match( '/linux/i', $user_agent ) ) {
+		$os = 'linux';
+	} elseif ( preg_match( '/macintosh|mac os x|mac_powerpc/i', $user_agent ) ) {
+		$os = 'mac';
+	} elseif ( preg_match( '/windows|win32|win98|win95|win16/i', $user_agent ) ) {
+		$os = 'windows';
+	} elseif ( preg_match( '/ubuntu/i', $user_agent ) ) {
+		$os = 'ubuntu';
+	} elseif ( preg_match( '/iphone/i', $user_agent ) ) {
+		$os = 'iphone';
+	} elseif ( preg_match( '/ipod/i', $user_agent ) ) {
+		$os = 'ipod';
+	} elseif ( preg_match( '/ipad/i', $user_agent ) ) {
+		$os = 'ipad';
+	} elseif ( preg_match( '/android/i', $user_agent ) ) {
+		$os = 'android';
+	} elseif ( preg_match( '/blackberry/i', $user_agent ) ) {
+		$os = 'blackberry';
+	} elseif ( preg_match( '/webos/i', $user_agent ) ) {
+		$os = 'mobile';
+	}
+
+	return $os ?? '';
+}
+
+/**
+ * Returns the final merged config.
+ *
+ * @since 0.0.9
+ *
+ * @param string|null $sub_config
+ *
+ * @return array
+ */
+function get_config( string $sub_config = null ): array {
+	$defaults = require __DIR__ . '/config.php';
+	$theme    = get_theme_support( SLUG )[0] ?? [];
+	$config   = apply_filters( SLUG, array_merge_recursive( $defaults, $theme ) );
+
+	return $config[ $sub_config ] ?? $config;
 }

@@ -51,7 +51,7 @@ add_filter( 'render_block', NS . 'query_block_filters', 10, 2 );
 /**
  * Description of expected behavior.
  *
- * @since 1.0.0
+ * @since 0.0.1
  *
  * @param string $content
  * @param array  $block

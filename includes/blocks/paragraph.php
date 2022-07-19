@@ -4,6 +4,9 @@ declare( strict_types=1 );
 
 namespace Blockify;
 
+use function date;
+use function str_replace;
+
 add_filter( 'render_block', NS . 'render_paragraph_block', 10, 2 );
 /**
  * Modifies front end HTML output of block.
@@ -21,12 +24,11 @@ function render_paragraph_block( string $content, array $block ): string {
 	}
 
 	$shortcodes = [
-		'[year]' => \date('Y'),
-		'[user]' => wp_get_current_user()->display_name,
+		'[year]' => date( 'Y' ),
 	];
 
-	foreach ($shortcodes as $shortcode => $value) {
-		$content = \str_replace( $shortcode, $value, $content );
+	foreach ( $shortcodes as $shortcode => $value ) {
+		$content = str_replace( $shortcode, $value, $content );
 	}
 
 	return $content;

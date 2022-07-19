@@ -4,7 +4,6 @@ const path                     = require( 'path' );
 const fs                       = require( 'fs' );
 const glob                     = require( 'glob' );
 const RemoveEmptyScriptsPlugin = require( 'webpack-remove-empty-scripts' );
-const wpPot                    = require( 'wp-pot' );
 
 const rename = () => {
 	const { join } = path;
@@ -74,24 +73,6 @@ const rename = () => {
 	}
 };
 
-const inProduction = false;
-
-const coreBlocks = files => glob
-	.sync( files )
-	.reduce( ( entries, filename ) => {
-		const [, name] = filename.match( /([^/]+)\.scss$/ );
-		return { ...entries, [ 'styles/' + name ]: filename };
-	}, {} );
-
-const translate = () => wpPot( {
-	package: 'Blockify',
-	domain: 'blockify',
-	destFile: 'lang/blockify.pot',
-	relativeTo: './',
-	src: 'includes/*.php',
-	team: 'Blockify <info@blockify.com>',
-} );
-
 module.exports = {
 	...defaultConfig,
 
@@ -102,10 +83,20 @@ module.exports = {
 	entry: {
 		...defaultConfig.entry,
 		index: path.resolve( process.cwd(), 'src', 'index.tsx' ),
-		script: path.resolve( process.cwd(), 'src', 'script.tsx' ),
 		editor: path.resolve( process.cwd(), 'src', 'editor.scss' ),
 		style: path.resolve( process.cwd(), 'src', 'style.scss' ),
-		...coreBlocks( path.resolve( process.cwd(), 'src', 'styles/*.scss' ) ),
+		...glob.sync( path.resolve( process.cwd(), 'src', 'core/**/style.scss' ) )
+			.reduce( ( entries, filename ) => {
+				const name = filename.split( '/' ).reverse()[ 1 ];
+
+				return { ...entries, [ 'core/' + name + '/style' ]: filename };
+			}, {} ),
+		...glob.sync( path.resolve( process.cwd(), 'src', 'core/**/script.tsx' ) )
+			.reduce( ( entries, filename ) => {
+				const name = filename.split( '/' ).reverse()[ 1 ];
+
+				return { ...entries, [ 'core/' + name + '/script' ]: filename };
+			}, {} )
 	},
 
 	plugins: [
@@ -120,17 +111,10 @@ module.exports = {
 						{
 							source: './build/style-style.css',
 							destination: './build/style.css'
-						},
-						{
-							source: './build/style-editor.css',
-							destination: './build/editor.css'
 						}
 					],
 					delete: [
-						'./build/styles/*.php',
-						'./build/styles/*.js',
-						'./build/styles/blocks/*.php',
-						'./build/styles/blocks/*.js',
+						'./build/index.css',
 						'./build/style-editor.css',
 						'./build/style-style.css'
 					],
@@ -143,14 +127,6 @@ module.exports = {
 				compiler.hooks.afterEmit.tap( 'rename', rename );
 			}
 		},
-
-		{
-			apply: compiler => {
-				if ( inProduction ) {
-					compiler.hooks.afterEmit.tap( 'translate', translate );
-				}
-			}
-		}
 	],
 };
 

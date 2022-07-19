@@ -33,5 +33,25 @@ function render_button_block( string $content, array $block ): string {
 		return $content;
 	}
 
+	if ( str_contains( $content, '-border-' ) ) {
+		$dom = dom( $content );
+
+		/**
+		 * @var $button \DOMElement
+		 */
+		$button  = $dom->firstChild;
+		$classes = \explode( ' ', $button->getAttribute( 'class' ) );
+		$new     = [];
+
+		foreach ( $classes as $class ) {
+			if ( ! str_contains( $class, '-border-' ) ) {
+				$new[] = $class;
+			}
+		}
+
+		$button->setAttribute( 'class', implode( ' ', $new ) );
+		$content = $dom->saveHTML();
+	}
+
 	return $content;
 }

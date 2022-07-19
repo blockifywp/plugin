@@ -25,56 +25,10 @@ add_filter( 'render_block', NS . 'render_google_map_block', 10, 2 );
  * @return string
  */
 function render_google_map_block( string $content, array $block ): string {
-	if ( 'blockify/google-map' === $block['blockName'] && ! is_admin() ) {
-		$id       = 'map-' . random_hex( false );
-		$api_key  = 'AIzaSyAdNy_lBnfX6KyUxeoeOC0Lp2t_4y24QUk';
-		$callback = 'initMap';
-		$zoom     = 8;
-		$center   = [
-			'lat' => -25.344,
-			'lng' => 131.031,
-		];
-
-		$styles = json_decode( file_get_contents( DIR . 'src/blocks/google-map/styles/subtle-greyscale.json' ) );
-
-		$map = [
-			'zoom'   => $zoom,
-			'center' => $center,
-			'styles' => $styles,
-		];
-
-		$script = '<script>function initMap() {';
-		$script .= sprintf( 'const map = new google.maps.Map(document.getElementById("%s"), %s);', $id, json_encode( $map ) );
-		$script .= sprintf( 'new google.maps.Marker({ position: %s, map: map });}', json_encode( $center ) );
-		$script .= 'window.initMap = initMap;</script>';
-
-		$dom                = dom( $content );
-		$first              = $dom->firstChild;
-		$first->textContent = '';
-
-		/**
-		 * @var $div DOMElement
-		 */
-		$div = $dom->getElementsByTagName( 'div' )->item( 0 );
-		$div->setAttribute( 'id', $id );
-
-		$content = $dom->saveHTML();
-		$content = $script . $content;
-		$content = $content . sprintf(
-				'<script async defer src="//maps.googleapis.com/maps/api/js?key=%1$s&callback=%2$s" ></script>',
-				$api_key,
-				$callback
-			);
+	if ( 'blockify/google-map' !== $block['blockName'] || is_admin() ) {
+		return $content;
 	}
 
-	return $content;
-}
-
-
-add_action( 'enqueue_block_editor_assets', NS . 'enqueue_google_maps_script' );
-add_action( 'wp_enqueue_scripts', NS . 'enqueue_google_maps_script' );
-
-function enqueue_google_maps_script() {
 	$google_maps_api_key = 'google_maps_api_key';
 
 	wp_enqueue_script(
@@ -84,4 +38,46 @@ function enqueue_google_maps_script() {
 		'',
 		true
 	);
+
+	$id       = 'map-' . random_hex( false );
+	$api_key  = ''; // TODO: Add default key.
+	$callback = 'initMap';
+	$zoom     = 8;
+	$center   = [
+		'lat' => -25.344,
+		'lng' => 131.031,
+	];
+
+	$styles = json_decode( file_get_contents( DIR . 'src/blocks/google-map/styles/subtle-greyscale.json' ) );
+
+	$map = [
+		'zoom'   => $zoom,
+		'center' => $center,
+		'styles' => $styles,
+	];
+
+	$script = '<script>function initMap() {';
+	$script .= sprintf( 'const map = new google.maps.Map(document.getElementById("%s"), %s);', $id, json_encode( $map ) );
+	$script .= sprintf( 'new google.maps.Marker({ position: %s, map: map });}', json_encode( $center ) );
+	$script .= 'window.initMap = initMap;</script>';
+
+	$dom                = dom( $content );
+	$first              = $dom->firstChild;
+	$first->textContent = '';
+
+	/**
+	 * @var $div DOMElement
+	 */
+	$div = $dom->getElementsByTagName( 'div' )->item( 0 );
+	$div->setAttribute( 'id', $id );
+
+	$content = $dom->saveHTML();
+	$content = $script . $content;
+	$content = $content . sprintf(
+			'<script async defer src="//maps.googleapis.com/maps/api/js?key=%1$s&callback=%2$s" ></script>',
+			$api_key,
+			$callback
+		);
+
+	return $content;
 }

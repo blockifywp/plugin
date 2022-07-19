@@ -9,6 +9,7 @@
   "supports": {
     "align": true,
     "alignWide": true,
+    "boxShadow": true,
     "inserter": true,
     "typography": {
       "fontSize": true,

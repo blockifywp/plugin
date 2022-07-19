@@ -13,6 +13,7 @@
   "supports": {
     "align": true,
     "alignWide": true,
+    "boxShadow": true,
     "color": {
       "gradients": true
     },
@@ -20,6 +21,9 @@
       "margin": true,
       "padding": true,
       "blockGap": true
+    },
+    "typography": {
+      "lineHeight": true
     },
     "__experimentalBorder": {
       "width": true,
@@ -45,7 +49,10 @@
             "left": "1em"
           }
         },
-        "blockGap": "1em"
+        "blockGap": "1em",
+        "typography": {
+          "lineHeight": "var(--wp--custom--line-height--text, 1.5)"
+        }
       }
     }
   },

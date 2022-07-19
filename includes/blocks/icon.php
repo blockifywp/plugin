@@ -6,6 +6,7 @@ namespace Blockify;
 
 use WP_REST_Request;
 use WP_REST_Server;
+use WP_Theme_JSON_Resolver;
 use function add_filter;
 use function str_replace;
 use function apply_filters;
@@ -57,7 +58,7 @@ function render_icon_block( string $content, array $block ): string {
 
 	$style        = $mask->getAttribute( 'style' );
 	$css          = css_rules_to_array( $style );
-	$theme_json   = \WP_Theme_JSON_Resolver::get_merged_data( '' );
+	$theme_json   = WP_Theme_JSON_Resolver::get_merged_data( '' );
 	$palette      = $theme_json->get_settings()['color']['palette'];
 	$mask_classes = $mask->getAttribute( 'class' );
 
