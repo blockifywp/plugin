@@ -30,6 +30,18 @@ use function wp_enqueue_style;
 use function wp_get_global_styles;
 use function wp_get_global_settings;
 
+function enqueue_editor_assets(): void {
+	wp_dequeue_style( 'wp-block-library-theme' );
+	wp_add_inline_style( 'global-styles', get_inline_css() );
+
+	enqueue_asset( 'editor.css' );
+	enqueue_asset( 'index.js', [
+		'deps' => [ 'wp-edit-site' ], // Needed for block styles API.
+	] );
+
+	wp_localize_script( 'blockify-index', 'blockify', get_script_data() );
+}
+
 add_action( 'enqueue_block_editor_assets', NS . 'enqueue_editor_scripts_styles' );
 /**
  * Enqueues editor assets.
@@ -39,15 +51,31 @@ add_action( 'enqueue_block_editor_assets', NS . 'enqueue_editor_scripts_styles' 
  * @return void
  */
 function enqueue_editor_scripts_styles(): void {
-	wp_dequeue_style( 'wp-block-library-theme' );
-	wp_add_inline_style( 'global-styles', get_inline_css() );
+	$current_screen = get_current_screen();
 
-	enqueue_asset( 'editor.css' );
-	enqueue_asset( 'index.js', [
-		'deps' => [ 'wp-edit-site' ],
-	] );
+	$site_editor = $current_screen->base === 'appearance_page_gutenberg-edit-site' || $current_screen->base === 'site-editor';
 
-	wp_localize_script( 'blockify-index', 'blockify', get_script_data() );
+	if ( ! $site_editor ) {
+		enqueue_editor_assets();
+	}
+}
+
+add_action( 'admin_enqueue_scripts', NS . 'admin_scripts_styles' );
+/**
+ * Conditionally enqueues admin scripts and styles.
+ *
+ * @since 0.0.2
+ *
+ * @return void
+ */
+function admin_scripts_styles() {
+	$current_screen = get_current_screen();
+	$site_editor    = $current_screen->base === 'appearance_page_gutenberg-edit-site' || $current_screen->base === 'site-editor';
+	$block_patterns = isset( $current_screen->post_type ) && 'block_pattern' === $current_screen->post_type;
+
+	if ( $site_editor ) {
+		enqueue_editor_assets();
+	}
 }
 
 add_action( 'after_setup_theme', NS . 'add_editor_styles' );
@@ -204,25 +232,6 @@ function enqueue_google_fonts(): void {
 			[ 'global-styles' ],
 			filemtime( WP_CONTENT_DIR . '/fonts' )
 		);
-	}
-}
-
-add_action( 'admin_enqueue_scripts', NS . 'admin_scripts_styles' );
-/**
- * Conditionally enqueues admin scripts and styles.
- *
- * @since 0.0.2
- *
- * @return void
- */
-function admin_scripts_styles() {
-	$current_screen = get_current_screen();
-	$conditions     = isset( $current_screen->post_type ) && 'block_pattern' === $current_screen->post_type;
-
-	if ( $conditions ) {
-		enqueue_asset( 'index.js' );
-		enqueue_asset( 'editor.css' );
-		wp_localize_script( 'blockify-index', 'blockify', get_script_data() );
 	}
 }
 

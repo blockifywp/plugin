@@ -6,6 +6,7 @@ namespace Blockify;
 
 use function add_action;
 use function get_post;
+use function register_post_meta;
 use function register_rest_field;
 use function wp_update_post;
 
@@ -65,16 +66,15 @@ function rest_fields(): void {
 		]
 	);
 
-	\register_post_meta( 'page', 'header_style', [
+	register_post_meta( 'page', 'template_part_header', [
 		'show_in_rest' => true,
 		'single'       => true,
 		'type'         => 'boolean',
 	] );
 
-	\register_post_meta( 'page', 'footer_style', [
+	register_post_meta( 'page', 'template_part_footer', [
 		'show_in_rest' => true,
 		'single'       => true,
 		'type'         => 'string',
 	] );
 }
-

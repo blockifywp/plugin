@@ -1,6 +1,6 @@
 {
   "name": "blockify-plugin",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Blockify plugin.",
   "author": "Blockify",
   "license": "GPL-2.0-or-later",
@@ -12,7 +12,7 @@
     "packages-update": "wp-scripts packages-update",
     "start": "wp-scripts start --hot",
     "rename:tsx": "./bin/build-tsx.js",
-    "oslllo-svg-fixer": "node node_modules/oslllo-svg-fixer/src/cli.js -s assets/svg/feather -d assets/svg/feather-fix",
+    "svg-fixer": "node node_modules/oslllo-svg-fixer/src/cli.js -s assets/svg/icon.svg -d assets/svg/optimized",
     "clean": "npm run rename:tsx",
     "build": "wp-scripts build",
     "build:public": "wp-scripts build wp-scripts build --webpack-src-dir=bin --config=webpack.public.config.js --output-path=build/public && npm run rename:tsx",

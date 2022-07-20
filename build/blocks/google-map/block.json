@@ -28,7 +28,7 @@
   "attributes": {
     "apiKey": {
       "type": "string",
-      "default": "AIzaSyAdNy_lBnfX6KyUxeoeOC0Lp2t_4y24QUk"
+      "default": ""
     },
     "lat": {
       "type": "integer",

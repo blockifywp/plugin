@@ -1,10 +1,10 @@
-=== Blockify ===
+=== Blockify - FSE Theme Framework, Block Library and Toolkit ===
 Contributors: blockify
 Requires at least: 6.0
 Tested up to: 6.0
 Requires PHP: 7.4
-Stable tag: 0.0.7
-License: GPLv3 or later
+Stable tag: 0.0.8
+License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate Link:
 
@@ -166,6 +166,7 @@ Parent themes, child themes and plugins can all be used to modify the default be
 1. Example of block library
 2. Example of block extensions
 3. Example of text formats
+4. Google maps with dark mode pro add on
 
 == Copyright ==
 
@@ -175,8 +176,12 @@ This plugin, like WordPress, is licensed under the GPL.
 
 == Changelog ==
 
+= 0.0.8 - July 20, 2022=
+* Fix: Google map block
+* Fix: Site editor scripts
+
 = 0.0.7 - July 19, 2022=
-* Add: Accordion bloc description
+* Add: Accordion block description
 * Update: Add blocks to config
 
 = 0.0.6 - July 19, 2022=

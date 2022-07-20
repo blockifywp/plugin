@@ -10,6 +10,23 @@ Visit [https://wordpress.org/plugins/blockify](https://wordpress.org/plugins/blo
 2. Download and install Blockify plugin from WordPress.org
 3. Navigate to Appearance > Editor to begin editing
 
+## Features
+
+- **Block Supports API:** Easy to use PHP API for modifying core block supports.
+- **Block Styles API:** Easy to use PHP API for modifying core block styles with JS.
+- **Block Library:** Unbranded, fully customizable, commonly needed UI components.
+- **Block Extensions**: Additional appearance controls for core blocks.
+- **Full Site Editing:** CSS framework. Extra page, post and template part settings.
+- **Google Fonts:** Automatically downloads and locally serves selected editor fonts.
+- **Text Formats:** Additional text formats including gradients, font size and more.
+- **Responsive Settings:** Mobile row-reverse, show/hide block,  
+- **Dark Mode (Pro):** Automatically enables dark mode for any supported theme.
+
+## Requirements
+
+- WordPress ^6.0
+- PHP ^7.4
+
 ## Theme Developers
 
 Blockify was built for you! It should work out of the box with any standard FSE theme. Just add the code snippet below to your parent theme, child theme or custom plugin to begin configuring your settings:

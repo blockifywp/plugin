@@ -4,14 +4,15 @@ declare( strict_types=1 );
 
 namespace Blockify;
 
+use DOMElement;
 use WP_REST_Request;
 use WP_REST_Server;
 use WP_Theme_JSON_Resolver;
 use function add_filter;
-use function str_replace;
 use function apply_filters;
 use function array_keys;
 use function preg_replace;
+use function str_replace;
 
 add_filter( 'render_block', NS . 'render_icon_block', 10, 2 );
 /**
@@ -79,9 +80,14 @@ function render_icon_block( string $content, array $block ): string {
 	return str_replace( 'fill="currentColor"', ' ', $dom->saveHTML() );
 }
 
-
 add_action( 'rest_api_init', NS . 'register_icons_rest_route' );
-
+/**
+ * Fetches icon data from endpoint.
+ *
+ * @since 0.0.1
+ *
+ * @return void
+ */
 function register_icons_rest_route(): void {
 	register_rest_route( SLUG . '/v1', '/icons/', [
 		'permission_callback' => '__return_true',
@@ -123,6 +129,13 @@ function register_icons_rest_route(): void {
 	] );
 }
 
+/**
+ * Rest endpoint callback.
+ *
+ * @since 0.0.1
+ *
+ * @return array
+ */
 function get_icon_data(): array {
 	$icon_data = [];
 	$icon_sets = apply_filters( 'blockify_icon_sets', [

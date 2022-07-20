@@ -354,7 +354,7 @@ $defaults['blocks'] = [
 	'breadcrumbs',
 	'counter',
 	'divider',
-	// 'google-map',
+	 'google-map',
 	'icon',
 	// 'newsletter',
 	'slider',
