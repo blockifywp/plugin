@@ -33,9 +33,7 @@ $defaults['blockSupports'] = [
 	'blockify/tabs'            => [
 		'boxShadow' => true,
 	],
-	'core/buttons'             => [
-		'boxShadow' => true,
-	],
+	'core/buttons'             => [],
 	'core/button'              => [
 		'boxShadow'            => true,
 		'__experimentalBorder' => [
@@ -86,8 +84,7 @@ $defaults['blockSupports'] = [
 		'boxShadow' => true,
 	],
 	'core/heading'             => [
-		'boxShadow' => true,
-		'spacing'   => [
+		'spacing' => [
 			'margin'  => true,
 			'padding' => true,
 		],
@@ -108,7 +105,6 @@ $defaults['blockSupports'] = [
 		],
 	],
 	'core/list'                => [
-		'boxShadow'            => true,
 		'__experimentalLayout' => [
 			'allowSwitching'  => false,
 			'allowInheriting' => false,
@@ -124,7 +120,6 @@ $defaults['blockSupports'] = [
 		],
 	],
 	'core/media-text'          => [
-		'boxShadow'            => true,
 		'__experimentalBorder' => [
 			'radius' => true,
 		],
@@ -209,7 +204,6 @@ $defaults['blockSupports'] = [
 		],
 	],
 	'core/separator'           => [
-		'boxShadow'            => true,
 		'align'                => [
 			'full',
 			'wide',
@@ -354,7 +348,7 @@ $defaults['blocks'] = [
 	'breadcrumbs',
 	'counter',
 	'divider',
-	 'google-map',
+	'google-map',
 	'icon',
 	// 'newsletter',
 	'slider',
