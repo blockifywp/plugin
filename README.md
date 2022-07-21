@@ -6,9 +6,36 @@ Visit [https://wordpress.org/plugins/blockify](https://wordpress.org/plugins/blo
 
 ## Installation
 
-1. Download and install Blockify theme from WordPress.org
+This plugin will work with any FSE theme, but a free starter theme is also available for download from the WordPress.org repository.
+
+### Standard
+
+1. (Optionally) download and install the Blockify starter theme from WordPress.org
 2. Download and install Blockify plugin from WordPress.org
 3. Navigate to Appearance > Editor to begin editing
+
+### Developers
+
+Blockify can be installed in a number of ways with Composer:
+
+- As a standard WordPress plugin
+- As a Composer package
+- Separate Composer packages
+- Separate NPM packages
+
+By separating packages, you can install only the functionality you need on a per project basis.
+
+#### Composer
+
+Blockify can be installed as a Composer package in any theme, child theme or plugin. It is automatically loaded and ready to use. More documentation for how to use Composer coming soon.
+  
+Composer details can be found in the `composer.json` file of this plugin.
+
+#### NPM
+
+Blockify provides a set of node packages (including the entire plugin) which allows installation via npm. Install only the parts you need, or the entire plugin. 
+
+All npm details can be found in the `package.json` file of this plugin. 
 
 ## Features
 
@@ -29,8 +56,7 @@ Visit [https://wordpress.org/plugins/blockify](https://wordpress.org/plugins/blo
 
 ## Theme Developers
 
-Blockify was built for you! It should work out of the box with any standard FSE theme. To get started, add theme support
-to your parent theme, child theme or custom plugin to begin configuring your settings:
+Blockify was built for you! It should work out of the box with any standard FSE theme. To add extra supports, copy and paste the code snippet below into your parent theme, child theme or custom plugin to begin configuring your settings:
 
 ```php
 // Filter Blockify config.
@@ -94,3 +120,7 @@ function blockify_config( array $defaults ) : array {
     ];
 }
 ```
+
+## Contributing
+
+All contributions and questions are welcome. Please feel free to submit Github issues.

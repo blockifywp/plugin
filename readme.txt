@@ -3,7 +3,7 @@ Contributors: blockify
 Requires at least: 6.0
 Tested up to: 6.0
 Requires PHP: 7.4
-Stable tag: 0.0.8
+Stable tag: 0.0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate Link:
@@ -12,11 +12,20 @@ Donate Link:
 
 **Please Note:** This plugin is currently in Beta. It has been tested thoroughly however due to WordPress and Gutenberg being under rapid development we cannot guarantee that all settings work 100% correctly all of the time.
 
-Lightweight (1kb), yet powerful block library and toolkit that enhances the WordPress site building experience. Launching soon! 🚀
+Extremely lightweight block toolkit that enhances the full site editing experience. Perfect for designers and developers needing a little bit extra from the WordPress editor. Take your block themes to the next level with the Blockify plugin! Launching soon 🚀
 
-Blockify aims to simplify the WordPress site building process, by making small and unobtrusive enhancements to the block editor. Perfect for theme designers and developers who need additional functionality without having to learn React or configure build tools.
+Every block and extension included has been carefully chosen and built from scratch, in order to extend WordPress' functionality, rather than replacing it. Blockify is designed to work with any standard Full Site Editing block theme, however some may need to add extra theme support. For any development related issues, please submit an issue at [https://github.com/blockifywp/plugin](https://github.com/blockifywp/plugin).
 
-Every block and extension included has been carefully chosen, in order to extend WordPress' functionality, rather than replacing it. Blockify is designed to work with any standard Full Site Editing block theme. For any development related issues, please submit an issue at [https://github.com/blockifywp/plugin](https://github.com/blockifywp/plugin).
+### Modern Code
+
+- **Block.json:** Every block uses a block.json file and is automatically loaded by WordPress in an optimized way.
+
+- **Webpack Code Splitting:** All assets are automatically separated and conditionally loaded only when a block or extension is used on a page.
+
+- **Modern PHP:** Only PHP 7.4 and up is supported. This allows for extra clean and fast code.
+
+- **100% TypeScript:** Basically, you can be sure that every line of code has been obsessed over and built following the best modern practices.
+
 
 ### Block Extensions
 
