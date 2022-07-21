@@ -69,6 +69,7 @@ $defaults['blockSupports'] = [
 			'fontSize'   => true,
 			'fontWeight' => true,
 		],
+		'reverseMobile' => true
 	],
 	'core/embed'               => [
 		'spacing' => [
@@ -272,11 +273,6 @@ $defaults['blockStyles']['register'] = [
 		'name'      => 'primary',
 		'label'     => __( 'Primary', 'blockify' ),
 		'isDefault' => true,
-	],
-	[
-		'type'  => 'core/columns',
-		'name'  => 'reverse',
-		'label' => __( 'Reverse', 'blockify' ),
 	],
 	[
 		'type'  => 'core/list',

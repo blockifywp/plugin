@@ -16,7 +16,7 @@ Lightweight (1kb), yet powerful block library and toolkit that enhances the Word
 
 Blockify aims to simplify the WordPress site building process, by making small and unobtrusive enhancements to the block editor. Perfect for theme designers and developers who need additional functionality without having to learn React or configure build tools.
 
-Every block and extension included has been carefully chosen, in order to extend WordPress' functionality, rather than replacing it. Blockify is designed to work with any standard Full Site Editing block theme. There is also a free starter theme available to use as a quick wireframe for your next project - ([https://wordpress.org/themes/blockify](https://wordpress.org/themes/blockify)).
+Every block and extension included has been carefully chosen, in order to extend WordPress' functionality, rather than replacing it. Blockify is designed to work with any standard Full Site Editing block theme. For any development related issues, please submit an issue at [https://github.com/blockifywp/plugin](https://github.com/blockifywp/plugin).
 
 ### Block Extensions
 
@@ -40,7 +40,7 @@ Block extensions are additional controls added to core blocks. They are helpful 
 
 ### Text Format Effects
 
-- **NEW! Gradients:** Add custom text gradients to paragraphs, headings, button text or any block that supports Rich Text editing.
+- **Gradient:** Add custom text gradients to paragraphs, headings, button text or any block that supports rich text formats.
 
 - **Clear Formatting:** Removes all formatting from selected text.
 
@@ -62,9 +62,9 @@ Block extensions are additional controls added to core blocks. They are helpful 
 
 - **SVG Support:** Extra code has been included to enable SVG support in the image, gallery and site logo blocks.
 
-- **Base CSS:** Optionally load a 1kb base CSS normalize/reset file to ensure consistent styling across core blocks, and fix minor styling issues.
+- **Custom Icons:** Custom icons can be added directly in the editor with the Icon block. Alternatively, developers can provide complete SVG icon sets from within themes, child themes or custom plugins.
 
-- **Code Splitting:** All CSS and JS assets are separated and conditionally loaded only when required by a page.
+- **Optimized CSS & JS:** Optionally load a 1kb base CSS normalize/reset file to ensure consistent styling across core blocks, and fix minor styling issues. All CSS and JS assets are separated and conditionally loaded only when required by a page.
 
 - **Hook System:** Every line of code in Blockify can be modified with hooks. There are plenty of actions and filters provided for developers to customize almost every aspect of the editor with plain old PHP.
 
@@ -78,9 +78,7 @@ Block extensions are additional controls added to core blocks. They are helpful 
 
 - **WooCommerce Support:** Additional block support and controls for WooCommerce blocks, products and pages. All styles are inherited 100% from theme.json, so there's no need to do any extra work. Everything just works.
 
-- **Premium Icons:** 1000+ premium icons to choose from.
-
-- **Pattern Editor:** Edit, import and export block patterns like a Pro. The pattern editor extension gives you the tools to develop professional, 100% automated design systems from WordPress themes. This is how the Blockify theme demos are created.
+- **Premium Icons:** 1000+ premium, hand picked SVG icons to choose from.
 
 - **White Label:** Completely rebrand the entire Blockify plugin with your own company name and logo. Perfect for theme designers and agencies.
 
@@ -114,7 +112,6 @@ Blockify is currently in BETA testing, however it is currently running on multip
 = How can I add support for the Blockify plugin in my theme? =
 
 Glad you asked! It couldn't be easier, simply copy and paste the code snippet below as an example:
-
 
 `
 // Filter Blockify config.
