@@ -325,13 +325,13 @@ $defaults['blockStyles']['register'][] = [
 ];
 
 $defaults['darkMode'] = [
-	'neutral-900' => 'white',
-	'neutral-800' => 'neutral-25',
-	'neutral-700' => 'neutral-50',
-	'neutral-600' => 'neutral-100',
-	'neutral-500' => 'neutral-200',
-	'neutral-400' => 'neutral-300',
-	'neutral-300' => 'neutral-400',
+	'neutral-900' => 'neutral-100',
+	'neutral-800' => 'neutral-200',
+	'neutral-700' => 'neutral-200',
+	'neutral-600' => 'neutral-300',
+	'neutral-500' => 'neutral-300',
+	'neutral-400' => 'neutral-400',
+	'neutral-300' => 'neutral-500',
 	'neutral-200' => 'neutral-500',
 	'neutral-100' => 'neutral-600',
 	'neutral-50'  => 'neutral-700',
@@ -354,6 +354,12 @@ $defaults['blocks'] = [
 $defaults['extensions'] = [
 	// 'templateParts',
 	'pageTitle',
+];
+
+$defaults['icons'] = [
+	'dashicons' => DIR . 'assets/svg/dashicons',
+	'wordpress' => DIR . 'assets/svg/wordpress',
+	'social'    => DIR . 'assets/svg/social',
 ];
 
 return $defaults;

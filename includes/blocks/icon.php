@@ -138,11 +138,7 @@ function register_icons_rest_route(): void {
  */
 function get_icon_data(): array {
 	$icon_data = [];
-	$icon_sets = apply_filters( 'blockify_icon_sets', [
-		'dashicons' => DIR . 'assets/svg/dashicons',
-		'wordpress' => DIR . 'assets/svg/wordpress',
-		'social'    => DIR . 'assets/svg/social',
-	] );
+	$icon_sets = get_config( 'icons' );
 
 	foreach ( $icon_sets as $icon_set => $set_dir ) {
 		$icons = glob( $set_dir . '/*.svg' );

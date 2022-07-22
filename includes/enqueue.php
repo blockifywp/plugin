@@ -62,7 +62,7 @@ function enqueue_editor_scripts_styles(): void {
 
 add_action( 'admin_enqueue_scripts', NS . 'admin_scripts_styles' );
 /**
- * Conditionally enqueues admin scripts and styles.
+ * Conditionally enqueues site editor scripts and styles.
  *
  * @since 0.0.2
  *
@@ -71,7 +71,6 @@ add_action( 'admin_enqueue_scripts', NS . 'admin_scripts_styles' );
 function admin_scripts_styles() {
 	$current_screen = get_current_screen();
 	$site_editor    = $current_screen->base === 'appearance_page_gutenberg-edit-site' || $current_screen->base === 'site-editor';
-	$block_patterns = isset( $current_screen->post_type ) && 'block_pattern' === $current_screen->post_type;
 
 	if ( $site_editor ) {
 		enqueue_editor_assets();
@@ -163,12 +162,14 @@ function enqueue_scripts_styles(): void {
 	}
 }
 
-add_action( 'enqueue_block_editor_assets', NS . 'enqueue_google_fonts' );
-add_action( 'wp_enqueue_scripts', NS . 'enqueue_google_fonts' );
+//add_action( 'enqueue_block_editor_assets', NS . 'enqueue_google_fonts' );
+//add_action( 'wp_enqueue_scripts', NS . 'enqueue_google_fonts' );
 /**
  * Enqueues google fonts.
  *
  * @since 0.0.2
+ *
+ * @todo Switch to wp_enqueue_webfont function.
  *
  * @return void
  */
@@ -177,15 +178,16 @@ function enqueue_google_fonts(): void {
 		return;
 	}
 
-	$global_styles = wp_get_global_styles();
-	$google_fonts  = [];
+	$global_styles  = wp_get_global_styles();
+	$default_weight = 'var(--wp--custom--font-weight--regular)';
+	$google_fonts   = [];
 
 	if ( isset( $global_styles['blocks']['core/heading']['typography']['fontFamily'] ) ) {
-		$google_fonts[ $global_styles['blocks']['core/heading']['typography']['fontFamily'] ] = $global_styles['blocks']['core/heading']['typography']['fontWeight'];
+		$google_fonts[ $global_styles['blocks']['core/heading']['typography']['fontFamily'] ] = $global_styles['blocks']['core/heading']['typography']['fontWeight'] ?? $default_weight;
 	}
 
 	if ( isset( $global_styles['typography']['fontFamily'] ) ) {
-		$google_fonts[ $global_styles['typography']['fontFamily'] ] = $global_styles['typography']['fontWeight'];
+		$google_fonts[ $global_styles['typography']['fontFamily'] ] = $global_styles['typography']['fontWeight'] ?? $default_weight;
 	}
 
 	foreach ( $google_fonts as $google_font => $font_weight ) {
@@ -259,8 +261,7 @@ function get_script_data(): array {
  * @return string
  */
 function get_inline_css( string $css = '' ): string {
-	$settings = wp_get_global_settings();
-
+	$settings        = wp_get_global_settings();
 	$scrollbar_width = get_os() === 'windows' ? '12px' : '15px';
 	$content_size    = $settings['layout']['contentSize'] ?? '768px';
 	$wide_size       = $settings['layout']['wideSize'] ?? '1280px';
@@ -272,5 +273,5 @@ function get_inline_css( string $css = '' ): string {
 	}
 CSS;
 
-	return apply_filters( 'blockify_inline_css', minify_css( $css ) );
+	return minify_css( $css );
 }

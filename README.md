@@ -56,11 +56,18 @@ All npm details can be found in the `package.json` file of this plugin.
 
 ## Theme Developers
 
-Blockify was built for you! It should work out of the box with any standard FSE theme. To add extra supports, copy and paste the code snippet below into your parent theme, child theme or custom plugin to begin configuring your settings:
+Blockify was built for you! It should work out of the box with any standard FSE theme. There is also a free starter theme available for use as an example base
+
+To add theme support, copy and paste the code snippet below into your parent theme, child theme or custom plugin to begin configuring your settings:
 
 ```php
 // Filter Blockify config.
 add_theme_support( 'blockify', [
+
+    // Register custom icon set with icon block.
+    'icons' => [
+        'fontawesome' => get_stylesheet_directory() . '/assets/svg/fontawesome',
+    ],
 
 	// Modify default block supports.
 	'blockSupports' => [
