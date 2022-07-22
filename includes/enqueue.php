@@ -11,6 +11,7 @@ use function add_editor_style;
 use function apply_filters;
 use function array_flip;
 use function basename;
+use function current_theme_supports;
 use function end;
 use function explode;
 use function file_exists;
@@ -162,19 +163,23 @@ function enqueue_scripts_styles(): void {
 	}
 }
 
-//add_action( 'enqueue_block_editor_assets', NS . 'enqueue_google_fonts' );
-//add_action( 'wp_enqueue_scripts', NS . 'enqueue_google_fonts' );
+add_action( 'enqueue_block_editor_assets', NS . 'enqueue_google_fonts' );
+add_action( 'wp_enqueue_scripts', NS . 'enqueue_google_fonts' );
 /**
  * Enqueues google fonts.
  *
  * @since 0.0.2
  *
- * @todo Switch to wp_enqueue_webfont function.
- *
  * @return void
+ * @todo  Switch to wp_enqueue_webfont function.
+ *
  */
 function enqueue_google_fonts(): void {
 	if ( ! function_exists( 'wptt_get_webfont_url' ) ) {
+		return;
+	}
+
+	if ( ! current_theme_supports( SLUG ) ) {
 		return;
 	}
 
