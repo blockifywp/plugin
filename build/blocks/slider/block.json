@@ -3,7 +3,7 @@
   "apiVersion": 2,
   "name": "blockify/slider",
   "title": "Slider",
-  "description": "The most lightweight slider/carousel block available.",
+  "description": "A simple, lightweight vanilla JS slider block.",
   "icon": "slides",
   "category": "blockify",
   "textdomain": "blockify",

@@ -3,7 +3,7 @@
   "apiVersion": 2,
   "name": "blockify/icon",
   "title": "Icon",
-  "description": "A lightweight, yet powerful icon block. Default icons include Dashicons, Social icons and WordPress editor icons. Loads a single SVG, no icon fonts. Supports gradients and shadows.",
+  "description": "Lightweight, fully customizable SVG icon block. Default icon sets include Dashicons, Social icons and WordPress editor icons. Renders an inline SVG, no icon fonts are loaded. Supports gradients and shadows.",
   "icon": "star-empty",
   "category": "blockify",
   "textdomain": "blockify",

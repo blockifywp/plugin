@@ -4,6 +4,8 @@ declare( strict_types=1 );
 
 namespace Blockify;
 
+use function array_map;
+use function wp_list_pluck;
 use const DIRECTORY_SEPARATOR;
 use const WP_CONTENT_DIR;
 use function add_action;
@@ -183,9 +185,11 @@ function enqueue_google_fonts(): void {
 		return;
 	}
 
-	$global_styles  = wp_get_global_styles();
-	$default_weight = 'var(--wp--custom--font-weight--regular)';
-	$google_fonts   = [];
+	$global_styles     = wp_get_global_styles();
+	$global_settings   = wp_get_global_settings();
+	$font_family_slugs = array_map( fn( $font_family ) => $font_family['slug'], $global_settings['typography']['fontFamilies']['theme'] ?? [ null ] );
+	$default_weight    = 'var(--wp--custom--font-weight--regular)';
+	$google_fonts      = [];
 
 	if ( isset( $global_styles['blocks']['core/heading']['typography']['fontFamily'] ) ) {
 		$google_fonts[ $global_styles['blocks']['core/heading']['typography']['fontFamily'] ] = $global_styles['blocks']['core/heading']['typography']['fontWeight'] ?? $default_weight;
@@ -212,6 +216,10 @@ function enqueue_google_fonts(): void {
 		$weight = end( $explode_weight );
 
 		if ( in_array( $slug, [ 'sans-serif', 'serif', 'monospace' ] ) ) {
+			return;
+		}
+
+		if ( ! in_array( $slug, $font_family_slugs ) ) {
 			return;
 		}
 
