@@ -171,6 +171,22 @@ Parent themes, child themes and plugins can all be used to modify the default be
 3. Example of text formats
 4. Google maps with dark mode pro add on
 
+== Installation ==
+
+This plugin can be installed directly from your site.
+
+1. Log in and navigate to _Plugins → Add New.
+2. Type "Blockify" into the Search and hit Enter.
+3. Locate the Blockify plugin in the list of search results and click Install Now.
+4. Once installed, click the Activate link.
+
+It can also be installed manually:
+
+1. Download the Blockify plugin from WordPress.org.
+2. Unzip the package and move to your plugins directory.
+3. Log into WordPress and navigate to the Plugins screen.
+4. Locate Blockify in the list and click the Activate link.
+
 == Copyright ==
 
 This plugin, like WordPress, is licensed under the GPL.
