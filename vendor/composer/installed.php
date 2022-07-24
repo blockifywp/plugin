@@ -3,7 +3,7 @@
         'name' => 'blockify/plugin',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '69f34d5bc47ca890e0661a3baec9cfbe0db36fb2',
+        'reference' => 'ec1c4a36060afbecd5315c027b1e83d1b223de9c',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'blockify/plugin' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '69f34d5bc47ca890e0661a3baec9cfbe0db36fb2',
+            'reference' => 'ec1c4a36060afbecd5315c027b1e83d1b223de9c',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -10,32 +10,6 @@ use function register_post_meta;
 use function register_rest_field;
 use function wp_update_post;
 
-add_action( 'after_setup_theme', NS . 'theme_supports' );
-/**
- * Handles theme supports.
- *
- * @since 0.0.2
- *
- * @return void
- */
-function theme_supports(): void {
-	remove_theme_support( 'core-block-patterns' );
-}
-
-add_action( 'after_setup_theme', NS . 'post_type_supports' );
-/**
- * Handles post type supports.
- *
- * @since 0.0.2
- *
- * @return void
- */
-function post_type_supports(): void {
-	add_post_type_support( 'page', 'excerpt' );
-	add_post_type_support( 'block_pattern', 'excerpt' );
-	add_post_type_support( 'page', 'custom-fields' );
-}
-
 add_action( 'init', NS . 'rest_fields' );
 /**
  * Registers rest fields.

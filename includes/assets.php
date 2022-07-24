@@ -278,5 +278,5 @@ function get_inline_css( string $css = '' ): string {
 	}
 CSS;
 
-	return minify_css( $css );
+	return minify_css( apply_filters( 'blockify_inline_css', $css ) );
 }

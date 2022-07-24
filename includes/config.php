@@ -4,11 +4,6 @@ declare( strict_types=1 );
 
 namespace Blockify;
 
-use function array_map;
-use function basename;
-use function str_contains;
-use const GLOB_ONLYDIR;
-
 $defaults = [];
 
 $defaults['blockSupports'] = [
@@ -64,12 +59,12 @@ $defaults['blockSupports'] = [
 		],
 	],
 	'core/columns'             => [
-		'boxShadow'  => true,
-		'typography' => [
+		'boxShadow'     => true,
+		'typography'    => [
 			'fontSize'   => true,
 			'fontWeight' => true,
 		],
-		'reverseMobile' => true
+		'reverseMobile' => true,
 	],
 	'core/embed'               => [
 		'spacing' => [
@@ -256,87 +251,12 @@ $defaults['blockSupports'] = [
 	],
 ];
 
-$defaults['blockStyles']['unregister'] = [
-	[
-		'type' => 'core/button',
-		'name' => [ 'fill', 'outline' ],
-	],
-	[
-		'type' => 'core/separator',
-		'name' => [ 'wide', 'dots' ],
-	],
-];
-
-$defaults['blockStyles']['register'] = [
-	[
-		'type'      => 'core/button',
-		'name'      => 'primary',
-		'label'     => __( 'Primary', 'blockify' ),
-		'isDefault' => true,
-	],
-	[
-		'type'  => 'core/list',
-		'name'  => 'numbered',
-		'label' => __( 'Numbered', 'blockify' ),
-	],
-	[
-		'type'  => 'core/list',
-		'name'  => 'checklist',
-		'label' => __( 'Checklist', 'blockify' ),
-	],
-	[
-		'type'  => 'core/list',
-		'name'  => 'square',
-		'label' => __( 'Square', 'blockify' ),
-	],
-];
-
-$global_styles = wp_get_global_settings();
-
-if ( $global_styles['color']['palette']['theme'] ) {
-	$secondary_button = false;
-	$colors           = $global_styles['color']['palette']['theme'];
-
-	foreach ( $colors as $color ) {
-		if ( str_contains( $color['slug'], 'secondary-' ) ) {
-			$secondary_button = true;
-		}
-	}
-
-	if ( $secondary_button ) {
-		$defaults['blockStyles']['register'][] = [
-			'type'  => 'core/button',
-			'name'  => 'secondary',
-			'label' => __( 'Secondary', 'blockify' ),
-		];
-	}
-}
-
-$defaults['blockStyles']['register'][] = [
-	'type'  => 'core/button',
-	'name'  => 'outline',
-	'label' => __( 'Outline', 'blockify' ),
-];
-
-$defaults['blockStyles']['register'][] = [
-	'type'  => 'core/button',
-	'name'  => 'transparent',
-	'label' => __( 'Transparent', 'blockify' ),
-];
+$defaults['blockStyles']['register'] = [];
+$defaults['blockStyles']['unregister'] = [];
 
 $defaults['darkMode'] = [
-	'neutral-900' => 'neutral-100',
-	'neutral-800' => 'neutral-200',
-	'neutral-700' => 'neutral-200',
-	'neutral-600' => 'neutral-300',
-	'neutral-500' => 'neutral-300',
-	'neutral-400' => 'neutral-400',
-	'neutral-300' => 'neutral-500',
-	'neutral-200' => 'neutral-500',
-	'neutral-100' => 'neutral-600',
-	'neutral-50'  => 'neutral-700',
-	'neutral-25'  => 'neutral-800',
-	'white'       => 'neutral-900',
+	'black' => 'white',
+	'white' => 'black',
 ];
 
 $defaults['blocks'] = [
