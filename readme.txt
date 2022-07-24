@@ -3,7 +3,7 @@ Contributors: blockify
 Requires at least: 6.0
 Tested up to: 6.0
 Requires PHP: 7.4
-Stable tag: 0.0.11
+Stable tag: 0.0.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -179,7 +179,11 @@ This plugin, like WordPress, is licensed under the GPL.
 
 == Changelog ==
 
-= 0.0.11 - July 20, 2022=
+= 0.0.12 - 25 July, 2022 =
+* Fix: Reverse on mobile
+* Fix: Navigation block font size
+
+= 0.0.11 - July 24, 2022=
 * Fix: Google fonts loading
 * Remove: Theme related functions
 
