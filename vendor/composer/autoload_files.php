@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     '2d93258af16d106f9054d8d8e0c0329d' => $vendorDir . '/wptt/webfont-loader/wptt-webfont-loader.php',
+    'bf422eb95c8b2116376e76f8bca04ace' => $baseDir . '/blockify.php',
 );

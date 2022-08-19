@@ -1,33 +1,30 @@
 {
-    "name": "blockify/plugin",
-    "type": "library",
-    "authors": [
-        {
-            "name": "Blockify",
-            "email": "info@blockify.com"
-        }
-    ],
-    "scripts": {
-        "install:force": "rm -Rf ./composer.lock && composer install --no-dev",
-        "install-codestandards": "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run",
-        "phpcs": "phpcs",
-        "test-unit": "composer dump && \"vendor/bin/phpunit\" --testsuite unit --color=always",
-        "test-integration": "composer dump && \"vendor/bin/phpunit\" --testsuite integration --configuration tests/phpunit/integration/phpunit.xml.dist --color=always"
-    },
-    "minimum-stability": "dev",
-    "config": {
-        "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true,
-            "composer/installers": true
-        }
-    },
-    "autoload": {
-        "files": [
-            "vendor/wptt/webfont-loader/wptt-webfont-loader.php"
-        ],
-        "classmap": []
-    },
-    "require": {
-        "wptt/webfont-loader": "dev-master"
+  "name": "blockify/plugin",
+  "type": "library",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Blockify",
+      "email": "info@blockify.com"
     }
+  ],
+  "scripts": {
+    "install:force": "rm -Rf ./composer.lock && composer install --no-dev",
+    "install-codestandards": "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run",
+    "phpcs": "phpcs",
+    "test-unit": "composer dump && \"vendor/bin/phpunit\" --testsuite unit --color=always",
+    "test-integration": "composer dump && \"vendor/bin/phpunit\" --testsuite integration --configuration tests/phpunit/integration/phpunit.xml.dist --color=always"
+  },
+  "minimum-stability": "dev",
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "composer/installers": true
+    }
+  },
+  "require-dev": {
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
+    "squizlabs/php_codesniffer": "^3.7.0",
+    "wp-coding-standards/wpcs": "dev-develop"
+  }
 }

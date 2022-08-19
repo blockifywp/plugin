@@ -2,7 +2,7 @@
 
 declare( strict_types=1 );
 
-namespace Blockify;
+namespace Blockify\Plugin;
 
 use DOMElement;
 use WP_REST_Request;
@@ -78,89 +78,4 @@ function render_icon_block( string $content, array $block ): string {
 	$div->removeChild( $container );
 
 	return str_replace( 'fill="currentColor"', ' ', $dom->saveHTML() );
-}
-
-add_action( 'rest_api_init', NS . 'register_icons_rest_route' );
-/**
- * Fetches icon data from endpoint.
- *
- * @since 0.0.1
- *
- * @return void
- */
-function register_icons_rest_route(): void {
-	register_rest_route( SLUG . '/v1', '/icons/', [
-		'permission_callback' => '__return_true',
-		'methods'             => WP_REST_Server::READABLE,
-		[
-			'args' => [
-				'sets' => [
-					'required' => false,
-					'type'     => 'string',
-				],
-				'set'  => [
-					'required' => false,
-					'type'     => 'string',
-				],
-			],
-		],
-		'callback'            => function ( $request ) {
-			$icon_data = get_icon_data();
-
-			/**
-			 * @var WP_REST_Request $request
-			 */
-			if ( $request->get_param( 'set' ) ) {
-				$set = $request->get_param( 'set' );
-
-				if ( $request->get_param( 'icon' ) ) {
-					return $icon_data[ $set ][ $request->get_param( 'icon' ) ];
-				}
-
-				return $icon_data[ $set ];
-			}
-
-			if ( $request->get_param( 'sets' ) ) {
-				return array_keys( $icon_data );
-			}
-
-			return $icon_data;
-		},
-	] );
-}
-
-/**
- * Rest endpoint callback.
- *
- * @since 0.0.1
- *
- * @return array
- */
-function get_icon_data(): array {
-	$icon_data = [];
-	$icon_sets = get_config( 'icons' );
-
-	foreach ( $icon_sets as $icon_set => $set_dir ) {
-		$icons = glob( $set_dir . '/*.svg' );
-
-		foreach ( $icons as $icon ) {
-			$name = basename( $icon, '.svg' );
-			$icon = file_get_contents( $icon );
-
-			if ( $icon_set === 'wordpress' ) {
-				$icon = str_replace(
-					[ '<svg ', 'fill="none"' ],
-					[ '<svg fill="currentColor" ', '' ],
-					$icon
-				);
-			}
-
-			// Remove comments.
-			$icon = preg_replace( '/<!--(.|\s)*?-->/', '', $icon );
-
-			$icon_data[ $icon_set ][ $name ] = $icon;
-		}
-	}
-
-	return $icon_data;
 }

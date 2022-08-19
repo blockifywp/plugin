@@ -2,7 +2,7 @@
 
 declare( strict_types=1 );
 
-namespace Blockify;
+namespace Blockify\Plugin;
 
 use function add_filter;
 use function str_contains;

@@ -8,6 +8,7 @@ class ComposerStaticInit5726a8eb6489c26df3b7d8af414c5348
 {
     public static $files = array (
         '2d93258af16d106f9054d8d8e0c0329d' => __DIR__ . '/..' . '/wptt/webfont-loader/wptt-webfont-loader.php',
+        'bf422eb95c8b2116376e76f8bca04ace' => __DIR__ . '/../..' . '/blockify.php',
     );
 
     public static $classMap = array (

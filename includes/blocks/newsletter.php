@@ -2,7 +2,7 @@
 
 declare( strict_types=1 );
 
-namespace Blockify;
+namespace Blockify\Plugin;
 
 use DOMElement;
 use function add_action;

@@ -2,22 +2,16 @@
 
 declare( strict_types=1 );
 
-namespace Blockify;
+namespace Blockify\Plugin;
 
 use const GLOB_ONLYDIR;
-use WP_Block_Pattern_Categories_Registry;
-use WP_Block_Patterns_Registry;
 use function __;
 use function add_action;
 use function apply_filters;
+use function array_map;
 use function array_merge;
 use function basename;
-use function glob;
-use function in_array;
 use function register_block_type;
-use function register_block_pattern_category;
-use function ucwords;
-use function wp_list_pluck;
 
 add_action( 'init', NS . 'register_block_types' );
 /**
@@ -28,7 +22,12 @@ add_action( 'init', NS . 'register_block_types' );
  * @return void
  */
 function register_block_types(): void {
-	foreach ( get_config( 'blocks' ) as $block_type ) {
+	$block_types = apply_filters( 'blockify_block_types', array_map(
+		fn( $dir ) => basename( $dir ),
+		glob( DIR . 'build/blocks/*', GLOB_ONLYDIR )
+	) );
+
+	foreach ( $block_types as $block_type ) {
 		register_block_type( DIR . 'build/blocks/' . $block_type );
 	}
 }
@@ -55,8 +54,8 @@ function register_block_categories( array $categories ): array {
 		$categories,
 		[
 			[
-				'slug'  => SLUG,
-				'title' => ucwords( SLUG ),
+				'slug'  => 'blockify',
+				'title' => 'Blockify',
 			],
 		]
 	);

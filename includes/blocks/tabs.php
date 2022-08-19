@@ -1,6 +1,6 @@
 <?php
 
-namespace Blockify;
+namespace Blockify\Plugin;
 
 use DOMElement;
 use DomXPath;

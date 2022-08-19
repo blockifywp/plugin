@@ -1,9 +1,8 @@
-const FileManagerPlugin        = require( 'filemanager-webpack-plugin' );
-const defaultConfig            = require( '@wordpress/scripts/config/webpack.config' );
-const path                     = require( 'path' );
-const fs                       = require( 'fs' );
-const glob                     = require( 'glob' );
-const RemoveEmptyScriptsPlugin = require( 'webpack-remove-empty-scripts' );
+const defaultConfig     = require( '@wordpress/scripts/config/webpack.config' );
+const BrowserSyncPlugin = require( 'browser-sync-webpack-plugin' );
+const path              = require( 'path' );
+const fs                = require( 'fs' );
+const glob              = require( 'glob' );
 
 const rename = () => {
 	const { join } = path;
@@ -82,44 +81,15 @@ module.exports = {
 
 	entry: {
 		...defaultConfig.entry,
-		index: path.resolve( process.cwd(), 'src', 'index.tsx' ),
-		editor: path.resolve( process.cwd(), 'src', 'editor.scss' ),
-		style: path.resolve( process.cwd(), 'src', 'style.scss' ),
-		...glob.sync( path.resolve( process.cwd(), 'src', 'core/**/style.scss' ) )
-			.reduce( ( entries, filename ) => {
-				const name = filename.split( '/' ).reverse()[ 1 ];
-
-				return { ...entries, [ 'core/' + name + '/style' ]: filename };
-			}, {} ),
-		...glob.sync( path.resolve( process.cwd(), 'src', 'core/**/script.tsx' ) )
-			.reduce( ( entries, filename ) => {
-				const name = filename.split( '/' ).reverse()[ 1 ];
-
-				return { ...entries, [ 'core/' + name + '/script' ]: filename };
-			}, {} )
 	},
 
 	plugins: [
 		...defaultConfig.plugins,
 
-		new RemoveEmptyScriptsPlugin(),
-
-		new FileManagerPlugin( {
-			events: {
-				onEnd: {
-					copy: [
-						{
-							source: './build/style-style.css',
-							destination: './build/style.css'
-						}
-					],
-					delete: [
-						'./build/index.css',
-						'./build/style-editor.css',
-						'./build/style-style.css'
-					],
-				},
-			},
+		new BrowserSyncPlugin( {
+			host: 'localhost',
+			port: 8887,
+			proxy: 'https://blockify.local/'
 		} ),
 
 		{
