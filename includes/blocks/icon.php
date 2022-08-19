@@ -5,13 +5,8 @@ declare( strict_types=1 );
 namespace Blockify\Plugin;
 
 use DOMElement;
-use WP_REST_Request;
-use WP_REST_Server;
 use WP_Theme_JSON_Resolver;
 use function add_filter;
-use function apply_filters;
-use function array_keys;
-use function preg_replace;
 use function str_replace;
 
 add_filter( 'render_block', NS . 'render_icon_block', 10, 2 );
@@ -58,7 +53,7 @@ function render_icon_block( string $content, array $block ): string {
 	}
 
 	$style        = $mask->getAttribute( 'style' );
-	$css          = css_rules_to_array( $style );
+	$css          = css_string_to_array( $style );
 	$theme_json   = WP_Theme_JSON_Resolver::get_merged_data( '' );
 	$palette      = $theme_json->get_settings()['color']['palette'];
 	$mask_classes = $mask->getAttribute( 'class' );

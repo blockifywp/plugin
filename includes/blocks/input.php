@@ -8,7 +8,7 @@ use function add_filter;
 use function str_contains;
 use function str_replace;
 
-add_filter( 'render_block', NS . 'redner_input_block', 10, 2 );
+add_filter( 'render_block', NS . 'render_input_block', 10, 2 );
 /**
  * Modifies front end HTML output of block.
  *
@@ -19,7 +19,7 @@ add_filter( 'render_block', NS . 'redner_input_block', 10, 2 );
  *
  * @return string
  */
-function redner_input_block(  string $content, array $block ): string {
+function render_input_block(  string $content, array $block ): string {
 	if ( ! isset( $block['blockName'] ) || ! str_contains( $block['blockName'], 'blockify/' ) ) {
 		return $content;
 	}

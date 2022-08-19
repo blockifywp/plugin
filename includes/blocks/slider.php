@@ -6,7 +6,6 @@ namespace Blockify\Plugin;
 
 use DOMElement;
 use function add_filter;
-use function str_replace;
 
 add_filter( 'render_block', NS . 'render_slider_block', 10, 2 );
 /**

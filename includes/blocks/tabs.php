@@ -31,7 +31,7 @@ function render_tabs_block( string $content, array $block ): string {
 		 * @var $container DOMElement
 		 */
 		$container = $dom->getElementsByTagName( 'div' )->item( 0 );
-		$styles    = css_rules_to_array( $container->getAttribute( 'style' ) );
+		$styles    = css_string_to_array( $container->getAttribute( 'style' ) );
 
 		unset( $styles['padding'] );
 		unset( $styles['padding-top'] );

@@ -42,7 +42,7 @@ function breadcrumbs_block_render_callback( array $attributes, string $content )
 	$post = get_post();
 
 	if ( $post ) {
-		$html = '<span>' . convert_case( $post->post_name, TITLE_CASE ) . '</span>';
+		$html = '<span>' . $post->post_title . '</span>';
 	}
 
 	$id        = wp_get_post_parent_id();

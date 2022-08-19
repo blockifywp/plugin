@@ -9,6 +9,9 @@ use function add_action;
 use function file_get_contents;
 use function is_admin;
 use function json_decode;
+use function md5;
+use function rand;
+use function substr;
 use function wp_enqueue_script;
 use function wp_localize_script;
 
@@ -44,7 +47,7 @@ function render_google_map_block( string $content, array $block ): string {
 	];
 
 	$dark = json_decode( file_get_contents( DIR . 'src/blocks/google-map/styles/' . ( $block['attrs']['darkStyle'] ?? 'night-mode' ) . '.json' ) );
-	$hex  = random_hex( false );
+	$hex  = substr( md5( (string) rand() ), 0, 6 );
 	$id   = 'blockify-map-' . $hex;
 
 	add_action( 'wp_enqueue_scripts', function () use ( $google_maps_api_key, $enqueued, $map, $id, $hex, $dark ) {

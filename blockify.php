@@ -6,7 +6,7 @@
  * Description: A lightweight block library and toolkit that supercharges Full Site Editing themes.
  * Author:      Blockify
  * Author URI:  https://blockifywp.com/about/
- * Version:     0.0.13
+ * Version:     0.0.14
  * License:     GPLv2-or-Later
  * Text Domain: blockify
  */

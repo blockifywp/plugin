@@ -5,93 +5,16 @@ declare( strict_types=1 );
 namespace Blockify\Plugin;
 
 use const PHP_INT_MAX;
-use function dirname;
-use function get_template_directory_uri;
-use function plugin_dir_url;
-use function trailingslashit;
 use function add_action;
-use function apply_filters;
-use function array_merge_recursive;
 use function defined;
 use function explode;
-use function get_theme_support;
-use function in_array;
-use function implode;
-use function is_array;
 use function libxml_clear_errors;
 use function libxml_use_internal_errors;
 use function mb_convert_encoding;
 use function preg_replace;
-use function str_replace;
 use function trim;
 use DOMDocument;
 use DOMElement;
-
-const CAMEL_CASE    = 'camel';
-const PASCAL_CASE   = 'pascal';
-const SNAKE_CASE    = 'snake';
-const ADA_CASE      = 'ada';
-const MACRO_CASE    = 'macro';
-const KEBAB_CASE    = 'kebab';
-const TRAIN_CASE    = 'train';
-const COBOL_CASE    = 'cobol';
-const LOWER_CASE    = 'lower';
-const UPPER_CASE    = 'upper';
-const TITLE_CASE    = 'title';
-const SENTENCE_CASE = 'sentence';
-const DOT_CASE      = 'dot';
-
-/**
- * Convert string case.
- *
- * camel    myNameIsBond
- * pascal   MyNameIsBond
- * snake    my_name_is_bond
- * ada      My_Name_Is_Bond
- * macro    MY_NAME_IS_BOND
- * kebab    my-name-is-bond
- * train    My-Name-Is-Bond
- * cobol    MY-NAME-IS-BOND
- * lower    my name is bond
- * upper    MY NAME IS BOND
- * title    My Name Is Bond
- * sentence My name is bond
- * dot      my.name.is.bond
- *
- * @since 0.0.2
- *
- * @param string $string
- * @param string $case
- *
- * @return string
- */
-function convert_case( string $string, string $case ): string {
-	$delimiters = 'sentence' === $case ? [ ' ', '-', '_' ] : [ ' ', '-', '_', '.' ];
-	$lower      = trim( str_replace( $delimiters, $delimiters[0], strtolower( $string ) ), $delimiters[0] );
-	$upper      = trim( ucwords( $lower ), $delimiters[0] );
-	$pieces     = explode( $delimiters[0], $lower );
-
-	$cases = [
-		CAMEL_CASE    => lcfirst( str_replace( ' ', '', $upper ) ),
-		PASCAL_CASE   => str_replace( ' ', '', $upper ),
-		SNAKE_CASE    => strtolower( implode( '_', $pieces ) ),
-		ADA_CASE      => str_replace( ' ', '_', $upper ),
-		MACRO_CASE    => strtoupper( implode( '_', $pieces ) ),
-		KEBAB_CASE    => strtolower( implode( '-', $pieces ) ),
-		TRAIN_CASE    => lcfirst( str_replace( ' ', '-', $upper ) ),
-		COBOL_CASE    => strtoupper( implode( '-', $pieces ) ),
-		LOWER_CASE    => strtolower( $string ),
-		UPPER_CASE    => strtoupper( $string ),
-		TITLE_CASE    => $upper,
-		SENTENCE_CASE => ucfirst( $lower ),
-		DOT_CASE      => strtolower( implode( '.', $pieces ) ),
-	];
-
-	$string = $cases[ $case ] ?? $string;
-	$string = in_array( $string, [ 'Wordpress' ] ) ? 'WordPress' : $string;
-
-	return apply_filters( 'blockify_convert_case', $string );
-}
 
 /**
  * Returns a formatted DOMDocument object from a given string.
@@ -133,32 +56,6 @@ function dom( string $html ): DOMDocument {
 }
 
 /**
- * Quick and dirty way to mostly minify CSS.
- *
- * @author Gary Jones
- *
- * @since  0.0.2
- *
- * @param string $css CSS to minify
- *
- * @return string
- */
-function minify_css( string $css ): string {
-	$css = preg_replace( '/\s+/', ' ', $css );
-	$css = preg_replace( '/(\s+)(\/\*(.*?)\*\/)(\s+)/', '$2', $css );
-	$css = preg_replace( '~/\*(?![!|*])(.*?)\*/~', '', $css );
-	$css = preg_replace( '/;(?=\s*})/', '', $css );
-	$css = preg_replace( '/(,|:|;|\{|}|\*\/|>) /', '$1', $css );
-	$css = preg_replace( '/ (,|;|\{|}|\(|\)|>)/', '$1', $css );
-	$css = preg_replace( '/(:| )0\.([0-9]+)(%|em|ex|px|in|cm|mm|pt|pc)/i', '${1}.${2}${3}', $css );
-	$css = preg_replace( '/(:| )(\.?)0(%|em|ex|px|in|cm|mm|pt|pc)/i', '${1}0', $css );
-	$css = preg_replace( '/0 0 0 0/', '0', $css );
-	$css = preg_replace( '/#([a-f0-9])\\1([a-f0-9])\\2([a-f0-9])\\3/i', '#\1\2\3', $css );
-
-	return trim( $css );
-}
-
-/**
  * Returns an HTML element with a replaced tag.
  *
  * @since 0.0.20
@@ -192,22 +89,6 @@ function change_tag_name( DOMElement $node, string $name ): DOMElement {
 	$node->parentNode->replaceChild( $new_node, $node );
 
 	return $new_node;
-}
-
-/**
- * Attempts to log WordPress PHP data to console.
- *
- * @since    0.0.2
- *
- * @param mixed $data
- *
- * @return void
- */
-function log( $data ): void {
-	$data   = json_encode( $data );
-	$script = "<script class='console-log'>console.log($data);</script>";
-
-	add_action( 'wp_footer', fn() => print $script, PHP_INT_MAX - 1 );
 }
 
 /**
