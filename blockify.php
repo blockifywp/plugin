@@ -18,8 +18,6 @@ namespace Blockify\Plugin;
 use const DIRECTORY_SEPARATOR;
 use const PHP_VERSION;
 use function add_action;
-use function array_map;
-use function glob;
 use function version_compare;
 
 if ( ! version_compare( '7.4.0', PHP_VERSION, '<=' ) ) {
@@ -32,7 +30,7 @@ const DS   = DIRECTORY_SEPARATOR;
 const DIR  = __DIR__ . DS;
 const FILE = __FILE__;
 
-add_action('after_setup_theme', NS . 'register');
+add_action( 'after_setup_theme', NS . 'register' );
 /**
  * Registers plugin after theme is loaded.
  *
@@ -43,9 +41,14 @@ add_action('after_setup_theme', NS . 'register');
 function register() {
 	require_once DIR . 'includes/utility.php';
 	require_once DIR . 'includes/blocks.php';
-
-	array_map(
-		fn( $file ) => require_once $file,
-		glob( DIR . 'includes/blocks/*.php' )
-	);
+	require_once DIR . 'includes/blocks/accordion.php';
+	require_once DIR . 'includes/blocks/breadcrumbs.php';
+	require_once DIR . 'includes/blocks/google-map.php';
+	require_once DIR . 'includes/blocks/icon.php';
+	require_once DIR . 'includes/blocks/input.php';
+	require_once DIR . 'includes/blocks/newsletter.php';
+	require_once DIR . 'includes/blocks/popup.php';
+	require_once DIR . 'includes/blocks/slider.php';
+	require_once DIR . 'includes/blocks/tabs.php';
+	require_once DIR . 'includes/blocks/toggle.php';
 }
