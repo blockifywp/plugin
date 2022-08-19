@@ -4,15 +4,11 @@ declare( strict_types=1 );
 
 namespace Blockify\Plugin;
 
-use const PHP_INT_MAX;
-use function add_action;
 use function defined;
 use function explode;
 use function libxml_clear_errors;
 use function libxml_use_internal_errors;
 use function mb_convert_encoding;
-use function preg_replace;
-use function trim;
 use DOMDocument;
 use DOMElement;
 
