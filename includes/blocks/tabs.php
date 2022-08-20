@@ -18,7 +18,6 @@ add_filter( 'render_block', NS . 'render_tabs_block', 10, 2 );
  * @return string
  */
 function render_tabs_block( string $content, array $block ): string {
-
 	if ( 'blockify/tabs' === $block['blockName'] ) {
 		$dom          = dom( $content );
 		$finder       = new DomXPath( $dom );
@@ -27,9 +26,7 @@ function render_tabs_block( string $content, array $block ): string {
 		$nav          = $dom->createElement( 'div' );
 		$nav->setAttribute( 'class', 'blockify-tabs-nav' );
 
-		/**
-		 * @var $container DOMElement
-		 */
+		/** @var DOMElement $container */
 		$container = $dom->getElementsByTagName( 'div' )->item( 0 );
 		$styles    = css_string_to_array( $container->getAttribute( 'style' ) );
 
@@ -39,6 +36,7 @@ function render_tabs_block( string $content, array $block ): string {
 		unset( $styles['padding-bottom'] );
 		unset( $styles['padding-left'] );
 
+		// TODO: Apply styles.
 		//$container->setAttribute( 'style', css_rules_to_string( $styles ) );
 
 		foreach ( $tab_contents as $tab_content ) {
@@ -55,16 +53,12 @@ function render_tabs_block( string $content, array $block ): string {
 			$tab->setAttribute( 'class', $tab->getAttribute( 'class' ) . ' blockify-tab-content' );
 		}
 
-		/**
-		 * @var DOMElement $tabTitle
-		 */
+		/** @var DOMElement $tabTitle */
 		foreach ( $tab_titles as $tabTitle ) {
 			$nav->appendChild( $tabTitle );
 		}
 
-		if ( $container ) {
-			$container->insertBefore( $nav, $container->firstChild );
-		}
+		$container->insertBefore( $nav, $container->firstChild );
 
 		$content = $dom->saveHTML();
 	}

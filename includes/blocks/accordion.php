@@ -53,12 +53,9 @@ function render_accordion_item_block( string $content, array $block ): string {
 	}
 
 	if ( isset( $block['attrs']['className'] ) && str_contains( $block['attrs']['className'], 'is-style-open' ) ) {
-
 		$dom = dom( $content );
 
-		/**
-		 * @var $details DOMElement
-		 */
+		/** @var DOMElement $details */
 		$details = $dom->firstChild;
 
 		$details->setAttribute( 'open', '' );
