@@ -3,7 +3,7 @@ Contributors: blockify
 Requires at least: 6.0
 Tested up to: 6.0
 Requires PHP: 7.4
-Stable tag: 0.0.14
+Stable tag: 0.0.15
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -94,6 +94,10 @@ This plugin, like WordPress, is licensed under the GPL.
 © Copyright 2022 BlockifyWP.
 
 == Changelog ==
+
+= 0.0.15 - 20 August, 2022 =
+* Remove: Divider block, moved to spacer block
+* Add: Missing pot file
 
 = 0.0.14 - 20 August, 2022 =
 * Fix: Calls to undefined functions

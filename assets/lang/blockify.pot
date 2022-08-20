@@ -1,0 +1,718 @@
+# Copyright (C) 2022 Blockify
+# This file is distributed under the GPLv2-or-Later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Blockify 0.0.15\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/blockify\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2022-08-20T03:41:05+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.6.0\n"
+"X-Domain: blockify\n"
+
+#. Plugin Name of the plugin
+#. Author of the plugin
+msgid "Blockify"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://blockifywp.com/"
+msgstr ""
+
+#. Description of the plugin
+msgid "A lightweight block library and toolkit that supercharges Full Site Editing themes."
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://blockifywp.com/about/"
+msgstr ""
+
+#: includes/blocks.php:49
+#: build/blocks/newsletter/index.js:1
+msgid "Newsletter"
+msgstr ""
+
+#: includes/blocks/breadcrumbs.php:64
+msgid "Home"
+msgstr ""
+
+#: includes/blocks/newsletter.php:58
+msgid "Thank you for subscribing!"
+msgstr ""
+
+#: includes/blocks/newsletter.php:106
+msgid "Invalid nonce."
+msgstr ""
+
+#: includes/blocks/newsletter.php:166
+msgid "User with email already exists."
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+msgid "Closed"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+msgid "Open"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+msgid "Accordion item"
+msgstr ""
+
+#: build/blocks/accordion/index.js:1
+msgid "Item title"
+msgstr ""
+
+#: build/blocks/breadcrumbs/index.js:1
+msgid "Home / Page"
+msgstr ""
+
+#: build/blocks/counter/index.js:1
+msgid "Counter Settings"
+msgstr ""
+
+#: build/blocks/counter/index.js:1
+msgid "Start"
+msgstr ""
+
+#: build/blocks/counter/index.js:1
+msgid "End"
+msgstr ""
+
+#: build/blocks/counter/index.js:1
+msgid "Duration (seconds)"
+msgstr ""
+
+#: build/blocks/counter/index.js:1
+msgid "Delay (seconds)"
+msgstr ""
+
+#: build/blocks/counter/index.js:1
+msgid "HTML Tag"
+msgstr ""
+
+#: build/blocks/counter/index.js:1
+msgid "Suffix"
+msgstr ""
+
+#: build/blocks/divider/index.js:1
+msgid "Angle"
+msgstr ""
+
+#: build/blocks/divider/index.js:1
+msgid "Curve"
+msgstr ""
+
+#: build/blocks/divider/index.js:1
+msgid "Round"
+msgstr ""
+
+#: build/blocks/divider/index.js:1
+msgid "Wave"
+msgstr ""
+
+#: build/blocks/divider/index.js:1
+msgid "Fade"
+msgstr ""
+
+#: build/blocks/divider/index.js:1
+#: build/blocks/icon/index.js:1
+msgid "Color"
+msgstr ""
+
+#: build/blocks/divider/index.js:1
+msgid "Foreground"
+msgstr ""
+
+#: build/blocks/divider/index.js:1
+#: build/blocks/icon/index.js:1
+msgid "Background"
+msgstr ""
+
+#: build/blocks/divider/index.js:1
+msgid "Dimensions"
+msgstr ""
+
+#: build/blocks/divider/index.js:1
+#: build/blocks/google-map/index.js:1
+msgid "Height"
+msgstr ""
+
+#: build/blocks/google-map/index.js:1
+msgid "Marker"
+msgstr ""
+
+#: build/blocks/google-map/index.js:1
+msgid "Map Settings"
+msgstr ""
+
+#: build/blocks/google-map/index.js:1
+msgid "API Key"
+msgstr ""
+
+#: build/blocks/google-map/index.js:1
+#: build/blocks/newsletter/index.js:1
+msgid "Width"
+msgstr ""
+
+#: build/blocks/google-map/index.js:1
+msgid "Zoom"
+msgstr ""
+
+#: build/blocks/google-map/index.js:1
+msgid "Address"
+msgstr ""
+
+#: build/blocks/google-map/index.js:1
+msgid "Light style"
+msgstr ""
+
+#: build/blocks/google-map/index.js:1
+msgid "Default"
+msgstr ""
+
+#: build/blocks/google-map/index.js:1
+msgid "Ultra Light"
+msgstr ""
+
+#: build/blocks/google-map/index.js:1
+msgid "Subtle greyscale"
+msgstr ""
+
+#: build/blocks/google-map/index.js:1
+msgid "WY"
+msgstr ""
+
+#: build/blocks/google-map/index.js:1
+msgid "Interface"
+msgstr ""
+
+#: build/blocks/google-map/index.js:1
+msgid "Dark style"
+msgstr ""
+
+#: build/blocks/google-map/index.js:1
+msgid "Night mode"
+msgstr ""
+
+#: build/blocks/google-map/index.js:1
+msgid "Shades of grey"
+msgstr ""
+
+#: build/blocks/google-map/index.js:1
+msgid "Assassins Creed"
+msgstr ""
+
+#: build/blocks/google-map/index.js:1
+msgid "Modest"
+msgstr ""
+
+#: build/blocks/google-map/index.js:1
+msgid "Toggle dark mode preview"
+msgstr ""
+
+#: build/blocks/icon/index.js:1
+msgid "Flip Horizontal"
+msgstr ""
+
+#: build/blocks/icon/index.js:1
+msgid "Flip Vertical"
+msgstr ""
+
+#: build/blocks/icon/index.js:1
+msgid "Icon Settings"
+msgstr ""
+
+#: build/blocks/icon/index.js:1
+msgid "Select Icon Set"
+msgstr ""
+
+#: build/blocks/icon/index.js:1
+msgid "Select Icon"
+msgstr ""
+
+#: build/blocks/icon/index.js:1
+msgid "Icon Width"
+msgstr ""
+
+#: build/blocks/icon/index.js:1
+msgid "Icon"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Custom"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Displays a custom text input field."
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Placeholder"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "First name"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Displays a first name input field."
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Enter name"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Last name"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Displays a last name input field."
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Email"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Displays an email input field."
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Email address"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Sign up"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "URL"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Displays a website URL input field."
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Website"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Link"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Phone"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Displays a phone number input field."
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Telephone"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Call"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Mobile"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Number"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Displays a number input field."
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Password"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Displays a password input field."
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "User"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Text Area"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Displays a custom text area field."
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Leave a message"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Form"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Input"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Show Label"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid " field"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Show icon"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Required"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Checkbox"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Displays a checkbox field"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Terms"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Tick"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Agree"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Agree to terms and conditions."
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Auto"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Submit"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Displays a submit button"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Button"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Subscribe"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Width settings"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Button width"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Default (current page/post)"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Newsletter Settings"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Create WordPress user"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Registers a new WordPress subscriber."
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Redirect page"
+msgstr ""
+
+#: build/blocks/newsletter/index.js:1
+msgid "Success message"
+msgstr ""
+
+#: build/blocks/slider/index.js:1
+msgid "Slide"
+msgstr ""
+
+#: build/blocks/slider/index.js:1
+msgid "Slider Settings"
+msgstr ""
+
+#: build/blocks/slider/index.js:1
+msgid "Per View Desktop"
+msgstr ""
+
+#: build/blocks/slider/index.js:1
+msgid "Previous"
+msgstr ""
+
+#: build/blocks/slider/index.js:1
+msgid "Next"
+msgstr ""
+
+#: build/blocks/tabs/index.js:1
+msgid "Tab title"
+msgstr ""
+
+#: build/blocks/tabs/index.js:1
+msgid "Tab link colors"
+msgstr ""
+
+#: build/blocks/tabs/index.js:1
+msgid "Tab link"
+msgstr ""
+
+#: build/blocks/tabs/index.js:1
+msgid "Tab link active"
+msgstr ""
+
+#: build/blocks/tabs/index.js:1
+msgid "Tab link background"
+msgstr ""
+
+#: build/blocks/tabs/index.js:1
+msgid "Tab link background active"
+msgstr ""
+
+#: build/blocks/accordion/block.json
+#: src/blocks/accordion/block.json
+msgctxt "block title"
+msgid "Accordion"
+msgstr ""
+
+#: build/blocks/accordion/block.json
+#: src/blocks/accordion/block.json
+msgctxt "block description"
+msgid "A simple, customizable, accordion/faq block."
+msgstr ""
+
+#: build/blocks/accordion/block.json
+#: src/blocks/accordion/block.json
+msgctxt "block keyword"
+msgid "Faq"
+msgstr ""
+
+#: build/blocks/accordion/block.json
+#: src/blocks/accordion/block.json
+msgctxt "block keyword"
+msgid "Toggle"
+msgstr ""
+
+#: build/blocks/breadcrumbs/block.json
+#: src/blocks/breadcrumbs/block.json
+msgctxt "block title"
+msgid "Breadcrumbs"
+msgstr ""
+
+#: build/blocks/breadcrumbs/block.json
+#: src/blocks/breadcrumbs/block.json
+msgctxt "block description"
+msgid "Displays page and post breadcrumbs. This block will be removed if WordPress core adds a breadcrumbs block."
+msgstr ""
+
+#: build/blocks/breadcrumbs/block.json
+#: src/blocks/breadcrumbs/block.json
+msgctxt "block keyword"
+msgid "links"
+msgstr ""
+
+#: build/blocks/counter/block.json
+#: src/blocks/counter/block.json
+msgctxt "block title"
+msgid "Counter"
+msgstr ""
+
+#: build/blocks/counter/block.json
+#: src/blocks/counter/block.json
+msgctxt "block description"
+msgid "Counts up or down from one number to another."
+msgstr ""
+
+#: build/blocks/counter/block.json
+#: src/blocks/counter/block.json
+msgctxt "block keyword"
+msgid "countdown"
+msgstr ""
+
+#: build/blocks/counter/block.json
+#: src/blocks/counter/block.json
+msgctxt "block keyword"
+msgid "timer"
+msgstr ""
+
+#: build/blocks/counter/block.json
+#: src/blocks/counter/block.json
+msgctxt "block keyword"
+msgid "count"
+msgstr ""
+
+#: build/blocks/counter/block.json
+#: src/blocks/counter/block.json
+msgctxt "block keyword"
+msgid "clock"
+msgstr ""
+
+#: build/blocks/divider/block.json
+msgctxt "block title"
+msgid "Divider"
+msgstr ""
+
+#: build/blocks/divider/block.json
+msgctxt "block description"
+msgid "Separates page sections with different shapes and styles."
+msgstr ""
+
+#: build/blocks/divider/block.json
+msgctxt "block keyword"
+msgid "Popup"
+msgstr ""
+
+#: build/blocks/google-map/block.json
+#: src/blocks/google-map/block.json
+msgctxt "block title"
+msgid "Google Map"
+msgstr ""
+
+#: build/blocks/google-map/block.json
+#: src/blocks/google-map/block.json
+msgctxt "block description"
+msgid "Easy to use, customizable Google Map block. Also supports dark mode."
+msgstr ""
+
+#: build/blocks/icon/block.json
+#: src/blocks/icon/block.json
+msgctxt "block title"
+msgid "Icon"
+msgstr ""
+
+#: build/blocks/icon/block.json
+#: src/blocks/icon/block.json
+msgctxt "block description"
+msgid "Lightweight, fully customizable SVG icon block. Default icon sets include Dashicons, Social icons and WordPress editor icons. Renders an inline SVG, no icon fonts are loaded. Supports gradients and shadows."
+msgstr ""
+
+#: build/blocks/icon/block.json
+#: src/blocks/icon/block.json
+msgctxt "block keyword"
+msgid "font awesome"
+msgstr ""
+
+#: build/blocks/icon/block.json
+#: src/blocks/icon/block.json
+msgctxt "block keyword"
+msgid "fontawesome"
+msgstr ""
+
+#: build/blocks/icon/block.json
+#: src/blocks/icon/block.json
+msgctxt "block keyword"
+msgid "dashicons"
+msgstr ""
+
+#: build/blocks/icon/block.json
+#: src/blocks/icon/block.json
+msgctxt "block keyword"
+msgid "svg"
+msgstr ""
+
+#: build/blocks/newsletter/block.json
+#: src/blocks/newsletter/block.json
+msgctxt "block title"
+msgid "Newsletter"
+msgstr ""
+
+#: build/blocks/newsletter/block.json
+#: src/blocks/newsletter/block.json
+msgctxt "block description"
+msgid "Displays a newsletter block. NOTE: This block is still experimental."
+msgstr ""
+
+#: build/blocks/newsletter/block.json
+#: src/blocks/newsletter/block.json
+msgctxt "block keyword"
+msgid "Email"
+msgstr ""
+
+#: build/blocks/newsletter/block.json
+#: src/blocks/newsletter/block.json
+msgctxt "block keyword"
+msgid "Newsletter"
+msgstr ""
+
+#: build/blocks/newsletter/block.json
+#: src/blocks/newsletter/block.json
+msgctxt "block keyword"
+msgid "Subscribe"
+msgstr ""
+
+#: build/blocks/newsletter/block.json
+#: src/blocks/newsletter/block.json
+msgctxt "block keyword"
+msgid "Form"
+msgstr ""
+
+#: build/blocks/slider/block.json
+#: src/blocks/slider/block.json
+msgctxt "block title"
+msgid "Slider"
+msgstr ""
+
+#: build/blocks/slider/block.json
+#: src/blocks/slider/block.json
+msgctxt "block description"
+msgid "A simple, lightweight vanilla JS slider block."
+msgstr ""
+
+#: build/blocks/slider/block.json
+#: src/blocks/slider/block.json
+msgctxt "block keyword"
+msgid "slider"
+msgstr ""
+
+#: build/blocks/slider/block.json
+#: src/blocks/slider/block.json
+msgctxt "block keyword"
+msgid "carousel"
+msgstr ""
+
+#: build/blocks/tabs/block.json
+#: src/blocks/tabs/block.json
+msgctxt "block title"
+msgid "Tabs"
+msgstr ""
+
+#: build/blocks/tabs/block.json
+#: src/blocks/tabs/block.json
+msgctxt "block description"
+msgid "Simple and useful tabbed content section block. Can also be used for creating pricing table switches."
+msgstr ""
