@@ -9,7 +9,7 @@ use WP_Theme_JSON_Resolver;
 use function add_filter;
 use function str_replace;
 
-add_filter( 'render_block', NS . 'render_icon_block', 10, 2 );
+add_filter( 'render_block_blockify/icon', NS . 'render_icon_block', 10, 2 );
 /**
  * Modifies front end HTML output of block.
  *
@@ -21,10 +21,6 @@ add_filter( 'render_block', NS . 'render_icon_block', 10, 2 );
  * @return string
  */
 function render_icon_block( string $content, array $block ): string {
-	if ( 'blockify/icon' !== $block['blockName'] ) {
-		return $content;
-	}
-
 	if ( ! $content ) {
 		return $content;
 	}

@@ -7,7 +7,7 @@ namespace Blockify\Plugin;
 use DOMElement;
 use function add_filter;
 
-add_filter( 'render_block', NS . 'render_slider_block', 10, 2 );
+add_filter( 'render_block_blockify/slider', NS . 'render_slider_block', 10, 2 );
 /**
  * Modifies front end HTML output of block.
  *
@@ -19,10 +19,6 @@ add_filter( 'render_block', NS . 'render_slider_block', 10, 2 );
  * @return string
  */
 function render_slider_block( string $content, array $block ): string {
-	if ( 'blockify/slider' !== $block['blockName'] ) {
-		return $content;
-	}
-
 	$dom = dom( $content );
 
 	/**

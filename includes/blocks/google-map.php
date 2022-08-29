@@ -15,7 +15,7 @@ use function substr;
 use function wp_enqueue_script;
 use function wp_localize_script;
 
-add_filter( 'render_block', NS . 'render_google_map_block', 10, 2 );
+add_filter( 'render_block_blockify/google-map', NS . 'render_google_map_block', 10, 2 );
 /**
  * Modifies front end HTML output of block.
  *
@@ -29,7 +29,7 @@ add_filter( 'render_block', NS . 'render_google_map_block', 10, 2 );
  * @return string
  */
 function render_google_map_block( string $content, array $block ): string {
-	if ( 'blockify/google-map' !== $block['blockName'] || is_admin() ) {
+	if ( is_admin() ) {
 		return $content;
 	}
 

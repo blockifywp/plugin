@@ -45,8 +45,8 @@ add_filter( 'block_categories_all', NS . 'register_block_categories' );
 function register_block_categories( array $categories ): array {
 	$categories = array_merge( [
 		[
-			'slug'  => 'blockify-newsletter',
-			'title' => __( 'Newsletter', 'blockify' ),
+			'slug'  => 'blockify-form',
+			'title' => __( 'Form', 'blockify' ),
 		],
 	], $categories );
 

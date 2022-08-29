@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2-or-Later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Blockify 0.0.15\n"
+"Project-Id-Version: Blockify 0.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/blockify\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-08-20T03:41:05+00:00\n"
+"POT-Creation-Date: 2022-08-29T12:16:24+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: blockify\n"
@@ -24,7 +24,7 @@ msgid "https://blockifywp.com/"
 msgstr ""
 
 #. Description of the plugin
-msgid "A lightweight block library and toolkit that supercharges Full Site Editing themes."
+msgid "Lightweight block library for full site editing themes."
 msgstr ""
 
 #. Author URI of the plugin
@@ -32,23 +32,23 @@ msgid "https://blockifywp.com/about/"
 msgstr ""
 
 #: includes/blocks.php:49
-#: build/blocks/newsletter/index.js:1
-msgid "Newsletter"
+#: build/blocks/form/index.js:1
+msgid "Form"
 msgstr ""
 
 #: includes/blocks/breadcrumbs.php:64
 msgid "Home"
 msgstr ""
 
-#: includes/blocks/newsletter.php:58
+#: includes/blocks/form.php:59
 msgid "Thank you for subscribing!"
 msgstr ""
 
-#: includes/blocks/newsletter.php:106
+#: includes/blocks/form.php:141
 msgid "Invalid nonce."
 msgstr ""
 
-#: includes/blocks/newsletter.php:166
+#: includes/blocks/form.php:201
 msgid "User with email already exists."
 msgstr ""
 
@@ -100,47 +100,229 @@ msgstr ""
 msgid "Suffix"
 msgstr ""
 
-#: build/blocks/divider/index.js:1
-msgid "Angle"
+#: build/blocks/form/index.js:1
+msgid "Custom"
 msgstr ""
 
-#: build/blocks/divider/index.js:1
-msgid "Curve"
+#: build/blocks/form/index.js:1
+msgid "Displays a custom text input field."
 msgstr ""
 
-#: build/blocks/divider/index.js:1
-msgid "Round"
+#: build/blocks/form/index.js:1
+msgid "Placeholder"
 msgstr ""
 
-#: build/blocks/divider/index.js:1
-msgid "Wave"
+#: build/blocks/form/index.js:1
+msgid "First name"
 msgstr ""
 
-#: build/blocks/divider/index.js:1
-msgid "Fade"
+#: build/blocks/form/index.js:1
+msgid "Displays a first name input field."
 msgstr ""
 
-#: build/blocks/divider/index.js:1
-#: build/blocks/icon/index.js:1
-msgid "Color"
+#: build/blocks/form/index.js:1
+msgid "Last name"
 msgstr ""
 
-#: build/blocks/divider/index.js:1
-msgid "Foreground"
+#: build/blocks/form/index.js:1
+msgid "Displays a last name input field."
 msgstr ""
 
-#: build/blocks/divider/index.js:1
-#: build/blocks/icon/index.js:1
-msgid "Background"
+#: build/blocks/form/index.js:1
+msgid "Email"
 msgstr ""
 
-#: build/blocks/divider/index.js:1
-msgid "Dimensions"
+#: build/blocks/form/index.js:1
+msgid "Displays an email input field."
 msgstr ""
 
-#: build/blocks/divider/index.js:1
+#: build/blocks/form/index.js:1
+msgid "Email address"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Newsletter"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Sign up"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "URL"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Displays a website URL input field."
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "https://example.com/"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Website"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Link"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Phone"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Displays a phone number input field."
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Telephone"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Call"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Mobile"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Number"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Displays a number input field."
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Password"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Displays a password input field."
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "User"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Text Area"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Displays a custom text area field."
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Leave a message"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Input"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Show Label"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid " field"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Show icon"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Required"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Checkbox"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Displays a checkbox field"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Terms"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Tick"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Agree"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Agree to terms and conditions."
+msgstr ""
+
+#: build/blocks/form/index.js:1
 #: build/blocks/google-map/index.js:1
-msgid "Height"
+msgid "Width"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Auto"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Submit"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Displays a submit button"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Button"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Width settings"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Button width"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Default (current page/post)"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Form Settings"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Create WordPress user"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "If enabled, will attempt to register a new WordPress subscriber with the information provided."
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Success page"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Select which page users should be redirected to after a successful form submission."
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Success message"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Message to display to users after a successful form submission."
 msgstr ""
 
 #: build/blocks/google-map/index.js:1
@@ -156,8 +338,7 @@ msgid "API Key"
 msgstr ""
 
 #: build/blocks/google-map/index.js:1
-#: build/blocks/newsletter/index.js:1
-msgid "Width"
+msgid "Height"
 msgstr ""
 
 #: build/blocks/google-map/index.js:1
@@ -241,223 +422,15 @@ msgid "Icon Width"
 msgstr ""
 
 #: build/blocks/icon/index.js:1
+msgid "Color"
+msgstr ""
+
+#: build/blocks/icon/index.js:1
 msgid "Icon"
 msgstr ""
 
-#: build/blocks/newsletter/index.js:1
-msgid "Custom"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Displays a custom text input field."
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Placeholder"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "First name"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Displays a first name input field."
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Enter name"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Last name"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Displays a last name input field."
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Email"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Displays an email input field."
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Email address"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Sign up"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "URL"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Displays a website URL input field."
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Website"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Link"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Phone"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Displays a phone number input field."
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Telephone"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Call"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Mobile"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Number"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Displays a number input field."
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Password"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Displays a password input field."
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "User"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Text Area"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Displays a custom text area field."
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Leave a message"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Form"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Input"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Show Label"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid " field"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Show icon"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Required"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Checkbox"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Displays a checkbox field"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Terms"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Tick"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Agree"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Agree to terms and conditions."
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Auto"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Submit"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Displays a submit button"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Button"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Subscribe"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Width settings"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Button width"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Default (current page/post)"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Newsletter Settings"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Create WordPress user"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Registers a new WordPress subscriber."
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Redirect page"
-msgstr ""
-
-#: build/blocks/newsletter/index.js:1
-msgid "Success message"
+#: build/blocks/icon/index.js:1
+msgid "Background"
 msgstr ""
 
 #: build/blocks/slider/index.js:1
@@ -582,19 +555,40 @@ msgctxt "block keyword"
 msgid "clock"
 msgstr ""
 
-#: build/blocks/divider/block.json
+#: build/blocks/form/block.json
+#: src/blocks/form/block.json
 msgctxt "block title"
-msgid "Divider"
+msgid "Form"
 msgstr ""
 
-#: build/blocks/divider/block.json
+#: build/blocks/form/block.json
+#: src/blocks/form/block.json
 msgctxt "block description"
-msgid "Separates page sections with different shapes and styles."
+msgid "Displays a form block. Please note that this block is still experimental."
 msgstr ""
 
-#: build/blocks/divider/block.json
+#: build/blocks/form/block.json
+#: src/blocks/form/block.json
 msgctxt "block keyword"
-msgid "Popup"
+msgid "Email"
+msgstr ""
+
+#: build/blocks/form/block.json
+#: src/blocks/form/block.json
+msgctxt "block keyword"
+msgid "Newsletter"
+msgstr ""
+
+#: build/blocks/form/block.json
+#: src/blocks/form/block.json
+msgctxt "block keyword"
+msgid "Subscribe"
+msgstr ""
+
+#: build/blocks/form/block.json
+#: src/blocks/form/block.json
+msgctxt "block keyword"
+msgid "Form"
 msgstr ""
 
 #: build/blocks/google-map/block.json
@@ -643,42 +637,6 @@ msgstr ""
 #: src/blocks/icon/block.json
 msgctxt "block keyword"
 msgid "svg"
-msgstr ""
-
-#: build/blocks/newsletter/block.json
-#: src/blocks/newsletter/block.json
-msgctxt "block title"
-msgid "Newsletter"
-msgstr ""
-
-#: build/blocks/newsletter/block.json
-#: src/blocks/newsletter/block.json
-msgctxt "block description"
-msgid "Displays a newsletter block. NOTE: This block is still experimental."
-msgstr ""
-
-#: build/blocks/newsletter/block.json
-#: src/blocks/newsletter/block.json
-msgctxt "block keyword"
-msgid "Email"
-msgstr ""
-
-#: build/blocks/newsletter/block.json
-#: src/blocks/newsletter/block.json
-msgctxt "block keyword"
-msgid "Newsletter"
-msgstr ""
-
-#: build/blocks/newsletter/block.json
-#: src/blocks/newsletter/block.json
-msgctxt "block keyword"
-msgid "Subscribe"
-msgstr ""
-
-#: build/blocks/newsletter/block.json
-#: src/blocks/newsletter/block.json
-msgctxt "block keyword"
-msgid "Form"
 msgstr ""
 
 #: build/blocks/slider/block.json

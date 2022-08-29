@@ -1,9 +1,9 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 2,
-  "name": "blockify/newsletter",
-  "title": "Newsletter",
-  "description": "Displays a newsletter block. NOTE: This block is still experimental.",
+  "name": "blockify/form",
+  "title": "Form",
+  "description": "Displays a form block. Please note that this block is still experimental.",
   "icon": "email",
   "category": "blockify",
   "textdomain": "blockify",
@@ -24,7 +24,8 @@
     },
     "spacing": {
       "padding": true,
-      "margin": true
+      "margin": true,
+      "blockGap": true
     },
     "__experimentalBorder": {
       "color": true,
@@ -38,7 +39,7 @@
       "default": {
         "type": "flex",
         "justifyContent": "left",
-        "orientation": "horizontal"
+        "orientation": "vertical"
       }
     }
   },

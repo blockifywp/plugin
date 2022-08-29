@@ -7,7 +7,7 @@ namespace Blockify\Plugin;
 use DOMElement;
 use function str_contains;
 
-add_filter( 'render_block', NS . 'render_accordion_block', 10, 2 );
+add_filter( 'render_block_blockify/accordion', NS . 'render_accordion_block', 10, 2 );
 /**
  * Modifies front end HTML output of block.
  *
@@ -19,10 +19,6 @@ add_filter( 'render_block', NS . 'render_accordion_block', 10, 2 );
  * @return string
  */
 function render_accordion_block( string $content, array $block ): string {
-	if ( 'blockify/accordion' !== $block['blockName'] ) {
-		return $content;
-	}
-
 	$dom = dom( $content );
 
 	/**

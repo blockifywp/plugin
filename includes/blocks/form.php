@@ -6,6 +6,7 @@ namespace Blockify\Plugin;
 
 use DOMElement;
 use function add_action;
+use function add_filter;
 use function add_query_arg;
 use function admin_url;
 use function esc_attr;
@@ -15,7 +16,7 @@ use function get_permalink;
 use function is_admin;
 use function wp_nonce_field;
 
-add_filter( 'render_block', NS . 'render_newsletter_block', 10, 2 );
+add_filter( 'render_block_blockify/form', NS . 'render_form_block', 10, 2 );
 /**
  * Modifies front end HTML output of block.
  *
@@ -26,12 +27,12 @@ add_filter( 'render_block', NS . 'render_newsletter_block', 10, 2 );
  *
  * @return string
  */
-function render_newsletter_block( string $content, array $block ): string {
+function render_form_block( string $content, array $block ): string {
 	if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
 		return $content;
 	}
 
-	if ( is_admin() || ! $content || 'blockify/newsletter' !== $block['blockName'] ) {
+	if ( is_admin() || ! $content ) {
 		return $content;
 	}
 
@@ -54,7 +55,7 @@ function render_newsletter_block( string $content, array $block ): string {
 	$fragment = $form->ownerDocument->createDocumentFragment();
 
 	$hidden_fields = [
-		'action'          => 'blockify_newsletter',
+		'action'          => 'blockify_form',
 		'success_message' => $block['attrs']['successMessage'] ?? __( 'Thank you for subscribing!', 'blockify' ),
 		'redirect_page'   => $block['attrs']['redirectPage'] ?? $post->ID ?? false,
 		'insert_user'     => $block['attrs']['insertUser'] ?? true,
@@ -70,7 +71,7 @@ function render_newsletter_block( string $content, array $block ): string {
 		}
 	}
 
-	$fragment->appendXML( wp_nonce_field( 'blockify_newsletter', 'nonce' ) );
+	$fragment->appendXML( wp_nonce_field( 'blockify_form', 'nonce' ) );
 	$form->insertBefore( $fragment, $form->firstChild );
 
 	$content = $dom->saveHTML();
@@ -86,22 +87,56 @@ function render_newsletter_block( string $content, array $block ): string {
 	return $content;
 }
 
-add_action( 'admin_post_blockify_newsletter', NS . 'handle_form_submission' );
+//add_filter( 'render_block_blockify/text-area', NS . 'render_text_area_block', 10, 2 );
+/**
+ * Modifies front end HTML output of block.
+ *
+ * @since 0.2.0
+ *
+ * @param string $content
+ * @param array  $block
+ *
+ * @return string
+ */
+function render_text_area_block( string $content, array $block ): string {
+	if ( ! $content) {
+		return '';
+	}
+
+	$dom = dom( $content );
+
+	/* @var \DOMElement $first_child */
+	$first_child = $dom->firstChild;
+
+	/* @var \DOMElement $text_area */
+	$text_area   = $first_child->getElementsByTagName( 'textarea' )->item( 0 );
+
+	if ($block['attrs']['minHeight'] ?? false) {
+		$text_area->setAttribute(
+			'style',
+			$text_area->getAttribute('style') . ';min-height:' . $block['attrs']['minHeight']
+		);
+	}
+
+	return $dom->saveHTML();
+}
+
+add_action( 'admin_post_blockify_form', NS . 'handle_form_submission' );
 /**
  * Handles form submissions (creates new WordPress subscriber).
  *
  * @since 0.0.1
  *
- * @todo Add mailchimp support.
- *
  * @return void
+ * @todo  Add mailchimp support.
+ *
  */
 function handle_form_submission(): void {
 	$referer = isset( $_POST['_wp_http_referer'] ) ? esc_url( $_POST['_wp_http_referer'] ) : '';
 
 	$redirect_page = home_url( $referer );
 
-	if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'blockify_newsletter' ) ) {
+	if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'blockify_form' ) ) {
 		wp_safe_redirect( add_query_arg(
 			[ 'error_message' => __( 'Invalid nonce.', 'blockify' ) ],
 			$redirect_page

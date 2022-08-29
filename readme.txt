@@ -3,7 +3,7 @@ Contributors: blockify
 Requires at least: 6.0
 Tested up to: 6.0
 Requires PHP: 7.4
-Stable tag: 0.0.15
+Stable tag: 0.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -95,53 +95,56 @@ This plugin, like WordPress, is licensed under the GPL.
 
 == Changelog ==
 
-= 0.0.15 - 20 August, 2022 =
+= 0.2.0 - 29 August 2022 =
+* Update: Rename newsletter block to form
+
+= 0.0.15 - 20 August 2022 =
 * Remove: Divider block, moved to spacer block
 * Add: Missing pot file
 
-= 0.0.14 - 20 August, 2022 =
+= 0.0.14 - 20 August 2022 =
 * Fix: Calls to undefined functions
 
-= 0.0.13 - 19 August, 2022 =
+= 0.0.13 - 19 August 2022 =
 * Remove: Theme related features
 
 = 0.0.12 - 25 July, 2022 =
 * Fix: Reverse on mobile
 * Fix: Navigation block font size
 
-= 0.0.11 - July 24, 2022=
+= 0.0.11 - 24 July 2022 =
 * Fix: Google fonts loading
 * Remove: Theme related functions
 
-= 0.0.10 - July 22, 2022=
+= 0.0.10 - 22 July 2022 =
 * Update: Move icons to config
 
-= 0.0.9 - July 21, 2022=
+= 0.0.9 - 21 July 2022 =
 * Fix: Reverse on mobile settings
 * Update: Improve box shadows
 
-= 0.0.8 - July 20, 2022=
+= 0.0.8 - 20 July 2022 =
 * Fix: Google map block
 * Fix: Site editor scripts
 
-= 0.0.7 - July 19, 2022=
+= 0.0.7 - 19 July 2022 =
 * Add: Accordion block description
 * Update: Add blocks to config
 
-= 0.0.6 - July 19, 2022=
+= 0.0.6 - 19 July 2022 =
 * Add: Block descriptions
 
-= 0.0.5 - July 19, 2022=
+= 0.0.5 - 19 July 2022 =
 * Add: Screenshots
 
-= 0.0.4 - July 19, 2022=
+= 0.0.4 - 19 July 2022 =
 * Remove: Pattern functions
 
-= 0.0.3 - July 15, 2022=
+= 0.0.3 - 15 July 2022 =
 * Update: Readme
 
-= 0.0.2 - July 12, 2022 =
+= 0.0.2 - 12 July 2022 =
 * Remove: Framework CSS
 
-= 0.0.1 - June 20, 2022=
+= 0.0.1 - 20 June 2022 =
 * Initial commit:

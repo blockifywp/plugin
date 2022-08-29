@@ -5,7 +5,7 @@
  * Description: Lightweight block library for full site editing themes.
  * Author:      Blockify
  * Author URI:  https://blockifywp.com/about/
- * Version:     0.0.15
+ * Version:     0.2.0
  * License:     GPLv2-or-Later
  * Text Domain: blockify
  * Domain Path: /assets/lang
@@ -53,7 +53,7 @@ function register() {
 	require_once DIR . 'includes/blocks/google-map.php';
 	require_once DIR . 'includes/blocks/icon.php';
 	require_once DIR . 'includes/blocks/input.php';
-	require_once DIR . 'includes/blocks/newsletter.php';
+	require_once DIR . 'includes/blocks/form.php';
 	require_once DIR . 'includes/blocks/popup.php';
 	require_once DIR . 'includes/blocks/slider.php';
 	require_once DIR . 'includes/blocks/tabs.php';
