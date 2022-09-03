@@ -3,7 +3,7 @@ Contributors: blockify
 Requires at least: 6.0
 Tested up to: 6.0
 Requires PHP: 7.4
-Stable tag: 0.2.0
+Stable tag: 0.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -94,6 +94,13 @@ This plugin, like WordPress, is licensed under the GPL.
 © Copyright 2022 BlockifyWP.
 
 == Changelog ==
+
+= 0.3.0 - 3 September 2022 =
+* Add: New reCaptcha v2 block
+* Add: reCaptcha v3 setting to Submit block
+* Add: Columns support to form
+* Add: blockify_form_user_data filter
+* Add: Slider arrows and dots visibility settings
 
 = 0.2.0 - 29 August 2022 =
 * Update: Rename newsletter block to form

@@ -59,5 +59,6 @@
   "editorScript": "file:index.js",
   "editorStyle": "file:editor.css",
   "style": "file:style.css",
-  "script": "file:script.js"
+  "script": "file:script.js",
+  "viewScript": "file:view.js"
 }

@@ -9,11 +9,14 @@ use function add_action;
 use function add_filter;
 use function add_query_arg;
 use function admin_url;
+use function apply_filters;
 use function esc_attr;
 use function esc_html;
 use function esc_url;
+use function get_option;
 use function get_permalink;
 use function is_admin;
+use function plugin_dir_url;
 use function wp_nonce_field;
 
 add_filter( 'render_block_blockify/form', NS . 'render_form_block', 10, 2 );
@@ -87,7 +90,7 @@ function render_form_block( string $content, array $block ): string {
 	return $content;
 }
 
-//add_filter( 'render_block_blockify/text-area', NS . 'render_text_area_block', 10, 2 );
+add_filter( 'render_block_blockify/text-area', NS . 'render_text_area_block', 10, 2 );
 /**
  * Modifies front end HTML output of block.
  *
@@ -99,7 +102,7 @@ function render_form_block( string $content, array $block ): string {
  * @return string
  */
 function render_text_area_block( string $content, array $block ): string {
-	if ( ! $content) {
+	if ( ! $content ) {
 		return '';
 	}
 
@@ -108,30 +111,32 @@ function render_text_area_block( string $content, array $block ): string {
 	/* @var \DOMElement $first_child */
 	$first_child = $dom->firstChild;
 
-	/* @var \DOMElement $text_area */
-	$text_area   = $first_child->getElementsByTagName( 'textarea' )->item( 0 );
+	if ( ! $first_child ) {
+		return $content;
+	}
 
-	if ($block['attrs']['minHeight'] ?? false) {
+	/* @var \DOMElement $text_area */
+	$text_area = $first_child->getElementsByTagName( 'textarea' )->item( 0 );
+
+	if ( $block['attrs']['minHeight'] ?? false ) {
 		$text_area->setAttribute(
 			'style',
-			$text_area->getAttribute('style') . ';min-height:' . $block['attrs']['minHeight']
+			$text_area->getAttribute( 'style' ) . ';min-height:' . $block['attrs']['minHeight']
 		);
 	}
 
 	return $dom->saveHTML();
 }
 
-add_action( 'admin_post_blockify_form', NS . 'handle_form_submission' );
+add_action( 'admin_post_blockify_form', NS . 'create_user_from_form' );
 /**
  * Handles form submissions (creates new WordPress subscriber).
  *
  * @since 0.0.1
  *
  * @return void
- * @todo  Add mailchimp support.
- *
  */
-function handle_form_submission(): void {
+function create_user_from_form(): void {
 	$referer = isset( $_POST['_wp_http_referer'] ) ? esc_url( $_POST['_wp_http_referer'] ) : '';
 
 	$redirect_page = home_url( $referer );
@@ -151,18 +156,18 @@ function handle_form_submission(): void {
 		return;
 	}
 
-	$user_pass       = $_POST['user_pass'] ?? wp_generate_password();
-	$user_url        = $_POST['user_url'] ?? ' ';
-	$user_email      = $_POST['user_email'] ?? ' ';
-	$first_name      = $_POST['first_name'] ?? ' ';
-	$last_name       = $_POST['last_name'] ?? ' ';
-	$description     = $_POST['description'] ?? ' ';
-	$agreement       = $_POST['checkbox'] ?? ' ';
-	$insert_user     = $_POST['insert_user'] ?? ' ';
-	$success_message = $_POST['success_message'] ?? ' ';
+	$user_pass       = (string) ( $_POST['user_pass'] ?? wp_generate_password() );
+	$user_url        = (string) ( $_POST['user_url'] ?? ' ' );
+	$user_email      = (string) ( $_POST['user_email'] ?? ' ' );
+	$first_name      = (string) ( $_POST['first_name'] ?? ' ' );
+	$last_name       = (string) ( $_POST['last_name'] ?? ' ' );
+	$description     = (string) ( $_POST['description'] ?? ' ' );
+	$agreement       = (string) ( $_POST['checkbox'] ?? ' ' );
+	$insert_user     = (string) ( $_POST['insert_user'] ?? ' ' );
+	$success_message = (string) ( $_POST['success_message'] ?? ' ' );
 
 	// Sanitized by wp_insert_user.
-	$user_data = [
+	$user_data = apply_filters( 'blockify_form_user_data', [
 		'user_pass'   => $user_pass,
 		'user_url'    => $user_url,
 		'user_email'  => $user_email,
@@ -172,7 +177,7 @@ function handle_form_submission(): void {
 
 		// Generated.
 		'user_login'  => $user_email,
-	];
+	] );
 
 	foreach ( $user_data as $key => $value ) {
 		if ( ! $value ) {
@@ -204,4 +209,40 @@ function handle_form_submission(): void {
 	}
 
 	die;
+}
+
+add_filter( SLUG, NS . 'add_plugin_editor_vars' );
+/**
+ * Adds plugin variables to editor.
+ *
+ * @since 0.2.0
+ *
+ * @param array $config
+ *
+ * @return array
+ */
+function add_plugin_editor_vars( array $config ): array {
+	$config['pluginDir']       = DIR;
+	$config['pluginUrl']       = plugin_dir_url( FILE );
+	$config['googleRecaptcha'] = get_option( SLUG )['googleRecaptcha'] ?? '';
+
+	return $config;
+}
+
+add_action( 'wp_enqueue_scripts', NS . 'register_recaptcha_script' );
+/**
+ * Registers Google reCAPTCHA script.
+ *
+ * @since 0.0.1
+ *
+ * @return void
+ */
+function register_recaptcha_script(): void {
+	wp_register_script(
+		'blockify-google-recaptcha',
+		'https://www.google.com/recaptcha/api.js',
+		[],
+		'',
+		true
+	);
 }

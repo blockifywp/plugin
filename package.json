@@ -1,6 +1,6 @@
 {
   "name": "blockify-plugin",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Blockify plugin and theme framework.",
   "author": "Blockify",
   "license": "GPL-2.0-or-later",

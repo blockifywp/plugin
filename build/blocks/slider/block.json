@@ -49,6 +49,14 @@
       "type": "integer",
       "default": 3
     },
+    "showArrows": {
+      "type": "boolean",
+      "default": true
+    },
+    "showDots": {
+      "type": "boolean",
+      "default": true
+    },
     "style": {
       "type": "object",
       "default": {

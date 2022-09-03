@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2-or-Later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Blockify 0.2.0\n"
+"Project-Id-Version: Blockify 0.3.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/blockify\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-08-29T12:16:24+00:00\n"
+"POT-Creation-Date: 2022-09-03T14:11:40+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: blockify\n"
@@ -40,16 +40,202 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#: includes/blocks/form.php:59
+#: includes/blocks/form.php:62
 msgid "Thank you for subscribing!"
 msgstr ""
 
-#: includes/blocks/form.php:141
+#: includes/blocks/form.php:146
 msgid "Invalid nonce."
 msgstr ""
 
-#: includes/blocks/form.php:201
+#: includes/blocks/form.php:206
 msgid "User with email already exists."
+msgstr ""
+
+#: includes/patterns.php:38
+msgctxt "Block Pattern General Name"
+msgid "Block Patterns"
+msgstr ""
+
+#: includes/patterns.php:39
+msgctxt "Block Pattern Singular Name"
+msgid "Block Pattern"
+msgstr ""
+
+#: includes/patterns.php:40
+msgid "Block Patterns"
+msgstr ""
+
+#: includes/patterns.php:41
+#: includes/patterns.php:68
+msgid "Block Pattern"
+msgstr ""
+
+#: includes/patterns.php:42
+msgid "Item Archives"
+msgstr ""
+
+#: includes/patterns.php:43
+msgid "Item Attributes"
+msgstr ""
+
+#: includes/patterns.php:44
+#: includes/patterns.php:107
+msgid "Parent Item:"
+msgstr ""
+
+#: includes/patterns.php:45
+#: includes/patterns.php:105
+msgid "All Items"
+msgstr ""
+
+#: includes/patterns.php:46
+#: includes/patterns.php:109
+msgid "Add New Item"
+msgstr ""
+
+#: includes/patterns.php:47
+msgid "Add New"
+msgstr ""
+
+#: includes/patterns.php:48
+msgid "New Item"
+msgstr ""
+
+#: includes/patterns.php:49
+#: includes/patterns.php:110
+msgid "Edit Item"
+msgstr ""
+
+#: includes/patterns.php:50
+#: includes/patterns.php:111
+msgid "Update Item"
+msgstr ""
+
+#: includes/patterns.php:51
+#: includes/patterns.php:112
+msgid "View Item"
+msgstr ""
+
+#: includes/patterns.php:52
+msgid "View Items"
+msgstr ""
+
+#: includes/patterns.php:53
+msgid "Search Item"
+msgstr ""
+
+#: includes/patterns.php:54
+msgid "Not found"
+msgstr ""
+
+#: includes/patterns.php:55
+msgid "Not found in Trash"
+msgstr ""
+
+#: includes/patterns.php:56
+msgid "Featured Image"
+msgstr ""
+
+#: includes/patterns.php:57
+msgid "Set featured image"
+msgstr ""
+
+#: includes/patterns.php:58
+msgid "Remove featured image"
+msgstr ""
+
+#: includes/patterns.php:59
+msgid "Use as featured image"
+msgstr ""
+
+#: includes/patterns.php:60
+msgid "Place into item"
+msgstr ""
+
+#: includes/patterns.php:61
+msgid "Uploaded to this item"
+msgstr ""
+
+#: includes/patterns.php:62
+#: includes/patterns.php:120
+msgid "Items list"
+msgstr ""
+
+#: includes/patterns.php:63
+#: includes/patterns.php:121
+msgid "Items list navigation"
+msgstr ""
+
+#: includes/patterns.php:64
+msgid "Filter items list"
+msgstr ""
+
+#: includes/patterns.php:69
+msgid "Block Pattern Description"
+msgstr ""
+
+#: includes/patterns.php:102
+msgctxt "Pattern Category General Name"
+msgid "Pattern Category"
+msgstr ""
+
+#: includes/patterns.php:103
+msgctxt "Pattern Category Singular Name"
+msgid "Pattern Category"
+msgstr ""
+
+#: includes/patterns.php:104
+msgid "Pattern Category"
+msgstr ""
+
+#: includes/patterns.php:106
+msgid "Parent Item"
+msgstr ""
+
+#: includes/patterns.php:108
+msgid "New Item Name"
+msgstr ""
+
+#: includes/patterns.php:113
+msgid "Separate items with commas"
+msgstr ""
+
+#: includes/patterns.php:114
+msgid "Add or remove items"
+msgstr ""
+
+#: includes/patterns.php:115
+msgid "Choose from the most used"
+msgstr ""
+
+#: includes/patterns.php:116
+msgid "Popular Items"
+msgstr ""
+
+#: includes/patterns.php:117
+msgid "Search Items"
+msgstr ""
+
+#: includes/patterns.php:118
+msgid "Not Found"
+msgstr ""
+
+#: includes/patterns.php:119
+msgid "No items"
+msgstr ""
+
+#: includes/patterns.php:148
+#: includes/patterns.php:149
+msgid "Patterns"
+msgstr ""
+
+#: includes/patterns.php:289
+msgid "Preview"
+msgstr ""
+
+#: includes/patterns.php:376
+msgid "Dark "
 msgstr ""
 
 #: build/blocks/accordion/index.js:1
@@ -286,11 +472,64 @@ msgid "Button"
 msgstr ""
 
 #: build/blocks/form/index.js:1
-msgid "Width settings"
+msgid "Submit settings"
 msgstr ""
 
 #: build/blocks/form/index.js:1
 msgid "Button width"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Enable reCAPTCHA v3"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+#: build/blocks/google-map/index.js:1
+msgid "API Key"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Enter your Google reCAPTCHA v2 API key to enable the recaptcha field. Get your key here https://google.com/recaptcha/admin/site/"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "reCaptcha v2"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Displays a Google reCaptcha v2 field. (v3 can be enabled with the Submit block). Enter your API Key from the Blockify global settings tab on any page or post."
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Google"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Recaptcha"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Confirm"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "reCaptcha Settings"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Color Scheme"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Light"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Dark"
+msgstr ""
+
+#: build/blocks/form/index.js:1
+msgid "Google reCaptcha V3"
 msgstr ""
 
 #: build/blocks/form/index.js:1
@@ -331,10 +570,6 @@ msgstr ""
 
 #: build/blocks/google-map/index.js:1
 msgid "Map Settings"
-msgstr ""
-
-#: build/blocks/google-map/index.js:1
-msgid "API Key"
 msgstr ""
 
 #: build/blocks/google-map/index.js:1
@@ -442,7 +677,19 @@ msgid "Slider Settings"
 msgstr ""
 
 #: build/blocks/slider/index.js:1
-msgid "Per View Desktop"
+msgid "Per View"
+msgstr ""
+
+#: build/blocks/slider/index.js:1
+msgid "Number of slides to display in the viewport on desktop."
+msgstr ""
+
+#: build/blocks/slider/index.js:1
+msgid "Show arrows"
+msgstr ""
+
+#: build/blocks/slider/index.js:1
+msgid "Show dots"
 msgstr ""
 
 #: build/blocks/slider/index.js:1
