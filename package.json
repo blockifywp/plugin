@@ -1,41 +1,7 @@
 {
   "name": "blockify-plugin",
-  "version": "0.3.0",
-  "description": "Blockify plugin and theme framework.",
-  "author": "Blockify",
+  "description": "Lightweight block toolkit for WordPress FSE enabled themes.",
+  "author": "Lee Anthony <info@blockifywp.com>",
   "license": "GPL-2.0-or-later",
-  "main": "assets/js/editor.js",
-  "scripts": {
-    "start": "wp-scripts start",
-    "build": "wp-scripts build",
-    "build:pot": "wp i18n make-pot ./ assets/lang/blockify.pot"
-  },
-  "devDependencies": {
-    "@glidejs/glide": "^3.5.2",
-    "@wordpress/api-fetch": "^6.3.0",
-    "@wordpress/block-editor": "^8.0.13",
-    "@wordpress/blocks": "^11.1.5",
-    "@wordpress/components": "^19.2.0",
-    "@wordpress/compose": "^5.0.7",
-    "@wordpress/data": "^6.3.0",
-    "@wordpress/dom-ready": "^3.6.0",
-    "@wordpress/edit-post": "^6.3.0",
-    "@wordpress/editor": "^12.5.1",
-    "@wordpress/element": "^4.0.4",
-    "@wordpress/hooks": "^3.6.0",
-    "@wordpress/i18n": "^4.2.4",
-    "@wordpress/icons": "^6.1.1",
-    "@wordpress/keycodes": "^3.2.4",
-    "@wordpress/plugins": "^4.4.0",
-    "@wordpress/primitives": "^3.9.0",
-    "@wordpress/scripts": "^21.0.1",
-    "browser-sync-webpack-plugin": "^2.3.0",
-    "classnames": "^2.3.1",
-    "google-map-react": "^2.2.0",
-    "html-react-parser": "^1.4.5",
-    "lodash": "^4.17.21",
-    "node-sass": "^7.0.1",
-    "oslllo-svg-fixer": "^2.1.1",
-    "react-google-autocomplete": "^2.7.0"
-  }
+  "main": "build/js/editor.js"
 }
