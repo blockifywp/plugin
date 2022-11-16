@@ -1,0 +1,105 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "blockify/tabs",
+  "title": "Tabs",
+  "description": "Simple and useful tabbed content section block. Can also be used for creating pricing table switches.",
+  "icon": "table-row-after",
+  "category": "blockify",
+  "textdomain": "blockify",
+  "supports": {
+    "align": true,
+    "alignWide": true,
+    "boxShadow": true,
+    "inserter": true,
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true
+    },
+    "color": {
+      "link": true,
+      "background": true,
+      "text": true,
+      "gradients": true
+    },
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true
+    },
+    "__experimentalBorder": {
+      "width": true,
+      "style": true,
+      "color": true,
+      "radius": true,
+      "__experimentalDefaultControls": {
+        "width": true,
+        "color": true
+      }
+    },
+    "__experimentalLayout": {
+      "allowSwitching": false,
+      "allowInheriting": false,
+      "default": {
+        "type": "flex",
+        "justifyContent": "left",
+        "orientation": "horizontal"
+      }
+    }
+  },
+  "attributes": {
+    "tabColor": {
+      "type": "string"
+    },
+    "tabGradient": {
+      "type": "string"
+    },
+    "tabColorActive": {
+      "type": "string"
+    },
+    "tabGradientActive": {
+      "type": "string"
+    },
+    "tabBackgroundColor": {
+      "type": "string"
+    },
+    "tabBackgroundGradient": {
+      "type": "string"
+    },
+    "tabBackgroundColorActive": {
+      "type": "string"
+    },
+    "tabBackgroundGradientActive": {
+      "type": "string"
+    },
+    "style": {
+      "type": "object",
+      "default": {
+        "border": {
+          "color": "var(--wp--custom--border--color)",
+          "radius": "var(--wp--custom--border--radius)",
+          "style": "var(--wp--custom--border--style)",
+          "width": "var(--wp--custom--border--width)"
+        },
+        "spacing": {
+          "margin": {
+            "top": "0px",
+            "bottom": "0px"
+          },
+          "padding": {
+            "top": "1em",
+            "right": "1em",
+            "bottom": "1em",
+            "left": "1em"
+          },
+          "blockGap": "0px"
+        }
+      }
+    }
+  },
+  "editorScript": "file:index.js",
+  "editorStyle": "file:editor.css",
+  "style": "file:style.css",
+  "script": "file:script.js",
+  "viewScript": "file:view.js"
+}

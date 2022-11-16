@@ -1,0 +1,86 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "blockify/counter",
+  "title": "Counter",
+  "description": "Counts up or down from one number to another.",
+  "icon": "clock",
+  "category": "blockify",
+  "textdomain": "blockify",
+  "keywords": [
+    "countdown",
+    "timer",
+    "count",
+    "clock"
+  ],
+  "supports": {
+    "color": {
+      "gradients": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true
+    },
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true
+    },
+    "__experimentalBorder": {
+      "width": true,
+      "style": true,
+      "color": true,
+      "radius": true,
+      "__experimentalDefaultControls": {
+        "width": true,
+        "color": true
+      }
+    },
+    "__experimentalLayout": {
+      "allowSwitching": false,
+      "allowInheriting": false,
+      "default": {
+        "type": "flex",
+        "justifyContent": "left",
+        "orientation": "horizontal"
+      }
+    }
+  },
+  "attributes": {
+    "start": {
+      "type": "string",
+      "default": "0"
+    },
+    "end": {
+      "type": "string",
+      "default": "100"
+    },
+    "duration": {
+      "type": "string",
+      "default": "2"
+    },
+    "delay": {
+      "type": "string",
+      "default": "0"
+    },
+    "tag": {
+      "type": "string",
+      "default": "span"
+    },
+    "suffix": {
+      "type": "string",
+      "default": ""
+    },
+    "style": {
+      "type": "object",
+      "default": {
+        "blockGap": "1em"
+      }
+    }
+  },
+  "editorScript": "file:index.js",
+  "script": "file:script.js",
+  "editorStyle": "file:editor.css",
+  "style": "file:style.css",
+  "viewScript": "file:view.js"
+}

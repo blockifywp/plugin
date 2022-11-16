@@ -1,7 +1,0 @@
-{
-  "name": "blockify-plugin",
-  "description": "Lightweight block toolkit for WordPress FSE enabled themes.",
-  "author": "Lee Anthony <info@blockifywp.com>",
-  "license": "GPL-2.0-or-later",
-  "main": "build/js/editor.js"
-}

@@ -1,0 +1,64 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "blockify/form",
+  "title": "Form",
+  "description": "Displays a form block. Please note that this block is still experimental.",
+  "icon": "email",
+  "category": "blockify",
+  "textdomain": "blockify",
+  "keywords": [
+    "Email",
+    "Newsletter",
+    "Subscribe",
+    "Form"
+  ],
+  "supports": {
+    "align": true,
+    "alignWide": true,
+    "boxShadow": true,
+    "inserter": true,
+    "color": {
+      "background": true,
+      "gradients": true
+    },
+    "spacing": {
+      "padding": true,
+      "margin": true,
+      "blockGap": true
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true
+    },
+    "__experimentalLayout": {
+      "allowSwitching": false,
+      "allowInheriting": false,
+      "default": {
+        "type": "flex",
+        "justifyContent": "left",
+        "orientation": "vertical"
+      }
+    }
+  },
+  "attributes": {
+    "successMessage": {
+      "type": "string",
+      "default": "Thank you for subscribing!"
+    },
+    "redirectPage": {
+      "type": "string"
+    },
+    "insertUser": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "editorScript": "file:index.js",
+  "editorStyle": "file:editor.css",
+  "style": "file:style.css",
+  "script": "file:script.js",
+  "viewScript": "file:view.js"
+}

@@ -1,0 +1,64 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "blockify/accordion",
+  "title": "Accordion",
+  "description": "A simple, customizable, accordion/faq block.",
+  "category": "blockify",
+  "icon": "list-view",
+  "textdomain": "blockify",
+  "keywords": [
+    "Faq",
+    "Toggle"
+  ],
+  "supports": {
+    "align": true,
+    "alignWide": true,
+    "boxShadow": true,
+    "color": {
+      "gradients": true
+    },
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true
+    },
+    "typography": {
+      "lineHeight": true
+    },
+    "__experimentalBorder": {
+      "width": true,
+      "style": true,
+      "color": true,
+      "radius": true,
+      "__experimentalDefaultControls": {
+        "width": true,
+        "color": true
+      }
+    }
+  },
+  "attributes": {
+    "style": {
+      "type": "object",
+      "default": {
+        "align": "none",
+        "spacing": {
+          "padding": {
+            "top": "1em",
+            "right": "1em",
+            "bottom": "1em",
+            "left": "1em"
+          }
+        },
+        "blockGap": "1em",
+        "typography": {
+          "lineHeight": "var(--wp--custom--line-height--text, 1.5)"
+        }
+      }
+    }
+  },
+  "editorScript": "file:index.js",
+  "script": "file:script.js",
+  "editorStyle": "file:editor.css",
+  "style": "file:style.css"
+}
