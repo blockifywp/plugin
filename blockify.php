@@ -5,7 +5,7 @@
  * Description: Lightweight block library for full site editing themes.
  * Author:      Blockify
  * Author URI:  https://blockifywp.com/about/
- * Version:     0.3.0
+ * Version:     0.4.0
  * License:     GPLv2-or-Later
  * Text Domain: blockify
  * Domain Path: /assets/lang
@@ -47,11 +47,13 @@ function register() {
 		basename( DIR ) . '/assets/lang'
 	);
 
-	require_once DIR . 'includes/utility.php';
-	require_once DIR . 'includes/blocks.php';
-
 	array_map(
 		fn( $file ) => require_once $file,
-		glob( DIR . 'includes/blocks/*.php' )
+		[
+			DIR . 'includes/utility.php',
+			DIR . 'includes/blocks.php',
+			...glob( DIR . 'includes/blocks/*.php' ),
+			...glob( DIR . 'includes/pattern-editor/*.php' ),
+		]
 	);
 }
