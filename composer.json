@@ -1,26 +1,33 @@
 {
-  "name": "blockify/pattern-editor",
-  "version": "0.0.1",
-  "description": "Block Pattern editor for WordPress themes.",
-  "author": "Blockify",
-  "require": {
-    "alledia/edd-sl-plugin-updater": "^1.6",
-    "wp-user-manager/wp-optionskit": "dev-master"
-  },
-  "config": {
-    "allow-plugins": {
-      "composer/installers": true,
-      "pestphp/pest-plugin": true
+  "name": "blockify/framework",
+  "description": "Blockify Plugin for WordPress",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Blockify",
+      "email": "info@blockify.com"
     }
-  },
+  ],
+  "type": "wordpress-plugin",
   "scripts": {
     "install:dev": "@composer update",
     "install:prod": "@composer update --no-dev",
     "install:cs": "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run",
-    "phpcs": "phpcs",
+    "phpcs": "phpcs -s",
     "phpcbf": "phpcbf",
     "phpstan": "phpstan",
     "pest": "pest"
+  },
+  "minimum-stability": "dev",
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "pestphp/pest-plugin": true
+    }
+  },
+  "require": {
+    "php": "^7.4 || ^8.0"
   },
   "require-dev": {
     "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
@@ -30,5 +37,10 @@
     "composer/installers": "^1.5 || ^2.0",
     "dingo-d/wp-pest-integration-test-setup": "dev-main",
     "szepeviktor/phpcs-psr-12-neutron-hybrid-ruleset": "dev-master"
+  },
+  "autoload": {
+    "files": [
+      "blockify.php"
+    ]
   }
 }

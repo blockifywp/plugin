@@ -1,59 +1,61 @@
 <?php
 /**
- * Plugin Name: Blockify
- * Plugin URI:  https://blockifywp.com/
- * Description: Lightweight block library for full site editing themes.
- * Author:      Blockify
- * Author URI:  https://blockifywp.com/about/
- * Version:     0.4.0
- * License:     GPLv2-or-Later
- * Text Domain: blockify
- * Domain Path: /assets/lang
+ * Plugin Name:  Blockify
+ * Plugin URI:   https://blockifywp.com/pro
+ * Description:  Blockify full site editing theme toolkit.
+ * Author:       Blockify
+ * Author URI:   https://blockifywp.com/
+ * Version:      0.5.0
+ * License:      GPLv2-or-Later
+ * Requires WP:  6.1
+ * Requires PHP: 7.4
+ * Text Domain:  blockify
  */
 
 declare( strict_types=1 );
 
 namespace Blockify\Plugin;
 
+use function function_exists;
 use const DIRECTORY_SEPARATOR;
 use const PHP_VERSION;
 use function add_action;
 use function array_map;
-use function basename;
-use function load_plugin_textdomain;
+use function glob;
+use function is_readable;
 use function version_compare;
 
-if ( ! version_compare( '7.4.0', PHP_VERSION, '<=' ) ) {
-	return;
-}
-
 const SLUG = 'blockify';
+const NAME = 'Blockify';
 const NS   = __NAMESPACE__ . '\\';
 const DS   = DIRECTORY_SEPARATOR;
 const DIR  = __DIR__ . DS;
 const FILE = __FILE__;
 
-add_action( 'after_setup_theme', NS . 'register' );
-/**
- * Registers plugin after theme is loaded.
- *
- * @since 0.0.13
- *
- * @return void
- */
-function register() {
-	load_plugin_textdomain(
-		'blockify', false,
-		basename( DIR ) . '/assets/lang'
-	);
+if ( ! version_compare( '7.4.0', PHP_VERSION, '<=' ) ) {
+	return;
+}
 
-	array_map(
-		fn( $file ) => require_once $file,
-		[
-			DIR . 'includes/utility.php',
-			DIR . 'includes/blocks.php',
-			...glob( DIR . 'includes/blocks/*.php' ),
-			...glob( DIR . 'includes/pattern-editor/*.php' ),
-		]
-	);
+if ( ! function_exists( 'Blockify\Plugin\setup' ) ) {
+	add_action( 'after_setup_theme', NS . 'setup', 9 );
+	/**
+	 * Sets up theme and allows child themes to override.
+	 *
+	 * @since 0.4.0
+	 *
+	 * @return void
+	 */
+	function setup(): void {
+		array_map(
+			static fn( string $file ) => is_readable( $file ) ? require_once $file : null,
+			[
+				...glob( DIR . 'includes/utility/*.php' ),
+				...glob( DIR . 'includes/config/*.php' ),
+				...glob( DIR . 'includes/*.php' ),
+				...glob( DIR . 'includes/blocks/*.php' ),
+				...glob( DIR . 'includes/extensions/*.php' ),
+				...glob( DIR . 'includes/plugins/*.php' ),
+			]
+		);
+	}
 }
