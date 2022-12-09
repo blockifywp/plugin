@@ -167,6 +167,7 @@ This plugin, like WordPress, is licensed under the GPL.
 * Add: Plugin settings
 * Add: Theme framework
 * Add: Dark mode toggle block
+* Add: SVG site logo support
 * Remove: Existing blocks
 
 = 0.4.0 - 16 November 2022 =
