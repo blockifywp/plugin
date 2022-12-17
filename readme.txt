@@ -3,8 +3,8 @@ Contributors: blockify
 Requires at least: 6.0
 Tested up to: 6.0
 Requires PHP: 7.4
-Stable tag: 0.5.0
-License: GPLv2 or later
+Stable tag: 0.5.1
+License: GPL-v2-or-later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
@@ -137,7 +137,6 @@ Parent themes, child themes and plugins can all be used to modify the default be
 7. Icon block variation
 8. SVG block variation
 
-
 == Installation ==
 
 This plugin can be installed directly from your site.
@@ -161,6 +160,11 @@ This plugin, like WordPress, is licensed under the GPL.
 © Copyright 2022 BlockifyWP.
 
 == Changelog ==
+
+= 0.5.1 =
+
+* Add: Default box shadow styles
+* Add: Unbounded font family
 
 = 0.5.0 - 8 December 2022 =
 

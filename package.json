@@ -1,6 +1,6 @@
 {
-  "name": "blockify-theme",
-  "description": "Blockify theme.",
+  "name": "blockify-plugin",
+  "description": "Blockify plugin.",
   "author": "Blockify",
   "license": "GPL-2.0-or-later",
   "main": "assets/js/index.js",
@@ -10,7 +10,8 @@
     "css": "rm -Rf assets/css && node-sass --output-style compressed --recursive -o assets/css src/scss && rm -Rf assets/css/abstracts",
     "pot": "wp i18n make-pot ./ languages/blockify.pot --exclude='wp,wp-content,vendor,tests,node_modules,build,assets,src' && echo 'Check nav menu refs'",
     "test": "jest --verbose ./tests/js/*.js",
-    "zip": "rm -Rf ../../blockify.zip && zip -r ../../blockify.zip assets/ includes/ languages/ blockify.php readme.txt"
+    "zip": "rm -Rf ../../blockify.zip && zip -r ../../blockify.zip assets/ includes/ parts/ patterns/ styles/ templates/ languages/ functions.php index.php readme.txt screenshot.png style.css theme.json",
+    "svn": "func() { npm run pot && npm run zip && cp ../../blockify.zip /Users/seothemes/Documents/Blockify/svn/blockify && cd /Users/seothemes/Documents/Blockify/svn/blockify && svn up && svn cp $1 $2 && cd $2 && rm -Rf ./* && cd .. && unzip blockify.zip -d $2 && rm blockify.zip && open -a Terminal .; }; func"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.18.6",
