@@ -1,4 +1,5 @@
-const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
+const defaultConfig     = require( '@wordpress/scripts/config/webpack.config' );
+const BrowserSyncPlugin = require( 'browser-sync-webpack-plugin' );
 const path          = require( 'path' );
 const fs            = require( 'fs' );
 const glob          = require( 'glob' );
@@ -7,7 +8,7 @@ const rename = () => {
 	const { join } = path;
 
 	const blockStyleFiles = glob.sync(
-		join( process.cwd(), 'build/blocks', '**', 'style-index.css' ),
+		join( process.cwd(), 'assets/js/blocks', '**', 'style-index.css' ),
 	);
 
 	if ( blockStyleFiles ) {
@@ -21,7 +22,7 @@ const rename = () => {
 	}
 
 	const blockEditorStyleFiles = glob.sync(
-		join( process.cwd(), 'build/blocks', '**', 'index.css' ),
+		join( process.cwd(), 'assets/js/blocks', '**', 'index.css' ),
 	);
 
 	if ( blockEditorStyleFiles ) {
@@ -35,7 +36,7 @@ const rename = () => {
 	}
 
 	const blockJsonFiles = glob.sync(
-		join( process.cwd(), 'build/blocks', '**', 'block.json' ),
+		join( process.cwd(), 'assets/js/blocks', '**', 'block.json' ),
 	);
 
 	if ( blockJsonFiles ) {
@@ -71,29 +72,37 @@ const rename = () => {
 	}
 };
 
-module.exports = {
-	...defaultConfig,
+module.exports = env => {
+	return {
+		...defaultConfig,
 
-	module: {
-		...defaultConfig.module,
-	},
-
-	entry: {
-		...defaultConfig.entry, // Blocks.
-		editor: './src/editor.tsx',
-		admin: './src/admin.tsx',
-		'animation/index': './src/extensions/animation/index.tsx',
-		'pattern-editor/index': './src/extensions/pattern-editor/index.tsx',
-		'page-settings/index': './src/extensions/page-settings/index.tsx',
-	},
-
-	plugins: [
-		...defaultConfig.plugins,
-
-		{
-			apply: compiler => {
-				compiler.hooks.afterEmit.tap( 'rename', rename );
-			}
+		module: {
+			...defaultConfig.module
 		},
-	],
+
+		entry: {
+			...defaultConfig.entry,
+			editor: './src/editor.tsx',
+			accordion: './src/public/accordion.tsx',
+			animation: './src/public/animation.tsx',
+			counter: './src/public/counter.tsx',
+		},
+
+		plugins: [
+			...defaultConfig.plugins,
+
+			new BrowserSyncPlugin( {
+				host: 'localhost',
+				port: 8887,
+				proxy: 'https://blockify.local/'
+			} ),
+
+			{
+				apply: compiler => {
+					compiler.hooks.afterEmit.tap( 'rename', rename );
+				}
+			},
+		]
+	};
 };
+
