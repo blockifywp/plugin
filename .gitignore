@@ -2,8 +2,7 @@ node_modules/
 wp/
 wp-content/
 build/
-src/*
-!src/public/
+src/
 *.zip
 *.lock
 *cache
