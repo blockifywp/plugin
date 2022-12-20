@@ -3,7 +3,7 @@ Contributors: blockify
 Requires at least: 6.0
 Tested up to: 6.0
 Requires PHP: 7.4
-Stable tag: 0.5.1
+Stable tag: 0.6.0
 License: GPL-v2-or-later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -161,7 +161,11 @@ This plugin, like WordPress, is licensed under the GPL.
 
 == Changelog ==
 
-= 0.5.1 =
+= 0.6.0 - 17 December 2022 =
+
+* Add: Theme as a package
+
+= 0.5.1 - 17 December 2022 =
 
 * Add: Default box shadow styles
 * Add: Unbounded font family

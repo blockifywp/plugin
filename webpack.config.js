@@ -1,8 +1,8 @@
 const defaultConfig     = require( '@wordpress/scripts/config/webpack.config' );
 const BrowserSyncPlugin = require( 'browser-sync-webpack-plugin' );
-const path          = require( 'path' );
-const fs            = require( 'fs' );
-const glob          = require( 'glob' );
+const path              = require( 'path' );
+const fs                = require( 'fs' );
+const glob              = require( 'glob' );
 
 const rename = () => {
 	const { join } = path;
@@ -81,21 +81,12 @@ module.exports = env => {
 		},
 
 		entry: {
-			...defaultConfig.entry,
-			editor: './src/editor.tsx',
-			accordion: './src/public/accordion.tsx',
-			animation: './src/public/animation.tsx',
-			counter: './src/public/counter.tsx',
+			settings: './src/settings.tsx',
+			patterns: './src/patterns.tsx',
 		},
 
 		plugins: [
 			...defaultConfig.plugins,
-
-			new BrowserSyncPlugin( {
-				host: 'localhost',
-				port: 8887,
-				proxy: 'https://blockify.local/'
-			} ),
 
 			{
 				apply: compiler => {

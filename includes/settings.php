@@ -57,3 +57,33 @@ function register_settings() {
 		]
 	);
 }
+
+add_action( 'blockify_editor_scripts', NS . 'enqueue_editor_scripts' );
+/**
+ * Enqueues editor assets.
+ *
+ * @since 0.0.14
+ *
+ * @return void
+ */
+function enqueue_editor_scripts(): void {
+	$asset_file = DIR . 'build/settings.asset.php';
+
+	// Installed as framework.
+	if ( ! file_exists( $asset_file ) ) {
+		return;
+	}
+
+	$asset = require DIR . 'build/settings.asset.php';
+	$deps  = $asset['dependencies'];
+
+	wp_register_script(
+		'blockify-settings',
+		plugin_dir_url( FILE ) . 'build/settings.js',
+		$deps,
+		filemtime( DIR . 'build/settings.js' ),
+		true
+	);
+
+	wp_enqueue_script( SLUG . '-settings' );
+}

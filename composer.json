@@ -1,5 +1,5 @@
 {
-  "name": "blockify/framework",
+  "name": "blockify/plugin",
   "description": "Blockify Plugin for WordPress",
   "license": "GPL-2.0-or-later",
   "authors": [
@@ -9,38 +9,17 @@
     }
   ],
   "type": "wordpress-plugin",
-  "scripts": {
-    "install:dev": "@composer update",
-    "install:prod": "@composer update --no-dev",
-    "install:cs": "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run",
-    "phpcs": "phpcs -s",
-    "phpcbf": "phpcbf",
-    "phpstan": "phpstan",
-    "pest": "pest"
-  },
   "minimum-stability": "dev",
-  "config": {
-    "allow-plugins": {
-      "composer/installers": true,
-      "dealerdirect/phpcodesniffer-composer-installer": true,
-      "pestphp/pest-plugin": true
-    }
-  },
   "require": {
-    "php": "^7.4 || ^8.0"
+    "blockify/theme": "@dev"
   },
-  "require-dev": {
-    "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
-    "php-parallel-lint/php-parallel-lint": "^1.3",
-    "szepeviktor/phpstan-wordpress": "^1.1",
-    "wp-coding-standards/wpcs": "^2.3",
-    "composer/installers": "^1.5 || ^2.0",
-    "dingo-d/wp-pest-integration-test-setup": "dev-main",
-    "szepeviktor/phpcs-psr-12-neutron-hybrid-ruleset": "dev-master"
-  },
-  "autoload": {
-    "files": [
-      "blockify.php"
-    ]
-  }
+  "repositories": [
+    {
+      "type": "path",
+      "url": "../../themes/blockify",
+      "options": {
+        "symlink": false
+      }
+    }
+  ]
 }
