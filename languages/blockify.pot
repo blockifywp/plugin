@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2-or-Later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Blockify 0.5.1\n"
+"Project-Id-Version: Blockify 0.6.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/blockify\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-12-17T12:42:17+00:00\n"
+"POT-Creation-Date: 2022-12-20T01:42:05+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: blockify\n"
@@ -20,229 +20,196 @@ msgid "Blockify"
 msgstr ""
 
 #. Plugin URI of the plugin
-msgid "https://blockifywp.com/pro"
+#. Author URI of the plugin
+msgid "https://blockifywp.com/"
 msgstr ""
 
 #. Description of the plugin
 msgid "Blockify full site editing theme toolkit."
 msgstr ""
 
-#. Author URI of the plugin
-msgid "https://blockifywp.com/"
+#: includes/pattern-editor.php:62
+msgctxt "Block Pattern General Name"
+msgid "Block Patterns"
 msgstr ""
 
-#: includes/blocks.php:46
-msgid "Form"
+#: includes/pattern-editor.php:63
+msgctxt "Block Pattern Singular Name"
+msgid "Block Pattern"
 msgstr ""
 
-#: includes/blocks/archive-title.php:35
-msgid "Search results"
+#: includes/pattern-editor.php:64
+msgid "Block Patterns"
 msgstr ""
 
-#: includes/blocks/post-title.php:34
-msgid "Latest Posts"
+#: includes/pattern-editor.php:65
+#: includes/pattern-editor.php:92
+msgid "Block Pattern"
 msgstr ""
 
-#: includes/blocks/search.php:72
-msgid "Search this website"
+#: includes/pattern-editor.php:66
+msgid "Item Archives"
 msgstr ""
 
-#: includes/config/block-extras.php:18
-msgid "Position"
+#: includes/pattern-editor.php:67
+msgid "Item Attributes"
 msgstr ""
 
-#: includes/config/block-extras.php:25
-msgid "Relative"
+#: includes/pattern-editor.php:68
+#: includes/pattern-editor.php:131
+msgid "Parent Item:"
 msgstr ""
 
-#: includes/config/block-extras.php:29
-msgid "Absolute"
+#: includes/pattern-editor.php:69
+#: includes/pattern-editor.php:129
+msgid "All Items"
 msgstr ""
 
-#: includes/config/block-extras.php:33
-msgid "Sticky"
+#: includes/pattern-editor.php:70
+#: includes/pattern-editor.php:133
+msgid "Add New Item"
 msgstr ""
 
-#: includes/config/block-extras.php:37
-msgid "Fixed"
+#: includes/pattern-editor.php:71
+msgid "Add New"
 msgstr ""
 
-#: includes/config/block-extras.php:41
-msgid "Static"
+#: includes/pattern-editor.php:72
+msgid "New Item"
 msgstr ""
 
-#: includes/config/block-extras.php:48
-msgid "Top"
+#: includes/pattern-editor.php:73
+#: includes/pattern-editor.php:134
+msgid "Edit Item"
 msgstr ""
 
-#: includes/config/block-extras.php:52
-msgid "Right"
+#: includes/pattern-editor.php:74
+#: includes/pattern-editor.php:135
+msgid "Update Item"
 msgstr ""
 
-#: includes/config/block-extras.php:56
-msgid "Bottom"
+#: includes/pattern-editor.php:75
+#: includes/pattern-editor.php:136
+msgid "View Item"
 msgstr ""
 
-#: includes/config/block-extras.php:60
-msgid "Left"
+#: includes/pattern-editor.php:76
+msgid "View Items"
 msgstr ""
 
-#: includes/config/block-extras.php:64
-msgid "Z-Index"
+#: includes/pattern-editor.php:77
+msgid "Search Item"
 msgstr ""
 
-#: includes/config/block-extras.php:68
-msgid "Display"
+#: includes/pattern-editor.php:78
+msgid "Not found"
 msgstr ""
 
-#: includes/config/block-extras.php:75
-#: includes/config/block-extras.php:143
-msgid "None"
+#: includes/pattern-editor.php:79
+msgid "Not found in Trash"
 msgstr ""
 
-#: includes/config/block-extras.php:79
-msgid "Flex"
+#: includes/pattern-editor.php:80
+msgid "Featured Image"
 msgstr ""
 
-#: includes/config/block-extras.php:83
-msgid "Inline Flex"
+#: includes/pattern-editor.php:81
+msgid "Set featured image"
 msgstr ""
 
-#: includes/config/block-extras.php:87
-msgid "Block"
+#: includes/pattern-editor.php:82
+msgid "Remove featured image"
 msgstr ""
 
-#: includes/config/block-extras.php:91
-msgid "Inline Block"
+#: includes/pattern-editor.php:83
+msgid "Use as featured image"
 msgstr ""
 
-#: includes/config/block-extras.php:95
-msgid "Inline"
+#: includes/pattern-editor.php:84
+msgid "Place into item"
 msgstr ""
 
-#: includes/config/block-extras.php:99
-msgid "Grid"
+#: includes/pattern-editor.php:85
+msgid "Uploaded to this item"
 msgstr ""
 
-#: includes/config/block-extras.php:103
-msgid "Inline Grid"
+#: includes/pattern-editor.php:86
+#: includes/pattern-editor.php:144
+msgid "Items list"
 msgstr ""
 
-#: includes/config/block-extras.php:107
-msgid "Contents"
+#: includes/pattern-editor.php:87
+#: includes/pattern-editor.php:145
+msgid "Items list navigation"
 msgstr ""
 
-#: includes/config/block-extras.php:114
-msgid "Order"
+#: includes/pattern-editor.php:88
+msgid "Filter items list"
 msgstr ""
 
-#: includes/config/block-extras.php:118
-msgid "Overflow"
+#: includes/pattern-editor.php:93
+msgid "Block Pattern Description"
 msgstr ""
 
-#: includes/config/block-extras.php:125
-msgid "Hidden"
+#: includes/pattern-editor.php:126
+msgctxt "Pattern Category General Name"
+msgid "Pattern Category"
 msgstr ""
 
-#: includes/config/block-extras.php:129
-msgid "Visible"
+#: includes/pattern-editor.php:127
+msgctxt "Pattern Category Singular Name"
+msgid "Pattern Category"
 msgstr ""
 
-#: includes/config/block-extras.php:136
-msgid "Pointer Events"
+#: includes/pattern-editor.php:128
+msgid "Pattern Category"
 msgstr ""
 
-#: includes/config/block-extras.php:147
-msgid "All"
+#: includes/pattern-editor.php:130
+msgid "Parent Item"
 msgstr ""
 
-#: includes/config/block-extras.php:154
-msgid "Width"
+#: includes/pattern-editor.php:132
+msgid "New Item Name"
 msgstr ""
 
-#: includes/config/block-extras.php:158
-msgid "Max Width"
+#: includes/pattern-editor.php:137
+msgid "Separate items with commas"
 msgstr ""
 
-#: includes/config/block-styles.php:26
-#: includes/config/block-styles.php:31
-#: includes/config/block-styles.php:66
-#: includes/config/block-styles.php:71
-#: includes/config/block-styles.php:86
-#: includes/config/block-styles.php:111
-msgid "Surface"
+#: includes/pattern-editor.php:138
+msgid "Add or remove items"
 msgstr ""
 
-#: includes/config/block-styles.php:36
-#: includes/config/block-styles.php:51
-#: includes/config/block-styles.php:61
-#: includes/config/block-styles.php:76
-msgid "Light"
+#: includes/pattern-editor.php:139
+msgid "Choose from the most used"
 msgstr ""
 
-#: includes/config/block-styles.php:41
-#: includes/config/block-styles.php:46
-#: includes/config/block-styles.php:56
-#: includes/config/block-styles.php:81
-msgid "Dark"
+#: includes/pattern-editor.php:140
+msgid "Popular Items"
 msgstr ""
 
-#: includes/config/block-styles.php:91
-msgid "Checklist"
+#: includes/pattern-editor.php:141
+msgid "Search Items"
 msgstr ""
 
-#: includes/config/block-styles.php:96
-msgid "Checklist Circle"
+#: includes/pattern-editor.php:142
+msgid "Not Found"
 msgstr ""
 
-#: includes/config/block-styles.php:101
-msgid "Square"
+#: includes/pattern-editor.php:143
+msgid "No items"
 msgstr ""
 
-#: includes/config/block-styles.php:106
-msgid "Accordion"
+#: includes/pattern-editor.php:260
+#: includes/pattern-editor.php:261
+msgid "Patterns"
 msgstr ""
 
-#: includes/config/block-styles.php:116
-msgid "Mega Menu"
-msgstr ""
-
-#: includes/config/block-styles.php:121
-msgid "Sub Heading"
-msgstr ""
-
-#: includes/config/block-styles.php:126
-msgid "Notice"
-msgstr ""
-
-#: includes/config/block-styles.php:131
-msgid "Angle"
-msgstr ""
-
-#: includes/config/block-styles.php:136
-msgid "Curve"
-msgstr ""
-
-#: includes/config/block-styles.php:141
-msgid "Round"
-msgstr ""
-
-#: includes/config/block-styles.php:146
-msgid "Wave"
-msgstr ""
-
-#: includes/config/block-styles.php:151
-msgid "Fade"
-msgstr ""
-
-#: includes/config/block-styles.php:177
-msgid "Secondary"
+#: includes/pattern-editor.php:280
+msgid "Preview"
 msgstr ""
 
 #: includes/settings.php:24
 msgid "Blockify Settings."
-msgstr ""
-
-#: includes/utility/icon.php:187
-msgid " icon"
 msgstr ""

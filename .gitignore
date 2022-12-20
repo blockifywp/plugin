@@ -2,6 +2,7 @@ node_modules/
 wp/
 wp-content/
 src/
+vendor/tgmpa
 *.zip
 *.lock
 *cache

@@ -8,7 +8,8 @@
     "build": "wp-scripts build",
     "pot": "wp i18n make-pot ./ languages/blockify.pot --exclude='wp,wp-content,vendor,tests,node_modules,build,assets,src'",
     "test": "jest --verbose ./tests/js/*.js",
-    "zip": "rm -Rf ../../blockify.zip && zip -r ../../blockify.zip assets/ includes/ languages/ blockify.php readme.txt"
+    "theme": "rm -Rf vendor && rm -Rf composer.lock && composer install",
+    "zip": "rm -Rf ../../blockify.zip && zip -r ../../blockify.zip build/ includes/ languages/ vendor/ blockify.php readme.txt"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.18.6",

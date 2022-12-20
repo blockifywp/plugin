@@ -5,7 +5,7 @@
  * Description:  Blockify full site editing theme toolkit.
  * Author:       Blockify
  * Author URI:   https://blockifywp.com/
- * Version:      0.6.0
+ * Version:      0.6.1
  * License:      GPLv2-or-Later
  * Requires WP:  6.1
  * Requires PHP: 7.4

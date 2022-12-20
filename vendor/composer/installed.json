@@ -7,10 +7,11 @@
             "dist": {
                 "type": "path",
                 "url": "../../themes/blockify",
-                "reference": "9f1897144f260fa0134b955d03e7d79e94a1a61e"
+                "reference": "7f6a460a0483e2fac19268ee26315f56e3b79f12"
             },
             "require": {
-                "php": "^7.4 || ^8.0"
+                "php": "^7.4 || ^8.0",
+                "tgmpa/tgm-plugin-activation": "dev-master"
             },
             "require-dev": {
                 "composer/installers": "^1.5 || ^2.0",
@@ -21,13 +22,8 @@
                 "szepeviktor/phpstan-wordpress": "^1.1",
                 "wp-coding-standards/wpcs": "^2.3"
             },
-            "type": "wordpress-plugin",
+            "type": "wordpress-theme",
             "installation-source": "dist",
-            "autoload": {
-                "files": [
-                    "blockify.php"
-                ]
-            },
             "scripts": {
                 "install:dev": [
                     "@composer update"
@@ -66,6 +62,68 @@
                 "relative": true
             },
             "install-path": "../blockify/theme"
+        },
+        {
+            "name": "tgmpa/tgm-plugin-activation",
+            "version": "dev-master",
+            "version_normalized": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TGMPA/TGM-Plugin-Activation.git",
+                "reference": "c626d0d91fc8ef24916e809c7b79eeafab1c1cac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TGMPA/TGM-Plugin-Activation/zipball/c626d0d91fc8ef24916e809c7b79eeafab1c1cac",
+                "reference": "c626d0d91fc8ef24916e809c7b79eeafab1c1cac",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "time": "2016-05-19T15:46:51+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "class-tgm-plugin-activation.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Thomas Griffin",
+                    "homepage": "http://thomasgriffinmedia.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Gary Jones",
+                    "homepage": "https://github.com/GaryJones",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Juliette Reinders Folmer",
+                    "homepage": "https://github.com/jrfnl",
+                    "role": "Developer"
+                }
+            ],
+            "description": "TGM Plugin Activation is a PHP library that allows you to easily require or recommend plugins for your WordPress themes (and plugins).",
+            "homepage": "http://tgmpluginactivation.com",
+            "keywords": [
+                "activation",
+                "library",
+                "plugins",
+                "theme",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/TGMPA/TGM-Plugin-Activation/issues",
+                "source": "https://github.com/TGMPA/TGM-Plugin-Activation"
+            },
+            "install-path": "../tgmpa/tgm-plugin-activation"
         }
     ],
     "dev": true,
