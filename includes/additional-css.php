@@ -4,6 +4,10 @@ declare( strict_types=1 );
 
 namespace Blockify\Plugin;
 
+use function add_filter;
+use function get_option;
+use function wp_strip_all_tags;
+
 add_filter( 'blockify_inline_css', NS . 'add_additional_css', 10, 3 );
 /**
  * Description of expected behavior.
@@ -20,8 +24,8 @@ function add_additional_css( string $css, string $content, bool $is_editor ): st
 	$additional_css = get_option( SLUG )['additionalCss'] ?? '';
 
 	if ( $additional_css && ! $is_editor ) {
-		$css .= $additional_css . $css;
+		$css .= wp_strip_all_tags($additional_css);
 	}
 
-	return strip_tags( $css );
+	return $css;
 }

@@ -2,7 +2,7 @@
 
 declare( strict_types=1 );
 
-namespace Blockify\Plugin;
+namespace Blockify\Theme;
 
 use function add_filter;
 

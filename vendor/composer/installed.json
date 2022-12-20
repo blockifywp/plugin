@@ -126,6 +126,6 @@
             "install-path": "../tgmpa/tgm-plugin-activation"
         }
     ],
-    "dev": true,
+    "dev": false,
     "dev-package-names": []
 }

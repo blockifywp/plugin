@@ -6,8 +6,6 @@ namespace Blockify\Plugin;
 
 use WP_Block_Patterns_Registry;
 use WP_Post;
-use function get_template_directory;
-use function locate_block_template;
 use const WP_CONTENT_DIR;
 use function __;
 use function add_action;
@@ -28,9 +26,11 @@ use function get_page_by_title;
 use function get_permalink;
 use function get_stylesheet;
 use function get_stylesheet_directory;
+use function get_template_directory;
 use function home_url;
 use function in_array;
 use function is_array;
+use function locate_block_template;
 use function preg_match_all;
 use function register_meta;
 use function rest_url;
@@ -410,7 +410,6 @@ function import_patterns() {
 	wp_safe_redirect( admin_url( 'edit.php?post_type=block_pattern&blockify_import_patterns=true' ) );
 }
 
-
 add_action( 'admin_notices', NS . 'pattern_import_success_notice' );
 /**
  * Admin notice for pattern import.
@@ -433,7 +432,6 @@ function pattern_import_success_notice() {
 	</div>
 	<?php
 }
-
 
 add_action( 'admin_post_blockify_export_patterns', NS . 'export_patterns' );
 /**
@@ -589,7 +587,7 @@ function replace_nav_menu_refs( string $html ): string {
  */
 function replace_image_paths( string $html ): string {
 	$regex       = "/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i";
-	$types       = [ 'jpg', 'jpeg', 'png', 'gif', 'mp4' ];
+	$types       = [ 'jpg', 'jpeg', 'png', 'gif', 'mp4', 'svg' ];
 	$upload_dir  = wp_upload_dir();
 	$content_dir = trailingslashit( WP_CONTENT_DIR );
 	$stylesheet  = get_stylesheet();

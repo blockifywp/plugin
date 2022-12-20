@@ -3,7 +3,7 @@ Contributors: blockify
 Requires at least: 6.1
 Tested up to: 6.1.1
 Requires PHP: 7.4
-Stable tag: 0.6.1
+Stable tag: 0.6.2
 License: GPL-v2-or-later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -160,6 +160,10 @@ This plugin, like WordPress, is licensed under the GPL.
 © Copyright 2022 BlockifyWP.
 
 == Changelog ==
+
+= 0.6.2 - 20 December 2022 =
+
+* Fix: Editor stylesheets
 
 = 0.6.1 - 20 December 2022 =
 

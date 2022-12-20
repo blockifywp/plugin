@@ -9,7 +9,7 @@
     "pot": "wp i18n make-pot ./ languages/blockify.pot --exclude='wp,wp-content,vendor,tests,node_modules,build,assets,src'",
     "test": "jest --verbose ./tests/js/*.js",
     "theme": "rm -Rf vendor && rm -Rf composer.lock && composer install",
-    "zip": "rm -Rf ../../blockify.zip && zip -r ../../blockify.zip build/ includes/ languages/ vendor/ blockify.php readme.txt"
+    "zip": "rm -Rf ../../blockify.zip && zip -r ../../blockify.zip build/ includes/ languages/ vendor/composer/ vendor/blockify/ vendor/autoload.php blockify.php readme.txt"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.18.6",

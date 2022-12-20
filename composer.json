@@ -10,6 +10,9 @@
   ],
   "type": "wordpress-plugin",
   "minimum-stability": "dev",
+  "scripts": {
+    "install:theme": "rm -Rf vendor/blockify && rm -Rf composer.lock && composer install --no-dev --no-scripts --no-autoloader && composer dump-autoload --optimize"
+  },
   "require": {
     "blockify/theme": "@dev"
   },
