@@ -3,7 +3,7 @@
         'name' => 'blockify/plugin',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '0b3ca81fcfefd14b4c6ee66d5f364876657eb77a',
+        'reference' => '71923e5a343e42163e64ddc0d3f31edb54c54ff9',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'blockify/plugin' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '0b3ca81fcfefd14b4c6ee66d5f364876657eb77a',
+            'reference' => '71923e5a343e42163e64ddc0d3f31edb54c54ff9',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -22,7 +22,7 @@
         'blockify/theme' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '7f6a460a0483e2fac19268ee26315f56e3b79f12',
+            'reference' => 'de14499408f22896d86e6ae11965e1bd6feb12c5',
             'type' => 'wordpress-theme',
             'install_path' => __DIR__ . '/../blockify/theme',
             'aliases' => array(),

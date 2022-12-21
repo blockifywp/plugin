@@ -7,7 +7,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../themes/blockify",
-                "reference": "7f6a460a0483e2fac19268ee26315f56e3b79f12"
+                "reference": "de14499408f22896d86e6ae11965e1bd6feb12c5"
             },
             "require": {
                 "php": "^7.4 || ^8.0",

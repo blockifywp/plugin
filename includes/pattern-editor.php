@@ -344,7 +344,6 @@ function add_show_patterns_body_class( string $classes ): string {
 	return $classes;
 }
 
-
 add_action( 'admin_post_blockify_import_patterns', NS . 'import_patterns', 11 );
 /**
  * Imports all registered patterns as posts.
@@ -428,7 +427,7 @@ function pattern_import_success_notice() {
 
 	?>
 	<div class="notice notice-success is-dismissible">
-		<p><?php _e( 'Patterns successfully imported.', 'blockify-pro' ); ?></p>
+		<p><?php _e( 'Patterns successfully imported.', 'blockify' ); ?></p>
 	</div>
 	<?php
 }
@@ -475,7 +474,7 @@ function pattern_export_success_notice() {
 	?>
 	<div class="notice notice-success is-dismissible">
 		<p>
-			<?php echo __( 'Patterns successfully exported.', 'blockify-pro' ); ?>
+			<?php echo __( 'Patterns successfully exported.', 'blockify' ); ?>
 		</p>
 	</div>
 	<?php

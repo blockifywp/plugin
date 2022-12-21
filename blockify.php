@@ -5,7 +5,7 @@
  * Description:  Blockify full site editing theme toolkit.
  * Author:       Blockify
  * Author URI:   https://blockifywp.com/
- * Version:      0.6.2
+ * Version:      0.6.3
  * License:      GPLv2-or-Later
  * Requires WP:  6.1
  * Requires PHP: 7.4
@@ -19,7 +19,7 @@ namespace Blockify\Plugin;
 use const DIRECTORY_SEPARATOR;
 use const PHP_VERSION;
 use function add_action;
-use function function_exists;
+use function get_template;
 use function glob;
 use function is_readable;
 use function version_compare;
@@ -39,7 +39,7 @@ add_action( 'plugins_loaded', NS . 'load_textdomain' );
 /**
  * Load textdomain.
  *
- * @since 0.0.1
+ * @since 0.6.0
  *
  * @return void
  */
@@ -47,35 +47,30 @@ function load_textdomain(): void {
 	load_plugin_textdomain( SLUG, false, basename( DIR ) . '/languages' );
 }
 
-add_action( 'after_setup_theme', NS . 'framework', 9 );
+add_action( 'after_setup_theme', NS . 'framework', 7 );
 /**
  * Load theme framework.
  *
- * @since 0.0.1
+ * @since 0.6.0
  *
  * @return void
  */
 function framework(): void {
-	if ( ! function_exists( 'Blockify\Theme\setup' ) ) {
+	if ( get_template() !== 'blockify' ) {
 		require_once DIR . 'vendor/blockify/theme/functions.php';
 	}
 }
 
-add_action( 'after_setup_theme', NS . 'setup', 10 );
+add_action( 'after_setup_theme', NS . 'setup', 9 );
 /**
  * Load plugin files.
  *
- * @since 0.0.1
+ * @since 0.6.0
  *
  * @return void
  */
 function setup(): void {
-	$files = [
-		...glob( DIR . 'includes/*.php' ),
-		...glob( DIR . 'includes/integrations/*.php' ),
-	];
-
-	foreach ( $files as $file ) {
+	foreach ( glob( DIR . 'includes/*.php' ) as $file ) {
 		if ( is_readable( $file ) ) {
 			require_once $file;
 		}

@@ -4,9 +4,6 @@ declare( strict_types=1 );
 
 namespace Blockify\Plugin;
 
-use function Blockify\Theme\get_asset_path;
-use function Blockify\Theme\get_editor_stylesheet_path;
-use function Blockify\Theme\get_system_fonts;
 use function add_filter;
 use function apply_filters;
 use function array_merge;
@@ -45,7 +42,6 @@ function add_fonts( $theme_json ) {
  * @return array
  */
 function get_selected_fonts(): array {
-	$path           = get_editor_stylesheet_path();
 	$font_families  = get_option( SLUG )['googleFonts'] ?? [];
 	$selected_fonts = [];
 
@@ -73,7 +69,7 @@ function get_selected_fonts(): array {
 					'fontDisplay' => 'swap',
 					'fontWeight'  => '100 900',
 					'src'         => [
-						"file:./{$path}assets/fonts/$slug.woff2",
+						"file:../../plugins/blockify/vendor/blockify/theme/assets/fonts/$slug.woff2",
 					],
 				],
 			],
@@ -91,10 +87,9 @@ function get_selected_fonts(): array {
  * @return array
  */
 function get_all_fonts(): array {
-	$font_families = get_system_fonts();
+	$font_families = [];
 	$font_slugs    = wp_list_pluck( $font_families, 'slug' );
-	$font_files    = glob( get_asset_path() . 'assets/fonts/*.woff2' );
-	$path          = get_editor_stylesheet_path();
+	$font_files    = glob( DIR . 'vendor/blockify/theme/assets/fonts/*.woff2' );
 
 	foreach ( $font_files as $font_file ) {
 		$slug = basename( $font_file, '.woff2' );
@@ -118,7 +113,7 @@ function get_all_fonts(): array {
 					'fontDisplay' => 'swap',
 					'fontWeight'  => '100 900',
 					'src'         => [
-						"file:./{$path}assets/fonts/$slug.woff2",
+						"file:../../plugins/blockify/vendor/blockify/theme/assets/fonts/$slug.woff2",
 					],
 				],
 			],
