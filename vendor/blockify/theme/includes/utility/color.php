@@ -4,6 +4,7 @@ declare( strict_types=1 );
 
 namespace Blockify\Theme;
 
+use function is_admin;
 use function str_replace;
 use function wp_get_global_settings;
 use function wp_get_global_styles;
@@ -66,29 +67,22 @@ function get_dark_mode_custom_properties(): string {
 	}
 
 	foreach ( $dark_mode_colors as $slug => $color ) {
-
 		$slug = strtolower( preg_replace( '/(?<!^)[A-Z]/', '-$0', $slug ) );
 
 		$styles[ '--wp--preset--color--' . $slug ] = "var(--wp--preset--color--custom-dark-mode-$slug,$color)";
 	}
 
 	foreach ( $dark_mode_gradients as $slug => $gradient ) {
-
 		$slug = strtolower( preg_replace( '/(?<!^)[A-Z]/', '-$0', $slug ) );
 
 		$styles[ '--wp--preset--gradient--' . $slug ] = "var(--wp--preset--gradient--custom-dark-mode-$slug,$gradient)";
 	}
 
-	$global_styles = wp_get_global_styles();
-
+	$global_styles          = wp_get_global_styles();
 	$styles['background']   = format_custom_property( $global_styles['color']['background'] ?? '' );
 	$styles['color']        = format_custom_property( $global_styles['color']['text'] ?? '' );
 	$theme_color_palette    = $global_settings['color']['palette']['theme'] ?? [];
 	$theme_gradient_palette = $global_settings['color']['gradients']['theme'] ?? [];
-
-	$options          = get_option( SLUG );
-	$color_options    = $options['darkModeColors'] ?? [];
-	$gradient_options = $options['darkModeGradients'] ?? [];
 
 	$light = [];
 
@@ -128,12 +122,14 @@ function get_dark_mode_custom_properties(): string {
 		}
 	}
 
-	foreach ( $theme_color_palette as $color ) {
-		$light[ '--wp--preset--color--' . $color['slug'] ] = $color['color'];
-	}
+	if ( ! is_admin() ) {
+		foreach ( $theme_color_palette as $color ) {
+			$light[ '--wp--preset--color--' . $color['slug'] ] = $color['color'];
+		}
 
-	foreach ( $theme_gradient_palette as $gradient ) {
-		$light[ '--wp--preset--gradient--' . $gradient['slug'] ] = $gradient['gradient'];
+		foreach ( $theme_gradient_palette as $gradient ) {
+			$light[ '--wp--preset--gradient--' . $gradient['slug'] ] = $gradient['gradient'];
+		}
 	}
 
 	return $css . '.is-style-dark{' . css_array_to_string( $styles ) . '}.is-style-light{' . css_array_to_string( $light ) . '}';

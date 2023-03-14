@@ -29,12 +29,14 @@ function render_list_block( string $html, array $block ): string {
 
 	$dom = dom( $html );
 	$ul  = get_dom_element( 'ul', $dom );
+	$ol  = get_dom_element( 'ol', $dom );
 
-	if ( ! $ul ) {
+	if ( ! $ul && ! $ol ) {
 		return $html;
 	}
 
-	$styles = css_string_to_array( $ul->getAttribute( 'style' ) );
+	$list   = $ul ?? $ol;
+	$styles = css_string_to_array( $list->getAttribute( 'style' ) );
 
 	if ( $block_gap === '0' || $block_gap ) {
 		$styles['gap'] = format_custom_property( $block_gap );
@@ -46,17 +48,17 @@ function render_list_block( string $html, array $block ): string {
 		$styles['justify-content'] = $justify_content;
 	}
 
-	$ul->setAttribute( 'style', css_array_to_string( $styles ) );
+	$list->setAttribute( 'style', css_array_to_string( $styles ) );
 
-	$classes = explode( ' ', $ul->getAttribute( 'class' ) );
+	$classes = explode( ' ', $list->getAttribute( 'class' ) );
 
 	array_unshift( $classes, 'wp-block-list' );
 
-	$ul->setAttribute( 'class', implode( ' ', $classes ) );
+	$list->setAttribute( 'class', implode( ' ', $classes ) );
 
 	$html = $dom->saveHTML();
 
-	if ( in_array( 'is-style-accordion', $classes, true ) ) {
+	if ( str_contains( $html, 'is-style-accordion' ) ) {
 		$html = render_list_block_accordion( $html, $block );
 	}
 
@@ -76,12 +78,15 @@ function render_list_block( string $html, array $block ): string {
 function render_list_block_accordion( string $html, array $block ): string {
 	$dom = dom( $html );
 	$ul  = get_dom_element( 'ul', $dom );
+	$ol  = get_dom_element( 'ol', $dom );
 
-	if ( ! $ul ) {
+	if ( ! $ul && ! $ol ) {
 		return $html;
 	}
 
-	$classes = explode( ' ', $ul->getAttribute( 'class' ) );
+	$list = $ul ?? $ol;
+
+	$classes = explode( ' ', $list->getAttribute( 'class' ) );
 
 	if ( ! in_array( 'wp-block-list', $classes, true ) ) {
 		$classes = [
@@ -90,11 +95,11 @@ function render_list_block_accordion( string $html, array $block ): string {
 		];
 	}
 
-	$ul->setAttribute( 'class', implode( ' ', $classes ) );
+	$list->setAttribute( 'class', implode( ' ', $classes ) );
 
 	$div = '<div>';
 
-	foreach ( $ul->getElementsByTagName( 'li' ) as $li ) {
+	foreach ( $list->getElementsByTagName( 'li' ) as $li ) {
 		$inner = $dom->saveHTML( $li );
 
 		if ( ! $li instanceof DOMElement ) {
@@ -131,7 +136,7 @@ function render_list_block_accordion( string $html, array $block ): string {
 
 		$li_style = $li->getAttribute( 'style' );
 
-		$has_border = str_contains_any( $li_style, 'border-width', 'border-style', 'border-color' );
+		$has_border = str_contains_any( $li_style, 'border-width', 'border-style', 'border-color' ) && ! str_contains( $li_style, 'border-width:0' );
 
 		if ( $has_border ) {
 			$details->appendChild( $dom->createElement( 'hr' ) );
@@ -191,7 +196,7 @@ function render_list_block_accordion( string $html, array $block ): string {
 	$div_dom  = dom( $div . '</div>' );
 	$imported = $dom->importNode( $div_dom->documentElement, true );
 
-	foreach ( $ul->attributes as $attribute ) {
+	foreach ( $list->attributes as $attribute ) {
 		if ( ! method_exists( $imported, 'setAttribute' ) ) {
 			continue;
 		}
@@ -199,7 +204,7 @@ function render_list_block_accordion( string $html, array $block ): string {
 		$imported->setAttribute( $attribute->localName, $attribute->nodeValue );
 	}
 
-	$dom->removeChild( $ul );
+	$dom->removeChild( $list );
 	$dom->appendChild( $imported );
 
 	return $dom->saveHTML();
@@ -218,7 +223,7 @@ add_filter( 'blockify_inline_js', NS . 'add_accordion_js', 10, 2 );
  */
 function add_accordion_js( string $js, string $content ): string {
 	if ( str_contains( $content, 'is-style-accordion' ) ) {
-		$js .= file_get_contents( DIR . 'assets/js/accordion.js' );
+		$js .= file_get_contents( get_dir() . 'assets/js/accordion.js' );
 	}
 
 	return $js;

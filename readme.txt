@@ -3,7 +3,7 @@ Contributors: blockify
 Requires at least: 6.1
 Tested up to: 6.1.1
 Requires PHP: 7.4
-Stable tag: 0.6.3
+Stable tag: trunk
 License: GPL-v2-or-later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,18 +12,6 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Blockify is a lightweight full-site editing block theme framework for WordPress. It provides useful features to help you build modern, fast-loading websites using only core blocks. Blockify is optimized for speed, with no CSS, JavaScript, image, or font files loaded by default. Customization settings include SVG icons, custom Google Fonts, box shadows, gradient text, absolute positioning, responsive settings, negative margins and more.
 
 Designed for use with any FSE theme and the most popular WordPress plugins. It's the perfect starting point and toolkit for building your own custom block theme. With Blockify, creating fast and stylish block-based websites has never been easier. Give it a try today and see the difference it can make for your site.
-
-## Site Editing
-
-Blockify is designed to work with any FSE theme. It provides some useful settings to help you customize your site, including:
-
-* Site Identity (logo, title, tagline)
-* Custom Google Fonts
-* SVG Icons
-* Additional CSS
-* Dark Mode
-
-All settings are available in the Site Editor or any editor page. Locate the Blockify settings in the Options > Plugins section of the Editor.
 
 ## Block Variations
 
@@ -160,6 +148,10 @@ This plugin, like WordPress, is licensed under the GPL.
 © Copyright 2022 BlockifyWP.
 
 == Changelog ==
+
+= 0.7.0 - 14 March 2023 =
+
+* Remove: Everything except theme framework
 
 = 0.6.3 - 21 December 2022 =
 

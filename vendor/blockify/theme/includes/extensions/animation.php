@@ -5,6 +5,7 @@ declare( strict_types=1 );
 namespace Blockify\Theme;
 
 use function add_filter;
+use function array_search;
 use function array_unique;
 use function explode;
 use function file_get_contents;
@@ -12,7 +13,7 @@ use function str_contains;
 
 add_filter( 'blockify_editor_data', NS . 'add_animation_names' );
 /**
- * Adds animation names to editor so they are available for options.
+ * Adds animation names to editor, so they are available for options.
  *
  * @since 0.9.19
  *
@@ -41,7 +42,7 @@ add_filter( 'blockify_inline_js', NS . 'add_animation_js', 10, 2 );
  */
 function add_animation_js( string $js, string $content ): string {
 	if ( str_contains( $content, ' has-animation' ) ) {
-		$js .= file_get_contents( DIR . 'assets/js/animation.js' );
+		$js .= file_get_contents( get_dir() . 'assets/js/animation.js' );
 	}
 
 	return $js;
@@ -91,9 +92,41 @@ function render_animation_attributes( string $html, array $block ): string {
 		$styles['--animation-name'] = $animation['name'] ?? '';
 	}
 
+	$event = $animation['event'] ?? '';
+
+	if ( $event === 'scroll' ) {
+		$classes[] = 'has-scroll-animation';
+
+		unset( $classes[ array_search( 'has-animation', $classes, true ) ] );
+		$styles['animation-delay']      = 'calc(var(--scroll) * -1s)';
+		$styles['animation-play-state'] = 'paused';
+		$styles['animation-duration']   = '1s';
+		$styles['animation-fill-mode']  = 'both';
+
+		unset( $styles['--animation-event'] );
+	}
+
 	$first->setAttribute( 'style', css_array_to_string( $styles ) );
 	$first->setAttribute( 'class', implode( ' ', $classes ) );
 
 	return $dom->saveHTML();
 }
 
+add_filter( 'blockify_inline_js', NS . 'add_scroll_js', 10, 2 );
+/**
+ * Adds scroll JS to the inline JS.
+ *
+ * @since 0.0.14
+ *
+ * @param string $js      Inline JS.
+ * @param string $content Page content.
+ *
+ * @return string
+ */
+function add_scroll_js( string $js, string $content ): string {
+	if ( str_contains( $content, 'animation-event:scroll' ) ) {
+		$js .= file_get_contents( get_dir() . 'assets/js/scroll.js' );
+	}
+
+	return $js;
+}

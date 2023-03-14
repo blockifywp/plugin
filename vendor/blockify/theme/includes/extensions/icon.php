@@ -11,7 +11,7 @@ use WP_REST_Server;
 
 add_action( 'rest_api_init', NS . 'register_icons_rest_route' );
 /**
- * Registers endpoint for icon data.
+ * Registers icon REST endpoint.
  *
  * @since 0.0.1
  *
@@ -19,7 +19,7 @@ add_action( 'rest_api_init', NS . 'register_icons_rest_route' );
  */
 function register_icons_rest_route(): void {
 	register_rest_route(
-		SLUG . '/v1',
+		'blockify/v1',
 		'/icons/',
 		[
 			'permission_callback' => static fn() => current_user_can( 'edit_posts' ),

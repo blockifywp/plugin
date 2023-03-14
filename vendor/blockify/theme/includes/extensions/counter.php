@@ -5,6 +5,9 @@ declare( strict_types=1 );
 namespace Blockify\Theme;
 
 use function add_filter;
+use function file_get_contents;
+use function str_contains;
+use function trim;
 
 add_filter( 'render_block_core/paragraph', NS . 'render_counter_block_variation', 10, 2 );
 /**
@@ -37,9 +40,7 @@ function render_counter_block_variation( string $html, array $block ): string {
 
 	$p->textContent = trim( $p->textContent );
 
-	$html = $dom->saveHTML();
-
-	return $html;
+	return $dom->saveHTML();
 }
 
 add_filter( 'blockify_inline_js', NS . 'add_counter_js', 10, 2 );
@@ -55,7 +56,7 @@ add_filter( 'blockify_inline_js', NS . 'add_counter_js', 10, 2 );
  */
 function add_counter_js( string $js, string $html ): string {
 	if ( str_contains( $html, 'is-style-counter' ) ) {
-		$js .= file_get_contents( DIR . 'assets/js/counter.js' );
+		$js .= file_get_contents( get_dir() . 'assets/js/counter.js' );
 	}
 
 	return $js;
