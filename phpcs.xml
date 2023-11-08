@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<ruleset name="blockify">
+	<config name="minimum_supported_wp_version" value="6.0"/>
+
+	<rule ref="WordPress-Extra"/>
+
+	<rule ref="WordPress">
+		<!-- Prevent WP short array syntax checks -->
+		<exclude name="Generic.Arrays.DisallowShortArraySyntax"/>
+		<!-- We don't need header comments. -->
+		<exclude name="Squiz.Commenting.FileComment.Missing"/>
+		<exclude name="Squiz.Commenting.FileComment.SpacingAfterComment"/>
+		<exclude name="Squiz.Commenting.FileComment.MissingPackageTag"/>
+		<!-- Prevent WP yoda checks -->
+		<exclude name="WordPress.PHP.YodaConditions.NotYoda"/>
+		<!-- Prevent WP snake_case checks. Too many usages of DOMDocument. -->
+		<exclude
+			name="WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase"/>
+		<exclude
+			name="WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase"/>
+		<exclude
+			name="WordPress.NamingConventions.ValidVariableName.InterpolatedVariableNotSnakeCase"/>
+		<!-- file_get_contents is safe and is used extensively. -->
+		<exclude
+			name="WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents"/>
+	</rule>
+
+	<!-- Disallow long array syntax -->
+	<rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+
+	<!-- Disallow Yoda conditions - https://make.wordpress.org/core/2022/06/14/upcoming-disallow-assignments-in-conditions-and-remove-the-yoda-condition-requirement-for-php/ -->
+	<rule ref="Generic.ControlStructures.DisallowYodaConditions"/>
+
+	<rule ref="Generic.Formatting.MultipleStatementAlignment">
+		<properties>
+			<property name="error" value="true"/>
+			<property name="maxPadding" value="50"/>
+		</properties>
+	</rule>
+
+	<arg name="extensions" value="php"/>
+	<file>./blockify.php</file>
+	<file>./vendor/blockify/theme/includes/</file>
+
+	<exclude-pattern>./docker/</exclude-pattern>
+	<exclude-pattern>./node_modules/</exclude-pattern>
+	<exclude-pattern>./vendor/</exclude-pattern>
+</ruleset>

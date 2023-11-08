@@ -1,17 +1,19 @@
-=== Blockify - Lightweight Full Site Editing Block Library ===
+=== Blockify - Lightweight Full Site Editing Block Toolkit ===
 Contributors: blockify
-Requires at least: 6.1
-Tested up to: 6.1.1
+Requires at least: 6.3
+Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: trunk
+Stable tag: 1.3.0
 License: GPL-v2-or-later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-Blockify is a lightweight full-site editing block theme framework for WordPress. It provides useful features to help you build modern, fast-loading websites using only core blocks. Blockify is optimized for speed, with no CSS, JavaScript, image, or font files loaded by default. Customization settings include SVG icons, custom Google Fonts, box shadows, gradient text, absolute positioning, responsive settings, negative margins and more.
+Blockify is a lightweight full-site editing block toolkit for WordPress. It provides useful features to help you build modern, fast-loading websites using only core blocks. Blockify is optimized for speed, with no CSS, JavaScript, image, or font files loaded by default. Customization settings include animations, SVG icons, custom Google Fonts, box shadows, gradient text, absolute positioning, responsive settings, negative margins and more.
 
 Designed for use with any FSE theme and the most popular WordPress plugins. It's the perfect starting point and toolkit for building your own custom block theme. With Blockify, creating fast and stylish block-based websites has never been easier. Give it a try today and see the difference it can make for your site.
+
+Please note that this plugin is not required if the Blockify theme is active.
 
 ## Block Variations
 
@@ -20,7 +22,7 @@ Blockify provides a number of block variations that use only core WordPress bloc
 * Accordion - (list block)
 * Counter - (paragraph block)
 * Curved Text - (paragraph block)
-* Grid - (group block - coming soon)
+* Grid - (group block)
 * Icon - (image block)
 * Marquee - (group block)
 * SVG - (image block)
@@ -60,11 +62,31 @@ Block extensions with responsive and hover state settings:
 * Notice
 * Divider - curve/wave/angle/round/fade
 
+## Pro Features
+
+* Pro Blocks
+* Custom Google Fonts
+* Premium SVG Icons
+* Automatic Dark Mode
+* Block Visibility
+* Plugin Integrations
+* eCommerce Support
+
+Learn more about Blockify Pro at [blockifywp.com](https://blockifywp.com/pro).
+
 == Frequently Asked Questions ==
 
-= What themes does this plugin work with? =
+= Which themes does this plugin work with? =
 
 This plugin is designed to work with any Full Site Editing block theme.
+
+= Is this plugin required for the Blockify theme or child themes? =
+
+No, this is a standalone plugin which provides the same functionality as the Blockify theme.
+
+= Is there a Pro version available? =
+
+Yes, the Blockify Pro plugin is available for purchase from the Blockify website and is compatible with any WordPress FSE block theme when the free Blockify plugin is installed.
 
 = Where is the settings page? =
 
@@ -86,7 +108,7 @@ The Dark Mode color palette can be customized from the Site Editor by clicking t
 
 = How is this a theme framework? =
 
-The Blockify plugin provides a set of useful features to help you build modern, fast-loading websites using only core blocks. It's the perfect starting point and toolkit for building your own custom block theme.
+The Blockify plugin provides a collection of reusable features to help you build modern, fast-loading websites using only core blocks. It's the perfect starting point and toolkit for building your own custom block theme.
 
 The framework includes a tonne of useful block customization features, smart base CSS, and a set of block variations and extensions to help you build your site faster. It's designed to work with any FSE theme and the most popular WordPress plugins.
 

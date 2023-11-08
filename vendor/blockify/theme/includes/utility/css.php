@@ -5,12 +5,16 @@ declare( strict_types=1 );
 namespace Blockify\Theme;
 
 use function array_key_last;
+use function array_merge;
+use function count;
 use function explode;
 use function file_exists;
-use function file_get_contents;
+use function get_template_directory;
 use function is_null;
+use function rtrim;
 use function str_contains;
 use function str_replace;
+use function wp_json_file_decode;
 
 /**
  * Converts array of CSS rules to string.
@@ -30,11 +34,12 @@ function css_array_to_string( array $styles, bool $trim = false ): string {
 			continue;
 		}
 
+		$value     = format_custom_property( (string) $value );
 		$semicolon = $trim && $property === array_key_last( $styles ) ? '' : ';';
-		$css      .= $property . ':' . $value . $semicolon;
+		$css       .= $property . ':' . $value . $semicolon;
 	}
 
-	return $css;
+	return rtrim( $css, ';' );
 }
 
 /**
@@ -62,7 +67,12 @@ function css_string_to_array( string $css ): array {
 			$value    = $parts[1];
 
 			if ( $value !== '' && $value !== 'null' ) {
-				$array[ $property ] = str_replace( 'xml$', 'xml;', $value );
+				$value = str_replace( 'xml$', 'xml;', $value );
+				$value = format_custom_property( (string) $value );
+
+				if ( $value ) {
+					$array[ $property ] = $value;
+				}
 			}
 		}
 	}
@@ -81,6 +91,29 @@ function css_string_to_array( string $css ): array {
  */
 function format_custom_property( string $custom_property ): string {
 	if ( ! str_contains( $custom_property, 'var:' ) ) {
+		$global_settings = function_exists( 'wp_get_global_settings' ) ? wp_get_global_settings() : [];
+		$theme_json_file = get_template_directory() . '/theme.json';
+		$theme_json      = [];
+
+		if ( file_exists( $theme_json_file ) ) {
+			$theme_json = wp_json_file_decode( $theme_json_file );
+		}
+
+		if ( ! isset( $global_settings['color']['palette']['theme'] ) && ! isset( $theme_json->settings->color->palette ) ) {
+			return $custom_property;
+		}
+
+		$colors = array_merge(
+			(array) $global_settings['color']['palette']['theme'],
+			(array) $theme_json->settings->color->palette
+		);
+
+		$color_slugs = wp_list_pluck( $colors, 'slug' );
+
+		if ( in_array( $custom_property, $color_slugs, true ) ) {
+			return "var(--wp--preset--color--{$custom_property})";
+		}
+
 		return $custom_property;
 	}
 
@@ -98,52 +131,50 @@ function format_custom_property( string $custom_property ): string {
 }
 
 /**
- * Gets animations from stylesheet.
+ * Adds shorthand CSS properties.
  *
- * @since 0.9.18
+ * @param array  $styles   Existing CSS array.
+ * @param string $property CSS property to add. E.g. 'margin'.
+ * @param array  $values   CSS values to add.
  *
  * @return array
  */
-function get_animations(): array {
-	$file = get_dir() . 'assets/css/extensions/animations.css';
-
-	if ( ! file_exists( $file ) ) {
-		return [];
+function add_shorthand_property( array $styles, string $property, array $values ): array {
+	if ( empty( $values ) || isset( $styles[ $property ] ) ) {
+		return $styles;
 	}
 
-	$parts      = explode( '@keyframes', file_get_contents( $file ) );
-	$animations = [];
-
-	unset( $parts[0] );
-
-	foreach ( $parts as $animation ) {
-		$name = trim( explode( '{', $animation )[0] ?? '' );
-
-		$animations[ $name ] = str_replace( $name, '', $animation );
+	if ( count( $values ) === 1 ) {
+		return $styles;
 	}
 
-	return $animations;
-}
+	$has_top    = isset( $values['top'] );
+	$has_right  = isset( $values['right'] );
+	$has_bottom = isset( $values['bottom'] );
+	$has_left   = isset( $values['left'] );
+	$has_all    = $has_top && $has_right && $has_bottom && $has_left;
 
-/**
- * Returns inline styles for animations.
- *
- * @since 0.9.19
- *
- * @param string $content   Page content.
- * @param bool   $is_editor Is admin.
- *
- * @return string
- */
-function get_animation_styles( string $content, bool $is_editor ): string {
-	$animations = get_animations();
-	$css        = '';
-
-	foreach ( $animations as $name => $animation ) {
-		if ( $is_editor || str_contains( $content, "animation-name:{$name}" ) ) {
-			$css .= "@keyframes $name" . trim( $animation );
-		}
+	if ( ! $has_top && ! $has_right && ! $has_bottom && ! $has_left ) {
+		return $styles;
 	}
 
-	return $css;
+	$top    = format_custom_property( $values['top'] ?? '0' );
+	$right  = format_custom_property( $values['right'] ?? '0' );
+	$bottom = format_custom_property( $values['bottom'] ?? '0' );
+	$left   = format_custom_property( $values['left'] ?? '0' );
+
+	unset( $styles[ $property . '-top' ] );
+	unset( $styles[ $property . '-right' ] );
+	unset( $styles[ $property . '-bottom' ] );
+	unset( $styles[ $property . '-left' ] );
+
+	if ( $top === $right && $right === $bottom && $bottom === $left ) {
+		$styles[ $property ] = format_custom_property( $top );
+	} else if ( $top === $bottom && $left === $right ) {
+		$styles[ $property ] = "$top $right";
+	} else {
+		$styles[ $property ] = "$top $right $bottom $left";
+	}
+
+	return $styles;
 }

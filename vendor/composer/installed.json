@@ -2,12 +2,12 @@
     "packages": [
         {
             "name": "blockify/theme",
-            "version": "dev-develop",
-            "version_normalized": "dev-develop",
+            "version": "dev-main",
+            "version_normalized": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../../themes/blockify",
-                "reference": "ea6a7e26b1f4069ffa3f4e95f46e95a9721d13af"
+                "reference": "0c5ca209c498441416b872588be7905d2c4c7520"
             },
             "require": {
                 "php": ">=7.4"
@@ -15,13 +15,14 @@
             "require-dev": {
                 "composer/installers": "^1.5 || ^2.0",
                 "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
-                "dingo-d/wp-pest-integration-test-setup": "dev-main",
+                "dingo-d/wp-pest": "dev-main",
+                "mockery/mockery": "^1.6@dev",
                 "php-parallel-lint/php-parallel-lint": "^1.3",
                 "szepeviktor/phpcs-psr-12-neutron-hybrid-ruleset": "dev-master",
                 "szepeviktor/phpstan-wordpress": "^1.1",
                 "wp-coding-standards/wpcs": "^2.3"
             },
-            "type": "wordpress-theme",
+            "type": "library",
             "installation-source": "dist",
             "autoload": {
                 "files": [
@@ -37,6 +38,9 @@
                 ],
                 "install:cs": [
                     "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run"
+                ],
+                "install:pest": [
+                    "pest --init"
                 ],
                 "phpcs": [
                     "phpcs -s"
@@ -57,10 +61,22 @@
             "authors": [
                 {
                     "name": "Blockify",
-                    "email": "info@blockifytheme.com"
+                    "homepage": "https://blockifywp.com"
                 }
             ],
             "description": "Blockify WordPress Theme",
+            "homepage": "https://wordpress.org/themes/blockify/",
+            "keywords": [
+                "blockify",
+                "blocks",
+                "fse",
+                "theme",
+                "wordpress",
+                "wp"
+            ],
+            "support": {
+                "issues": "https://github.com/blockifywp/theme/issues"
+            },
             "transport-options": {
                 "symlink": false,
                 "relative": true

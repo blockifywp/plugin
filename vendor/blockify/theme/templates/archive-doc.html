@@ -1,0 +1,27 @@
+<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
+
+<!-- wp:group {"tagName":"main","align":"full","style":{"boxShadow":{"inset":"inset","color":"#f3f4f6","y":"10","blur":"10","hover":{"y":"10","blur":"10","inset":"inset","color":"#f3f4f6","spread":"-10"},"spread":"-10"},"spacing":{"padding":{"top":"var:preset|spacing|lg","bottom":"var:preset|spacing|lg"}}},"className":"alignfull","layout":{"type":"constrained"}} -->
+<main class="wp-block-group alignfull has-box-shadow" style="padding-top:var(--wp--preset--spacing--lg);padding-bottom:var(--wp--preset--spacing--lg);--wp--custom--box-shadow--inset:inset;--wp--custom--box-shadow--hover--inset:inset;--wp--custom--box-shadow--y:10px;--wp--custom--box-shadow--hover--y:10px;--wp--custom--box-shadow--blur:10px;--wp--custom--box-shadow--hover--blur:10px;--wp--custom--box-shadow--spread:-10px;--wp--custom--box-shadow--hover--spread:-10px;--wp--custom--box-shadow--color:#f3f4f6;--wp--custom--box-shadow--hover--color:#f3f4f6"><!-- wp:spacer {"height":"var:preset|spacing|lg"} -->
+	<div style="height:var(--wp--preset--spacing--lg)" aria-hidden="true" class="wp-block-spacer"></div>
+	<!-- /wp:spacer -->
+
+	<!-- wp:columns {"align":"wide"} -->
+	<div class="wp-block-columns alignwide"><!-- wp:column {"width":"20%"} -->
+		<div class="wp-block-column" style="flex-basis:20%"><!-- wp:search {"label":"Search","showLabel":false,"buttonText":"Search","buttonPosition":"no-button","buttonUseIcon":true} /--></div>
+		<!-- /wp:column -->
+
+		<!-- wp:column -->
+		<div class="wp-block-column"><!-- wp:query {"queryId":4,"query":{"perPage":3,"pages":0,"offset":0,"postType":"doc","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false,"parents":[],"taxQuery":null}} -->
+			<div class="wp-block-query"><!-- wp:post-template -->
+				<!-- wp:post-content /-->
+				<!-- /wp:post-template --></div>
+			<!-- /wp:query --></div>
+		<!-- /wp:column -->
+
+		<!-- wp:column {"width":"20%"} -->
+		<div class="wp-block-column" style="flex-basis:20%"></div>
+		<!-- /wp:column --></div>
+	<!-- /wp:columns --></main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

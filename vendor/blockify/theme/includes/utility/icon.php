@@ -4,23 +4,21 @@ declare( strict_types=1 );
 
 namespace Blockify\Theme;
 
-use DOMException;
 use WP_REST_Request;
-use function __;
 use function apply_filters;
 use function array_keys;
 use function basename;
-use function explode;
+use function file_exists;
 use function file_get_contents;
+use function get_stylesheet_directory;
 use function glob;
-use function implode;
-use function in_array;
 use function preg_replace;
-use function str_contains;
 use function str_replace;
+use function strtolower;
 use function trim;
 use function ucwords;
 use function uniqid;
+use const GLOB_ONLYDIR;
 
 /**
  * Returns array of all icon sets and their directory path.
@@ -30,7 +28,7 @@ use function uniqid;
  * @return array
  */
 function get_icon_sets(): array {
-	$options = get_option( 'blockify' )['iconSets'] ?? [
+	$theme = [
 		[
 			'label' => 'WordPress',
 			'value' => 'wordpress',
@@ -41,6 +39,18 @@ function get_icon_sets(): array {
 		],
 	];
 
+	$child_theme = glob( get_stylesheet_directory() . '/assets/svg/*', GLOB_ONLYDIR );
+
+	foreach ( $child_theme as $dir ) {
+		$slug = basename( $dir );
+
+		$theme[] = [
+			'label' => ucwords( str_replace( '-', ' ', $slug ) ),
+			'value' => $slug,
+		];
+	}
+
+	$options   = get_option( 'blockify' )['iconSets'] ?? $theme;
 	$icon_sets = [];
 
 	foreach ( $options as $option ) {
@@ -48,8 +58,15 @@ function get_icon_sets(): array {
 			continue;
 		}
 
-		if ( in_array( $option['value'], [ 'wordpress', 'social' ], true ) ) {
-			$icon_sets[ $option['value'] ] = get_dir() . 'assets/svg/' . $option['value'];
+		$parent = get_dir() . 'assets/svg/' . $option['value'];
+		$child  = get_stylesheet_directory() . '/assets/svg/' . $option['value'];
+
+		if ( file_exists( $parent ) ) {
+			$icon_sets[ $option['value'] ] = $parent;
+		}
+
+		if ( file_exists( $child ) ) {
+			$icon_sets[ $option['value'] ] = $child;
 		}
 	}
 
@@ -87,6 +104,15 @@ function get_icon_data( WP_REST_Request $request ) {
 			// Remove comments.
 			$icon = preg_replace( '/<!--(.|\s)*?-->/', '', $icon );
 
+			// Remove new lines.
+			$icon = preg_replace( '/\s+/', ' ', $icon );
+
+			// Remove tabs.
+			$icon = preg_replace( '/\t+/', '', $icon );
+
+			// Remove spaces between tags.
+			$icon = preg_replace( '/>\s+</', '><', $icon );
+
 			$icon_data[ $icon_set ][ $name ] = trim( $icon );
 		}
 	}
@@ -115,9 +141,11 @@ function get_icon_data( WP_REST_Request $request ) {
  *
  * @since 0.9.10
  *
+ * @param string $set Icon set.
+ *
  * @return array
  */
-function get_icons(): array {
+function get_icons( string $set = '' ): array {
 	$icons     = [];
 	$icon_sets = get_icon_sets();
 
@@ -129,7 +157,7 @@ function get_icons(): array {
 		}
 	}
 
-	return $icons;
+	return $set ? ( $icons[ $set ] ?? [] ) : $icons;
 }
 
 /**
@@ -137,14 +165,14 @@ function get_icons(): array {
  *
  * @since 0.9.10
  *
- * @param string   $set  Icon set.
- * @param string   $name Icon name.
- * @param int|null $size Icon size.
+ * @param string          $set  Icon set.
+ * @param string          $name Icon name.
+ * @param string|int|null $size Icon size.
  *
- * @throws DOMException If DOM can't create element.
  * @return string
  */
-function get_icon( string $set, string $name, int $size = null ): string {
+function get_icon( string $set, string $name, $size = null ): string {
+	$set  = strtolower( $set );
 	$icon = get_icons()[ $set ][ $name ] ?? '';
 	$dom  = dom( $icon );
 	$svg  = get_dom_element( 'svg', $dom );
@@ -160,7 +188,7 @@ function get_icon( string $set, string $name, int $size = null ): string {
 	$svg->setAttribute( 'data-icon', $set . '-' . $name );
 
 	$label = ucwords( str_replace( '-', ' ', $name ) ) . __( ' Icon', 'blockify' );
-	$title = $dom->createElement( 'title' );
+	$title = create_element( 'title', $dom );
 
 	$title->appendChild( $dom->createTextNode( $label ) );
 	$title->setAttribute( 'id', $unique_id );
@@ -168,73 +196,57 @@ function get_icon( string $set, string $name, int $size = null ): string {
 	$svg->insertBefore( $title, $svg->firstChild );
 
 	if ( $size ) {
-		$svg->setAttribute( 'width', (string) $size );
-		$svg->setAttribute( 'height', (string) $size );
+		$has_unit = str_contains_any( (string) $size, 'px', 'em', 'rem', '%', 'vh', 'vw' );
+
+		if ( $has_unit ) {
+			$styles = css_string_to_array( $svg->getAttribute( 'style' ) );
+
+			$styles['min-width'] = $size;
+			$styles['height']    = $size;
+
+			$svg->setAttribute( 'style', css_array_to_string( $styles ) );
+		} else {
+			$svg->setAttribute( 'width', (string) $size );
+			$svg->setAttribute( 'height', (string) $size );
+		}
+	}
+
+	$fill = $svg->getAttribute( 'fill' );
+
+	if ( ! $fill ) {
+		$svg->setAttribute( 'fill', 'currentColor' );
 	}
 
 	return $dom->saveHTML();
 }
 
 /**
- * Renders image icon styles on front end.
+ * Renders all icon SVGs on front end.
  *
- * @since 0.2.0
+ * @since 1.2.9
  *
- * @param string $content Block HTML.
- * @param array  $block   Block data.
+ * @param int    $size Icon size.
+ * @param string $set  Icon set.
  *
  * @return string
  */
-function get_icon_html( string $content, array $block ): string {
-	$content = ! $content ? '<figure class="wp-block-image is-style-icon"><img src="" alt=""/></figure>' : $content;
-	$dom     = dom( $content );
-	$figure  = get_dom_element( 'figure', $dom );
-	$img     = get_dom_element( 'img', $figure );
+function get_icons_html( string $set = '', int $size = 20 ): string {
+	$icon_sets = get_icons();
 
-	if ( ! $figure || ! $img ) {
-		return $content;
+	if ( $set ) {
+		$icon_sets = [
+			$set => $icon_sets[ $set ] ?? [],
+		];
 	}
 
-	$link      = get_dom_element( 'a', $figure );
-	$span      = change_tag_name( $img, 'span' );
-	$icon_name = $block['attrs']['iconName'] ?? 'star-empty';
+	$html = '';
 
-	$span_classes = [
-		'wp-block-image__icon',
-	];
-
-	$figure_classes = explode( ' ', $figure->getAttribute( 'class' ) );
-
-	foreach ( $figure_classes as $index => $class ) {
-		if ( str_contains( $class, '-background' ) ) {
-			$span_classes[] = $class;
-			unset( $figure_classes[ $index ] );
+	foreach ( $icon_sets as $set => $icons ) {
+		foreach ( $icons as $name => $icon ) {
+			$html .= get_icon( $set, $name, $size );
 		}
 	}
 
-	$figure->setAttribute( 'class', implode( ' ', $figure_classes ) );
-
-	$aria_label = $img->getAttribute( 'alt' ) ? $img->getAttribute( 'alt' ) : str_replace( '-', ' ', $icon_name ) . __( ' icon', 'blockify' );
-
-	$span->setAttribute( 'class', implode( ' ', $span_classes ) );
-	$span->setAttribute( 'title', $block['attrs']['title'] ?? $aria_label );
-
-	if ( ! ( $block['attrs']['title'] ?? null ) || ! $aria_label ) {
-		$span->setAttribute( 'role', 'img' );
-	}
-
-	$span->removeAttribute( 'src' );
-	$span->removeAttribute( 'alt' );
-
-	if ( ! $figure->getAttribute( 'style' ) ) {
-		$figure->removeAttribute( 'style' );
-	}
-
-	if ( $link ) {
-		$link->appendChild( $span );
-	} else {
-		$figure->appendChild( $span );
-	}
-
-	return $dom->saveHTML();
+	return $html;
 }
+

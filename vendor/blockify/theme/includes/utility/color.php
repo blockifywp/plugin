@@ -4,133 +4,148 @@ declare( strict_types=1 );
 
 namespace Blockify\Theme;
 
-use function is_admin;
-use function str_replace;
+use function _wp_to_kebab_case;
+use function array_merge;
+use function array_replace;
+use function get_stylesheet_directory;
+use function get_template_directory;
 use function wp_get_global_settings;
-use function wp_get_global_styles;
+use function wp_json_file_decode;
 
 /**
- * Applies block color attributes.
+ * Gets system colors.
  *
- * @since 0.9.10
- *
- * @param array $styles Array of styles.
- * @param array $attrs  Array of attributes.
+ * @since 1.3.0
  *
  * @return array
  */
-function add_block_support_color( array $styles, array $attrs ): array {
-	$color = $attrs['style']['color'] ?? [];
-
-	if ( isset( $color['background'] ) ) {
-		$styles['background'] = $color['background'];
-	}
-
-	if ( isset( $attrs['backgroundColor'] ) ) {
-		$styles['background'] = 'var(--wp--preset--color--' . $attrs['backgroundColor'] . ')';
-	}
-
-	if ( isset( $color['gradient'] ) ) {
-		$styles['background'] = $color['gradient'];
-	}
-
-	if ( isset( $attrs['gradient'] ) ) {
-		$styles['background'] = 'var(--wp--preset--gradient--' . $attrs['gradient'] . ')';
-	}
-
-	if ( isset( $color['text'] ) ) {
-		$styles['color'] = $color['text'];
-	}
-
-	if ( isset( $attrs['textColor'] ) ) {
-		$styles['color'] = 'var(--wp--preset--color--' . $attrs['textColor'] . ')';
-	}
-
-	return $styles;
+function get_system_colors(): array {
+	return [
+		'currentcolor',
+		'currentColor',
+		'inherit',
+		'initial',
+		'transparent',
+		'unset',
+	];
 }
 
 /**
- * Returns dark mode custom properties.
+ * Gets color values from a color palette.
  *
- * @since 0.0.24
+ * @since 1.3.0
  *
- * @return string
+ * @param array  $colors Color palette.
+ * @param string $type   Color or gradient. Default is color.
+ *
+ * @return array
  */
-function get_dark_mode_custom_properties(): string {
-	$global_settings     = wp_get_global_settings();
-	$dark_mode_colors    = $global_settings['custom']['darkMode']['palette'] ?? [];
-	$dark_mode_gradients = $global_settings['custom']['darkMode']['gradients'] ?? [];
-	$css                 = '';
+function get_color_values( array $colors, string $type = 'color' ): array {
+	$color_values = [];
 
-	if ( ! $dark_mode_colors && ! $dark_mode_gradients ) {
-		return $css;
+	foreach ( $colors as $color ) {
+		$color = (array) $color;
+
+		if ( ! isset( $color['slug'], $color[ $type ] ) ) {
+			continue;
+		}
+
+		$color_values[ $color['slug'] ] = $color[ $type ];
 	}
 
-	foreach ( $dark_mode_colors as $slug => $color ) {
-		$slug = strtolower( preg_replace( '/(?<!^)[A-Z]/', '-$0', $slug ) );
+	return $color_values;
+}
 
-		$styles[ '--wp--preset--color--' . $slug ] = "var(--wp--preset--color--custom-dark-mode-$slug,$color)";
-	}
-
-	foreach ( $dark_mode_gradients as $slug => $gradient ) {
-		$slug = strtolower( preg_replace( '/(?<!^)[A-Z]/', '-$0', $slug ) );
-
-		$styles[ '--wp--preset--gradient--' . $slug ] = "var(--wp--preset--gradient--custom-dark-mode-$slug,$gradient)";
-	}
-
-	$global_styles          = wp_get_global_styles();
-	$styles['background']   = format_custom_property( $global_styles['color']['background'] ?? '' );
-	$styles['color']        = format_custom_property( $global_styles['color']['text'] ?? '' );
-	$theme_color_palette    = $global_settings['color']['palette']['theme'] ?? [];
-	$theme_gradient_palette = $global_settings['color']['gradients']['theme'] ?? [];
-
-	$light = [];
-
-	$light_background_slug = str_replace(
+/**
+ * Returns replacements for deprecated colors.
+ *
+ * @since 1.3.0
+ *
+ * @param array $settings Global settings.
+ *
+ * @return array
+ */
+function get_replacement_colors( array $settings = [] ): array {
+	return array_replace(
 		[
-			'var(--wp--preset--color--',
-			'var(--wp--preset--gradient--',
-			')',
+			'primary-darker'    => 'primary-900',
+			'primary-dark'      => 'primary-700',
+			'primary'           => 'primary-500',
+			'primary-light'     => 'primary-300',
+			'primary-lighter'   => 'primary-100',
+			'secondary-darker'  => 'primary-900',
+			'secondary-dark'    => 'primary-700',
+			'secondary'         => 'primary-300',
+			'secondary-light'   => 'primary-100',
+			'secondary-lighter' => 'primary-100',
+			'contrast'          => 'neutral-950',
+			'foreground'        => 'neutral-900',
+			'heading'           => 'neutral-800',
+			'body'              => 'neutral-600',
+			'neutral'           => 'neutral-500',
+			'outline'           => 'neutral-200',
+			'surface'           => 'neutral-100',
+			'lighten'           => 'neutral-50',
+			'background'        => 'neutral-0',
+			'base'              => 'neutral-0',
+			'success'           => 'success-500',
+			'warning'           => 'warning-500',
+			'error'             => 'error-500',
 		],
-		'',
-		$global_styles['color']['background'] ?? ''
+		$settings['custom']['deprecatedColors'] ?? []
 	);
+}
 
-	$light_text_slug = str_replace(
-		[
-			'var(--wp--preset--color--',
-			'var(--wp--preset--gradient--',
-			')',
-		],
-		'',
-		$global_styles['color']['text'] ?? ''
-	);
+/**
+ * Returns key value pairs of deprecated colors with replacements.
+ *
+ * @since 1.3.0
+ *
+ * @return array
+ */
+function get_deprecated_colors(): array {
+	$child_theme_json  = wp_json_file_decode( get_stylesheet_directory() . '/theme.json' );
+	$parent_theme_json = wp_json_file_decode( get_template_directory() . '/theme.json' );
+	$settings          = wp_get_global_settings();
+	$replacements      = get_replacement_colors( $settings );
+	$user_colors       = get_color_values( $settings['color']['palette']['theme'] ?? [] );
+	$default_colors    = get_color_values( array_merge(
+		(array) ( $parent_theme_json->settings->color->palette ?? [] ),
+		(array) ( $child_theme_json->settings->color->palette ?? [] ),
+	) );
 
-	foreach ( $theme_color_palette as $color ) {
-		if ( $light_background_slug === $color['slug'] ) {
-			$light['background'] = $color['color'];
+	$has_deprecated = false;
+	$new_colors     = [];
+	$old_colors     = [];
+
+	foreach ( $replacements as $old => $new ) {
+		$old = _wp_to_kebab_case( $old );
+		$new = _wp_to_kebab_case( $new );
+
+		if ( isset( $user_colors[ $old ] ) ) {
+			$has_deprecated = true;
+
+			if ( isset( $user_colors[ $new ] ) ) {
+				continue;
+			}
 		}
 
-		if ( $light_text_slug === $color['slug'] ) {
-			$light['color'] = $color['color'];
+		if ( ! isset( $user_colors[ $new ] ) ) {
+			$new_colors[ $new ] = $user_colors[ $old ] ?? $default_colors[ $new ] ?? '';
+
+			if ( isset( $user_colors[ $old ] ) ) {
+				continue;
+			}
 		}
+
+		$old = _wp_to_kebab_case( $old );
+
+		if ( ! str_contains_any( $new, 'var(', '#', 'rgb', 'hsl' ) ) {
+			$new = "var(--wp--preset--color--$new)";
+		}
+
+		$old_colors[ $old ] = $new;
 	}
 
-	foreach ( $theme_gradient_palette as $gradient ) {
-		if ( $light_background_slug === $gradient['slug'] ) {
-			$light['background'] = $gradient['gradient'];
-		}
-	}
-
-	if ( ! is_admin() ) {
-		foreach ( $theme_color_palette as $color ) {
-			$light[ '--wp--preset--color--' . $color['slug'] ] = $color['color'];
-		}
-
-		foreach ( $theme_gradient_palette as $gradient ) {
-			$light[ '--wp--preset--gradient--' . $gradient['slug'] ] = $gradient['gradient'];
-		}
-	}
-
-	return $css . '.is-style-dark{' . css_array_to_string( $styles ) . '}.is-style-light{' . css_array_to_string( $light ) . '}';
+	return $has_deprecated ? array_merge( $new_colors, $old_colors ) : [];
 }

@@ -5,6 +5,7 @@
   "license": "GPL-2.0-or-later",
   "main": "assets/js/index.js",
   "scripts": {
-    "zip": "rm -Rf ../blockify.zip && zip -r ../blockify.zip languages/ vendor/composer/ vendor/blockify/ vendor/autoload.php blockify.php readme.txt"
+    "pot": "wp i18n make-pot ./ languages/blockify.pot --exclude='.wordpress-org,vendor/bin,vendor/composer'",
+    "zip": "rm -Rf ../blockify-plugin.zip && zip -r ../blockify-plugin.zip languages/ vendor/composer/ vendor/blockify/ vendor/autoload.php blockify.php readme.txt"
   }
 }

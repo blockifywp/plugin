@@ -4,7 +4,6 @@ declare( strict_types=1 );
 
 namespace Blockify\Theme;
 
-use function __;
 use function add_filter;
 use function do_blocks;
 use function get_the_content;
@@ -18,7 +17,7 @@ if ( ! is_admin() ) {
 }
 
 /**
- * Render the Table of Contents block.
+ * Render Table of Contents block.
  *
  * @param string $html  The block content.
  * @param array  $block The block.
@@ -70,18 +69,18 @@ function render_table_of_contents( string $html, array $block ): string {
 
 		$nav->removeChild( $nav->firstChild );
 
-		$ol = $dom->createElement( 'ol' );
+		$ol = create_element( 'ol', $dom );
 
 		$nav->appendChild( $ol );
 
 		foreach ( $content_headings as $content_heading ) {
-			$link = $dom->createElement( 'a' );
+			$link = create_element( 'a', $dom );
 
 			$link->setAttribute( 'href', '#' . sanitize_title( $content_heading ) );
 
 			$link->textContent = $content_heading;
 
-			$li = $dom->createElement( 'li' );
+			$li = create_element( 'li', $dom );
 
 			$li->appendChild( $link );
 			$ol->appendChild( $li );

@@ -4,6 +4,7 @@ wp-content/
 src/
 *.zip
 *.lock
+*.DS_Store
 *cache
 package-lock.json
 composer.lock
