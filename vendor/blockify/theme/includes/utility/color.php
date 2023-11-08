@@ -31,6 +31,67 @@ function get_system_colors(): array {
 }
 
 /**
+ * Gets color shades.
+ *
+ * @since 1.3.0
+ *
+ * @param ?string $color Color slug.
+ *
+ * @return array
+ */
+function get_shade_scales( ?string $color = null ): array {
+	$map = [
+		'neutral' => [
+			950 => 0,
+			900 => 50,
+			800 => 100,
+			700 => 200,
+			600 => 300,
+			500 => 400,
+			400 => 500,
+			300 => 600,
+			200 => 700,
+			100 => 800,
+			50  => 900,
+			0   => 950,
+		],
+		'primary' => [
+			900 => 100,
+			700 => 300,
+			600 => 500,
+			500 => 600,
+			300 => 700,
+			100 => 900,
+		],
+		'accent'  => [
+			900 => 100,
+			700 => 300,
+			600 => 500,
+			500 => 600,
+			300 => 700,
+			100 => 900,
+		],
+		'success' => [
+			600 => 100,
+			500 => 500,
+			100 => 600,
+		],
+		'warning' => [
+			600 => 100,
+			500 => 500,
+			100 => 600,
+		],
+		'error'   => [
+			600 => 100,
+			500 => 500,
+			100 => 600,
+		],
+	];
+
+	return $color ? ( $map[ $color ] ?? [] ) : $map;
+}
+
+/**
  * Gets color values from a color palette.
  *
  * @since 1.3.0
@@ -114,13 +175,12 @@ function get_deprecated_colors(): array {
 		(array) ( $child_theme_json->settings->color->palette ?? [] ),
 	) );
 
-	$has_deprecated = false;
+	$has_deprecated = $settings['custom']['deprecatedColors'] ?? false;
 	$new_colors     = [];
 	$old_colors     = [];
 
 	foreach ( $replacements as $old => $new ) {
 		$old = _wp_to_kebab_case( $old );
-		$new = _wp_to_kebab_case( $new );
 
 		if ( isset( $user_colors[ $old ] ) ) {
 			$has_deprecated = true;
@@ -131,7 +191,11 @@ function get_deprecated_colors(): array {
 		}
 
 		if ( ! isset( $user_colors[ $new ] ) ) {
-			$new_colors[ $new ] = $user_colors[ $old ] ?? $default_colors[ $new ] ?? '';
+			$value = $user_colors[ $old ] ?? $default_colors[ $new ] ?? '';
+
+			if ( $value ) {
+				$new_colors[ $new ] = $value;
+			}
 
 			if ( isset( $user_colors[ $old ] ) ) {
 				continue;
@@ -140,12 +204,14 @@ function get_deprecated_colors(): array {
 
 		$old = _wp_to_kebab_case( $old );
 
-		if ( ! str_contains_any( $new, 'var(', '#', 'rgb', 'hsl' ) ) {
+		if ( ! str_contains_any( $new, 'var', '#', 'rgb', 'hsl' ) ) {
 			$new = "var(--wp--preset--color--$new)";
 		}
 
-		$old_colors[ $old ] = $new;
+		if ( $new ) {
+			$old_colors[ $old ] = $new;
+		}
 	}
 
-	return $has_deprecated ? array_merge( $new_colors, $old_colors ) : [];
+	return $has_deprecated ? array_replace( $new_colors, $old_colors ) : [];
 }

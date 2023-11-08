@@ -7,7 +7,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../themes/blockify",
-                "reference": "0c5ca209c498441416b872588be7905d2c4c7520"
+                "reference": "fd44ae2db286cb29ba4a009c02d23a80e2da149f"
             },
             "require": {
                 "php": ">=7.4"
@@ -84,6 +84,6 @@
             "install-path": "../blockify/theme"
         }
     ],
-    "dev": false,
+    "dev": true,
     "dev-package-names": []
 }

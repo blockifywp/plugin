@@ -13,6 +13,7 @@ use function get_post_field;
 use function get_post_meta;
 use function get_the_ID;
 use function gmdate;
+use function home_url;
 use function is_null;
 use function preg_match_all;
 use function shortcode_exists;
@@ -52,9 +53,9 @@ function render_template_tags( string $html, array $block, WP_Block $object ): s
 			'year'         => gmdate( 'Y' ),
 			'current_year' => gmdate( 'Y' ),
 			'date'         => gmdate( 'm/d/Y' ),
-			'site_title'   => get_bloginfo( 'name' ),
-			'site_url'     => get_bloginfo( 'url' ),
-			'site_name'    => get_bloginfo( 'name' ),
+			'home_url'     => esc_url( home_url() ),
+			'site_title'   => get_bloginfo( 'name', 'display' ),
+			'site_name'    => get_bloginfo( 'name', 'display' ),
 		]
 	);
 

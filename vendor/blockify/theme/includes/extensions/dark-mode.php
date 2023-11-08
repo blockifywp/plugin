@@ -11,7 +11,6 @@ use function array_replace;
 use function array_search;
 use function file_exists;
 use function filter_input;
-use function in_array;
 use function is_null;
 use function is_numeric;
 use function is_string;
@@ -88,19 +87,18 @@ function add_dark_mode_styles( string $css, string $content, bool $is_editor ): 
 		$has_light_style = file_exists( $light_style );
 	}
 
-	$default_mode       = $has_light_style ? 'dark' : 'light';
-	$opposite_mode      = $default_mode === 'light' ? 'dark' : 'light';
-	$default_json_file  = $stylesheet_dir . '/theme.json';
-	$opposite_json_file = $stylesheet_dir . '/styles/' . $opposite_mode . '.json';
-	$has_default        = file_exists( $default_json_file );
-	$has_opposite       = file_exists( $opposite_json_file );
-
+	$default_mode         = $has_light_style ? 'dark' : 'light';
+	$opposite_mode        = $default_mode === 'light' ? 'dark' : 'light';
+	$default_json_file    = $stylesheet_dir . '/theme.json';
+	$opposite_json_file   = $stylesheet_dir . '/styles/' . $opposite_mode . '.json';
+	$has_default          = file_exists( $default_json_file );
+	$has_opposite         = file_exists( $opposite_json_file );
 	$parent_default_file  = $template_dir . '/theme.json';
 	$parent_has_default   = file_exists( $parent_default_file );
 	$parent_opposite_file = $template_dir . '/styles/' . $opposite_mode . '.json';
 	$parent_has_opposite  = file_exists( $parent_opposite_file );
 
-	if ( ! ( $has_default || $parent_has_default ) && ! ( $has_opposite || $parent_has_opposite ) ) {
+	if ( ! ( $has_default || $parent_has_default ) ) {
 		return $css;
 	}
 
@@ -142,7 +140,9 @@ function add_dark_mode_styles( string $css, string $content, bool $is_editor ): 
 		$user_opposite = reverse_color_values( $default_colors );
 	}
 
-	$opposite_colors           = array_replace( $parent_opposite, $child_opposite, $user_opposite );
+	$opposite_colors = array_replace( $parent_opposite, $child_opposite, $user_opposite );
+
+	// Gradients.
 	$parent_gradients          = get_color_values( $parent_default_json->settings->color->gradients ?? [], 'gradient' );
 	$child_gradients           = get_color_values( $default_json->settings->color->gradients ?? [], 'gradient' );
 	$user_gradients            = get_color_values( $settings['color']['gradients']['theme'] ?? [], 'gradient' );
@@ -185,49 +185,33 @@ function add_dark_mode_styles( string $css, string $content, bool $is_editor ): 
 	$light_styles = [];
 
 	foreach ( $light_colors as $slug => $color ) {
-		if ( in_array( $color, $system_colors, true ) ) {
-			continue;
-		}
-
 		$light_styles[ '--wp--preset--color--' . $slug ] = $color;
 	}
 
 	foreach ( $light_gradients as $slug => $gradient ) {
-		if ( in_array( $gradient, $system_colors, true ) ) {
-			continue;
-		}
-
 		$light_styles[ '--wp--preset--gradient--' . $slug ] = $gradient;
 	}
 
 	$dark_styles = [];
 
 	foreach ( $dark_colors as $slug => $color ) {
-		if ( in_array( $color, $system_colors, true ) ) {
-			continue;
-		}
-
 		$dark_styles[ '--wp--preset--color--' . $slug ] = $color;
 	}
 
 	foreach ( $dark_gradients as $slug => $gradient ) {
-		if ( in_array( $gradient, $system_colors, true ) ) {
-			continue;
-		}
-
 		$dark_styles[ '--wp--preset--gradient--' . $slug ] = $gradient;
 	}
 
-	$light_mode_custom = (array) ( $settings['custom']['lightMode'] ?? [] );
-	$dark_mode_custom  = (array) ( $settings['custom']['darkMode'] ?? [] );
+	$light_mode_property = (array) ( $settings['custom']['lightMode'] ?? [] );
+	$dark_mode_property  = (array) ( $settings['custom']['darkMode'] ?? [] );
 
-	foreach ( $light_mode_custom as $property => $value ) {
+	foreach ( $light_mode_property as $property => $value ) {
 		if ( is_string( $value ) ) {
 			$light_styles[ $property ] = $value;
 		}
 	}
 
-	foreach ( $dark_mode_custom as $property => $value ) {
+	foreach ( $dark_mode_property as $property => $value ) {
 		if ( is_string( $value ) ) {
 			$dark_styles[ $property ] = $value;
 		}
@@ -265,57 +249,9 @@ function add_dark_mode_styles( string $css, string $content, bool $is_editor ): 
  * @return array
  */
 function reverse_color_values( array $colors, array $changed = [], array $theme = [], array $replacements = [] ): array {
-	$reversed = [];
-
-	$map = [
-		'neutral' => [
-			950 => 0,
-			900 => 50,
-			800 => 100,
-			700 => 200,
-			600 => 300,
-			500 => 400,
-			400 => 500,
-			300 => 600,
-			200 => 700,
-			100 => 800,
-			50  => 900,
-			0   => 950,
-		],
-		'primary' => [
-			900 => 100,
-			700 => 300,
-			600 => 500,
-			500 => 600,
-			300 => 700,
-			100 => 900,
-		],
-		'accent'  => [
-			900 => 100,
-			700 => 300,
-			600 => 500,
-			500 => 600,
-			300 => 700,
-			100 => 900,
-		],
-		'success' => [
-			600 => 100,
-			500 => 500,
-			100 => 600,
-		],
-		'warning' => [
-			600 => 100,
-			500 => 500,
-			100 => 600,
-		],
-		'error'   => [
-			600 => 100,
-			500 => 500,
-			100 => 600,
-		],
-	];
-
-	$shades = array_map( 'strval', $map['neutral'] );
+	$reversed      = [];
+	$shade_scales  = get_shade_scales();
+	$shade_strings = array_map( 'strval', $shade_scales['neutral'] ?? [] );
 
 	foreach ( $colors as $slug => $value ) {
 		if ( ! isset( $changed[ $slug ] ) ) {
@@ -325,7 +261,7 @@ function reverse_color_values( array $colors, array $changed = [], array $theme 
 				$reversed[ $slug ] = $theme_value;
 			}
 
-			if ( ! $changed ) {
+			if ( ! empty( $changed ) ) {
 				continue;
 			}
 		}
@@ -345,7 +281,7 @@ function reverse_color_values( array $colors, array $changed = [], array $theme 
 		}
 
 		$amount         = (int) $amount;
-		$reverse_amount = $map[ $color ][ $amount ] ?? null;
+		$reverse_amount = $shade_scales[ $color ][ $amount ] ?? null;
 
 		if ( is_null( $reverse_amount ) ) {
 			continue;
@@ -353,7 +289,7 @@ function reverse_color_values( array $colors, array $changed = [], array $theme 
 
 		$opposite_slug = $color . '-' . $reverse_amount;
 
-		if ( str_contains_any( $original_slug, ...$shades ) ) {
+		if ( str_contains_any( $original_slug, ...$shade_strings ) ) {
 			$reversed[ $original_slug ] = $colors[ $opposite_slug ] ?? null;
 
 			continue;
