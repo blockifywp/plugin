@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "blockify/conditional",
+  "title": "Conditional",
+  "description": "A container block that only displays its children if a condition is met.",
+  "icon": "visibility",
+  "textdomain": "blockify-blocks",
+  "keywords": [
+    "visibility",
+    "condition",
+    "hide",
+    "show",
+    "conditional",
+    "if"
+  ],
+  "attributes": {
+    "visibility": {
+      "type": "object"
+    }
+  },
+  "editorScript": "file:index.js"
+}

@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'bf9d727a77fd07786089b5dd56c23431' => $vendorDir . '/blockify/theme/functions.php',
+    '1ee60ad60d544c4a019cf7d6c72f21d0' => $vendorDir . '/fieldify/fields/src/utilities.php',
 );

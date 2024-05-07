@@ -1,0 +1,22 @@
+{
+  "name": "blockify/hooks",
+  "description": "Blockify hooks package.",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Blockify",
+      "homepage": "https://blockifywp.com"
+    }
+  ],
+  "type": "library",
+  "minimum-stability": "dev",
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true
+  },
+  "autoload": {
+    "psr-4": {
+      "Blockify\\Hooks\\": "src/"
+    }
+  }
+}

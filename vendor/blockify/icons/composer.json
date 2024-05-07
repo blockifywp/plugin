@@ -1,0 +1,27 @@
+{
+  "name": "blockify/icons",
+  "description": "Blockify icons package.",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Blockify",
+      "homepage": "https://blockifywp.com"
+    }
+  ],
+  "type": "library",
+  "minimum-stability": "dev",
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true
+  },
+  "autoload": {
+    "psr-4": {
+      "Blockify\\Icons\\": "src/"
+    }
+  },
+  "require": {
+    "blockify/utilities": "dev-main",
+    "blockify/dom": "dev-main",
+    "enshrined/svg-sanitize": "dev-master"
+  }
+}

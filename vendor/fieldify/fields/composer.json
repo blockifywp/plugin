@@ -1,0 +1,45 @@
+{
+  "name": "fieldify/fields",
+  "description": "WordPress custom fields library.",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Lee Anthony",
+      "homepage": "https://blockifywp.com"
+    },
+    {
+      "name": "David Sherlock",
+      "homepage": "https://arraypress.com"
+    }
+  ],
+  "type": "library",
+  "minimum-stability": "dev",
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true
+  },
+  "autoload": {
+    "classmap": [
+      "src/Fieldify.php"
+    ],
+    "files": [
+      "src/utilities.php"
+    ],
+    "psr-4": {
+      "Fieldify\\Fields\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=7.4",
+    "blockify/container": "dev-main",
+    "blockify/hooks": "dev-main",
+    "blockify/icons": "dev-main",
+    "blockify/utilities": "dev-main"
+  },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "git@github.com:blockifywp/utilities.git"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "blockify/slide",
+  "title": "Slide",
+  "description": "A single slide in a slider block..",
+  "icon": "slides",
+  "textdomain": "blockify-blocks",
+  "parent": [
+    "blockify/slider"
+  ],
+  "keywords": [
+    "slide",
+    "carousel",
+    "swipe"
+  ],
+  "editorScript": "file:index.js"
+}

@@ -1,0 +1,61 @@
+# https://EditorConfig.org
+
+root = true
+
+[*]
+indent_style = tab
+indent_size = 4
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+block_comment_start = /*
+block_comment = *
+block_comment_end = */
+
+[**/*.yml]
+indent_style = space
+indent_size = 2
+
+[*.json]
+indent_style = space
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.tsx]
+indent_style = unset
+
+[LICENSE]
+indent_style = unset
+
+# Ignore generated files
+
+[assets/css/**]
+insert_final_newline = unset
+trim_trailing_whitespace = unset
+
+[assets/fonts/**]
+insert_final_newline = unset
+trim_trailing_whitespace = unset
+
+[assets/js/**]
+insert_final_newline = unset
+trim_trailing_whitespace = unset
+
+[assets/svg/**]
+insert_final_newline = unset
+trim_trailing_whitespace = unset
+
+[patterns/**]
+insert_final_newline = unset
+trim_trailing_whitespace = unset
+
+[vendor/**]
+charset = unset
+end_of_line = unset
+insert_final_newline = unset
+trim_trailing_whitespace = unset
+indent_style = unset
+indent_size = unset

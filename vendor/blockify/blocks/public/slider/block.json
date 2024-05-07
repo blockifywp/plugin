@@ -1,0 +1,79 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "blockify/slider",
+  "title": "Slider",
+  "description": "A simple, lightweight vanilla JS slider block.",
+  "icon": "slides",
+  "textdomain": "blockify-blocks",
+  "keywords": [
+    "slide",
+    "carousel"
+  ],
+  "supports": {
+    "spacing": {
+      "blockGap": true
+    }
+  },
+  "attributes": {
+    "type": {
+      "type": "string",
+      "default": "slider"
+    },
+    "perPage": {
+      "type": "integer",
+      "default": 3
+    },
+    "perMove": {
+      "type": "integer",
+      "default": 1
+    },
+    "autoplay": {
+      "type": "boolean",
+      "default": true
+    },
+    "pauseOnHover": {
+      "type": "boolean",
+      "default": true
+    },
+    "showArrows": {
+      "type": "boolean",
+      "default": true
+    },
+    "showDots": {
+      "type": "boolean",
+      "default": true
+    },
+    "drag": {
+      "type": "boolean",
+      "default": true
+    },
+    "useBreakpoints": {
+      "type": "boolean",
+      "default": true
+    },
+    "speed": {
+      "type": "integer",
+      "default": 400
+    },
+    "interval": {
+      "type": "integer",
+      "default": 5000
+    },
+    "direction": {
+      "type": "string",
+      "default": "ltr"
+    },
+    "height": {
+      "type": "string",
+      "default": "auto"
+    }
+  },
+  "editorScript": "file:index.js",
+  "editorStyle": "file:index.css",
+  "viewScript": [
+    "file:view.js",
+    "splide",
+    "splide-autoscroll"
+  ]
+}

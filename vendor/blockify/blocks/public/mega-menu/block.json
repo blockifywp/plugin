@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "blockify/mega-menu",
+  "title": "Mega Menu",
+  "description": "Adds a mega menu block to the core Navigation block.",
+  "icon": "block-table",
+  "parent": [
+    "core/navigation"
+  ],
+  "textdomain": "blockify-blocks",
+  "keywords": [
+    "navigation",
+    "menu",
+    "mega menu"
+  ],
+  "supports": {
+    "dimensions": {
+      "width": false,
+      "height": false
+    }
+  },
+  "attributes": {
+    "label": {
+      "type": "string",
+      "default": "Mega Menu"
+    },
+    "content": {
+      "type": "string"
+    }
+  },
+  "editorScript": "file:index.js",
+  "editorStyle": "file:index.css",
+  "style": "file:view.css",
+  "viewScript": "file:view.js"
+}

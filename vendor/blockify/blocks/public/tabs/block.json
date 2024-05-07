@@ -1,0 +1,66 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "blockify/tabs",
+  "title": "Tabs",
+  "description": "An accessible, lightweight tabs block for displaying tabbed content.",
+  "icon": "table-row-after",
+  "textdomain": "blockify-blocks",
+  "supports": {
+    "inserter": true,
+    "color": {
+      "link": true,
+      "background": true,
+      "text": false
+    },
+    "spacing": {
+      "padding": true,
+      "margin": true,
+      "blockGap": {
+        "sides": [
+          "horizontal",
+          "vertical"
+        ]
+      },
+      "__experimentalDefaultControls": {
+        "padding": true,
+        "blockGap": true
+      }
+    },
+    "typography": {
+      "fontSize": true,
+      "__experimentalTextDecoration": true
+    },
+    "__experimentalBorder": {
+      "width": true,
+      "color": true,
+      "style": true,
+      "radius": true
+    }
+  },
+  "attributes": {
+    "layout": {
+      "type": "object"
+    },
+    "textAlign": {
+      "type": "string"
+    },
+    "style": {
+      "type": "object",
+      "default": {
+        "spacing": {
+          "padding": "var(--wp--preset--spacing--xs)"
+        },
+        "border": {
+          "width": "1px",
+          "style": "solid",
+          "color": "var(--wp--custom--border--color)"
+        }
+      }
+    }
+  },
+  "editorScript": "file:index.js",
+  "editorStyle": "file:index.css",
+  "viewScript": "file:view.js",
+  "style": "file:view.css"
+}

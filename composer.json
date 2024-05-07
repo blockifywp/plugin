@@ -1,16 +1,72 @@
 {
   "name": "blockify/plugin",
-  "description": "Blockify Plugin for WordPress",
+  "description": "Blockify plugin for WordPress.",
   "license": "GPL-2.0-or-later",
   "authors": [
     {
       "name": "Blockify",
-      "email": "info@blockify.com"
+      "homepage": "https://blockifywp.com"
     }
   ],
   "type": "wordpress-plugin",
   "minimum-stability": "dev",
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true,
+    "allow-plugins": {
+      "composer/installers": true
+    }
+  },
+  "archive": {
+    "exclude": [
+      ".git",
+      ".github",
+      ".gitignore",
+      ".gitattributes",
+      ".editorconfig",
+      "composer.json",
+      "composer.lock",
+      "composer-dev.json",
+      "composer-dev.lock",
+      "vendor/**/**/.git",
+      "vendor/**/**/.gitignore",
+      "vendor/**/**/.gitattributes",
+      "vendor/**/**/.editorconfig",
+      "vendor/**/**/composer.json",
+      "vendor/**/**/LICENSE"
+    ]
+  },
   "scripts": {
-    "install:theme": "rm -Rf vendor/blockify && rm -Rf composer.lock && composer install --no-dev --no-scripts --no-autoloader && composer dump-autoload --optimize"
-  }
+    "dev": "COMPOSER=composer-dev.json composer update",
+    "delete-git": "echo [WARNING] Deleting all .git directories from dependencies && rm -rf vendor/**/**/.git",
+    "dist": "composer update --no-dev && composer run delete-git && rm -rf vendor/bin",
+    "zip": "composer archive --format=zip --file=../blockify",
+    "pot": "wp i18n make-pot ./ languages/blockify.pot --exclude='.github,assets,vendor'"
+  },
+  "require": {
+    "php": ">=7.4",
+    "blockify/blocks": "dev-main",
+    "blockify/dom": "dev-main",
+    "blockify/framework": "dev-main",
+    "blockify/icons": "dev-main",
+    "blockify/utilities": "dev-main",
+    "fieldify/fields": "dev-main",
+    "tedivm/jshrink": "^1.7"
+  },
+  "require-dev": {
+    "composer/installers": "^1.12.0 || ^2",
+    "spatie/ignition": "^1.12",
+    "kint-php/kint": "dev-master",
+    "wpreadme2markdown/wp2md": "*"
+  },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "git@github.com:blockifywp/blocks.git"
+    },
+    {
+      "type": "git",
+      "url": "git@github.com:fieldifywp/fields.git"
+    }
+  ]
 }

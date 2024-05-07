@@ -1,0 +1,33 @@
+{
+  "name": "blockify/framework",
+  "description": "WordPress block theme framework.",
+  "license": "GPL-2.0-or-later",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Blockify",
+      "homepage": "https://blockifywp.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true
+  },
+  "autoload": {
+    "psr-4": {
+      "Blockify\\Framework\\": "src/"
+    },
+    "classmap": [
+      "src/Blockify.php"
+    ]
+  },
+  "require": {
+    "php": ">=7.4",
+    "blockify/container": "dev-main",
+    "blockify/dom": "dev-main",
+    "blockify/hooks": "dev-main",
+    "blockify/icons": "dev-main",
+    "blockify/utilities": "dev-main"
+  }
+}

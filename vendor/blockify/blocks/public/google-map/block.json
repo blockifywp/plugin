@@ -1,0 +1,77 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "blockify/google-map",
+  "title": "Google Map",
+  "description": "Easy to use, customizable Google Map block. Also supports dark mode.",
+  "icon": "location-alt",
+  "textdomain": "blockify-blocks",
+  "supports": {
+    "align": true,
+    "alignWide": true,
+    "boxShadow": true,
+    "spacing": {
+      "margin": true
+    },
+    "__experimentalBorder": {
+      "width": true,
+      "style": true,
+      "color": true,
+      "radius": true,
+      "__experimentalDefaultControls": {
+        "width": true,
+        "color": true
+      }
+    }
+  },
+  "attributes": {
+    "apiKey": {
+      "type": "string",
+      "default": ""
+    },
+    "lat": {
+      "type": "integer",
+      "default": 40.7127753
+    },
+    "lng": {
+      "type": "integer",
+      "default": -74.0059728
+    },
+    "address": {
+      "type": "string",
+      "default": "New York City, NY, USA"
+    },
+    "zoom": {
+      "type": "integer",
+      "default": 10
+    },
+    "height": {
+      "type": "string",
+      "default": "300px"
+    },
+    "width": {
+      "type": "string",
+      "default": "100%"
+    },
+    "lightStyle": {
+      "type": "string",
+      "default": "default"
+    },
+    "darkStyle": {
+      "type": "string",
+      "default": "night-mode"
+    },
+    "customStyle": {
+      "type": "string",
+      "default": ""
+    },
+    "showControls": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "editorScript": "file:index.js",
+  "editorStyle": "file:index.css",
+  "script": "file:view.js",
+  "style": "file:view.css"
+}

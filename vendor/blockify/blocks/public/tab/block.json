@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "title": "Tab",
+  "name": "blockify/tab",
+  "description": "A single tab in a tabs block.",
+  "parent": [
+    "blockify/tabs"
+  ],
+  "icon": "table-row-after",
+  "textdomain": "blockify-blocks",
+  "supports": {
+    "spacing": {
+      "padding": true
+    }
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "style": {
+      "type": "object",
+      "default": {
+        "spacing": {
+          "padding": {
+            "left": "var(--wp--preset--spacing--xs)",
+            "right": "var(--wp--preset--spacing--xs)"
+          }
+        }
+      }
+    }
+  }
+}

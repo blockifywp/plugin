@@ -1,0 +1,1 @@
+.nowrap{white-space:nowrap !important}@media (max-width: 599px){.nowrap [class*="columns-"]{display:grid;grid-template-columns:repeat(var(--columns), 1fr) !important}}@media (max-width: 959px){.nowrap.wp-block-post-template{display:grid;grid-template-columns:repeat(var(--columns), 1fr) !important}}.wrap{white-space:normal;flex-wrap:wrap}

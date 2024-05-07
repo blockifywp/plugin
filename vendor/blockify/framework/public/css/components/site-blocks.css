@@ -1,0 +1,1 @@
+.wp-site-blocks{display:var(--wp--custom--site-blocks--display, grid);grid-template-rows:auto 1fr auto;grid-template-columns:1fr;width:100%;min-height:var(--wp--custom--site-blocks--min-height, 100vh);overflow-x:var(--wp--custom--site-blocks--overflow-x);background:var(--wp--custom--site-blocks--background, transparent)}.wp-site-blocks>*+*{margin-top:0 !important}
