@@ -24,11 +24,9 @@ use function printf;
 use function version_compare;
 use function wp_get_theme;
 use const DIRECTORY_SEPARATOR;
-use const WP_CONTENT_DIR;
 
-const DIR       = __DIR__ . DIRECTORY_SEPARATOR;
-const FILE      = __FILE__;
-const CACHE_DIR = WP_CONTENT_DIR . '/cache/blockify/';
+const DIR  = __DIR__ . DIRECTORY_SEPARATOR;
+const FILE = __FILE__;
 
 ( static function (): void {
 	$theme         = get_template();
@@ -52,15 +50,16 @@ const CACHE_DIR = WP_CONTENT_DIR . '/cache/blockify/';
 		return;
 	}
 
-	require_once DIR . '/vendor/autoload.php';
-	require_once DIR . '/config/blocks.php';
-	require_once DIR . '/config/code.php';
-	require_once DIR . '/config/fields.php';
-	require_once DIR . '/config/fonts.php';
-	require_once DIR . '/config/framework.php';
-	require_once DIR . '/config/icons.php';
-	require_once DIR . '/config/license.php';
-	require_once DIR . '/config/patterns.php';
-	require_once DIR . '/config/seo.php';
-	require_once DIR . '/config/settings.php';
+	require_once DIR . 'vendor/autoload.php';
+	require_once DIR . 'includes/utility.php';
+	require_once DIR . 'includes/blocks.php';
+	require_once DIR . 'includes/code.php';
+	require_once DIR . 'includes/fields.php';
+	require_once DIR . 'includes/fonts.php';
+	require_once DIR . 'includes/framework.php';
+	require_once DIR . 'includes/icons.php';
+	require_once DIR . 'includes/license.php';
+	require_once DIR . 'includes/patterns.php';
+	require_once DIR . 'includes/seo.php';
+	require_once DIR . 'includes/settings.php';
 } )();

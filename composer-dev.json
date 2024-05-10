@@ -19,6 +19,7 @@
   },
   "require": {
     "php": ">=7.4",
+    "arraypress/lemon-squeezy-updater": "dev-main",
     "blockify/blocks": "@dev",
     "blockify/dom": "@dev",
     "blockify/framework": "@dev",

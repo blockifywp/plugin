@@ -1,0 +1,62 @@
+{
+    "agencify": [
+        "blog-comments",
+        "blog-post-content",
+        "contact-form",
+        "contact-icons-and-map",
+        "cta-center",
+        "cta-simple",
+        "faq-wide",
+        "feature-icon-boxes",
+        "feature-icons",
+        "feature-images",
+        "feature-partner",
+        "hero-contact",
+        "hero-features",
+        "hero-left",
+        "hero-single",
+        "page-about",
+        "page-contact",
+        "page-features",
+        "page-pricing",
+        "pricing-three-column",
+        "stats-timeline",
+        "team-members",
+        "template-single",
+        "testimonial-boxes",
+        "testimonial-brands"
+    ],
+    "blockify": [
+        "page-about",
+        "page-blog",
+        "page-contact",
+        "page-features",
+        "page-pricing"
+    ],
+    "codeify": [
+        "contact-form-map-overlay",
+        "contact-map",
+        "cta-right",
+        "feature-icon-boxes",
+        "feature-icons-centered",
+        "feature-image-compare",
+        "feature-images",
+        "hero-video",
+        "page-about",
+        "page-blog",
+        "page-contact",
+        "page-features",
+        "page-pricing",
+        "pricing-three-column",
+        "stats-four-columns",
+        "stats-timeline-center",
+        "testimonial-slider"
+    ],
+    "launchify": [
+        "page-contact"
+    ],
+    "saasify": [
+        "page-about"
+    ],
+    "utility": []
+}

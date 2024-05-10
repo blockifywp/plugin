@@ -91,9 +91,9 @@ function get_selected_fonts(): array {
 function get_all_fonts(): array {
 	$font_families = [];
 	$font_slugs    = wp_list_pluck( $font_families, 'slug' );
-	$dir           = DIR;
-	$font_files    = glob( $dir . 'assets/fonts/*.woff2' );
-	$basename      = basename( $dir );
+	$fonts_dir     = get_cache_dir( 'fonts' );
+	$font_files    = glob( $fonts_dir . '*.woff2' );
+	$basename      = basename( $fonts_dir );
 
 	foreach ( $font_files as $font_file ) {
 		$slug = basename( $font_file, '.woff2' );

@@ -6,6 +6,7 @@ namespace Blockify\Plugin;
 
 use Blockify\Icons\Icon;
 use Blockify\Utilities\Str;
+use function add_action;
 use function add_filter;
 use function array_merge;
 use function esc_html__;
@@ -13,7 +14,7 @@ use function glob;
 use function sprintf;
 use const GLOB_ONLYDIR;
 
-add_filter( Icon::FILTER, __NAMESPACE__ . '\add_icon_sets' );
+add_filter( Icon::FILTER, __NAMESPACE__ . '\\add_icon_sets' );
 /**
  * Add icon sets.
  *
@@ -27,6 +28,18 @@ function add_icon_sets( array $icon_sets ): array {
 	return array_merge( $icon_sets, get_pro_icon_sets() );
 }
 
+add_action( 'after_setup_theme', __NAMESPACE__ . '\\register_icon_rest_route' );
+/**
+ * Register icon REST route.
+ *
+ * @since 1.5.0
+ *
+ * @return void
+ */
+function register_icon_rest_route(): void {
+	Icon::register_rest_route();
+}
+
 add_filter( 'blockify_editor_data', __NAMESPACE__ . '\\add_pro_icon_set_options' );
 /**
  * Add Pro icon set options.
@@ -38,6 +51,10 @@ add_filter( 'blockify_editor_data', __NAMESPACE__ . '\\add_pro_icon_set_options'
  * @return array
  */
 function add_pro_icon_set_options( array $data ): array {
+	if ( is_license_active() ) {
+		return $data;
+	}
+
 	if ( ! isset( $data['pro'] ) ) {
 		$data['pro'] = [];
 	}
@@ -85,8 +102,7 @@ function add_pro_icon_set_options( array $data ): array {
  * @return array
  */
 function get_pro_icon_sets(): array {
-	$dirs = glob( CACHE_DIR . 'icons/*', GLOB_ONLYDIR );
-
+	$dirs      = glob( get_cache_dir( 'icons' ) . '*', GLOB_ONLYDIR );
 	$icon_sets = [];
 
 	foreach ( $dirs as $dir ) {

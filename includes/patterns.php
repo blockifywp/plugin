@@ -4,13 +4,17 @@ declare( strict_types=1 );
 
 namespace Blockify\Plugin;
 
+use Blockify\Utilities\Str;
 use WP_Post;
 use function add_filter;
 use function array_merge;
 use function get_stylesheet;
 use function get_the_terms;
 use function in_array;
+use function register_block_pattern;
+use function sprintf;
 use function str_contains;
+use function wp_json_file_decode;
 use function wp_list_pluck;
 
 /**
@@ -82,14 +86,20 @@ add_filter( 'blockify_pattern_dirs', __NAMESPACE__ . '\\add_pro_patterns' );
  * @return string[]
  */
 function add_pro_patterns( array $dirs ): array {
+	if ( ! is_license_active() ) {
+		return $dirs;
+	}
+
+	$patterns_dir = get_cache_dir( 'patterns' );
+
 	$dirs = array_merge(
 		[
-			CACHE_DIR . 'patterns/blockify',
+			$patterns_dir . 'blockify',
 		],
 		$dirs
 	);
 
-	$dirs[] = CACHE_DIR . 'patterns/' . get_stylesheet();
+	$dirs[] = $patterns_dir . get_stylesheet();
 
 	return $dirs;
 }
@@ -110,4 +120,67 @@ function add_utility_patterns( array $categories ): array {
 	$categories['utility']['dark-mode-toggle-dropdown'] = DIR . 'patterns/utility/dark-mode-toggle-dropdown.php';
 
 	return $categories;
+}
+
+
+add_action( 'init', __NAMESPACE__ . '\\add_placeholder_patterns', 11 );
+/**
+ * Adds placeholder patterns.
+ *
+ * @since 1.5.0
+ *
+ * @return void
+ */
+function add_placeholder_patterns(): void {
+	if ( is_license_active() ) {
+		return;
+	}
+
+	$patterns_json_file = DIR . 'patterns.json';
+
+	if ( ! file_exists( $patterns_json_file ) ) {
+		return;
+	}
+
+	$html = <<<HTML
+<!-- wp:group {"align":"full","layout":{"type":"default"}} -->
+<div class="wp-block-group alignfull">
+<!-- wp:image {"sizeSlug":"full","align":"full","style":{"minWidth":{"all":"100vw"}}} -->
+<figure class="wp-block-image alignfull size-full">
+<img src="https://blockifywp.com/wp-content/themes/blockifywp/screenshots/%s/pro/%s.webp" alt="%s"/>
+</figure>
+<!-- /wp:image -->
+</div>
+<!-- /wp:group -->
+HTML;
+
+	$stylesheet    = get_stylesheet();
+	$patterns_json = wp_json_file_decode( $patterns_json_file );
+
+	foreach ( $patterns_json as $theme => $patterns ) {
+		if ( $theme !== $stylesheet ) {
+			continue;
+		}
+
+		foreach ( $patterns as $pattern ) {
+			$category = explode( '-', $pattern )[0] ?? 'text';
+
+			$content = sprintf(
+				$html,
+				$theme,
+				$pattern,
+				Str::title_case( $theme . ' ' . $pattern )
+			);
+
+			register_block_pattern(
+				"$theme/$pattern-pro",
+				[
+					'title'       => Str::title_case( $theme . ' ' . $pattern ) . ' (Pro)',
+					'content'     => $content,
+					'categories'  => [ $category ],
+					'description' => 'This is a placeholder pattern. Activate your license to unlock the full pattern.',
+				]
+			);
+		}
+	}
 }

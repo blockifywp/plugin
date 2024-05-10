@@ -24,6 +24,7 @@
       ".gitignore",
       ".gitattributes",
       ".editorconfig",
+      "bin/*",
       "composer.json",
       "composer.lock",
       "composer-dev.json",
@@ -41,10 +42,12 @@
     "delete-git": "echo [WARNING] Deleting all .git directories from dependencies && rm -rf vendor/**/**/.git",
     "dist": "composer update --no-dev && composer run delete-git && rm -rf vendor/bin",
     "zip": "composer archive --format=zip --file=../blockify",
-    "pot": "wp i18n make-pot ./ languages/blockify.pot --exclude='.github,assets,vendor'"
+    "pot": "wp i18n make-pot ./ languages/blockify.pot --exclude='.github,assets,vendor'",
+    "patterns": "php bin/screenshots.php"
   },
   "require": {
     "php": ">=7.4",
+    "arraypress/lemon-squeezy-updater": "dev-main",
     "blockify/blocks": "dev-main",
     "blockify/dom": "dev-main",
     "blockify/framework": "dev-main",
