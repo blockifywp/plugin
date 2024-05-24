@@ -1,7 +1,6 @@
 node_modules/
 wp/
 wp-content/
-src/
 *.zip
 *.lock
 *DS_Store
