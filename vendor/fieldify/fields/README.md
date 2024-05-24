@@ -1,5 +1,7 @@
 # Fieldify
 
+[Documentation](https://fieldifywp.github.io/)
+
 Composer package for creating react-powered fields, blocks and settings in the
 WordPress editor with only PHP.
 

@@ -1,0 +1,8 @@
+*.iml
+*.ipr
+/.idea/
+composer.phar
+/build/
+/vendor/
+/test/
+/composer.lock

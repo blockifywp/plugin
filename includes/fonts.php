@@ -43,9 +43,13 @@ function add_fonts( $theme_json ) {
  * @return array
  */
 function get_selected_fonts(): array {
-	$font_families  = get_option( 'blockify' )['googleFonts'] ?? [];
+	$font_families  = get_option( 'blockify', [] )['googleFonts'] ?? [];
 	$selected_fonts = [];
 	$basename       = basename( DIR );
+
+	if ( empty( $font_families ) ) {
+		return $selected_fonts;
+	}
 
 	foreach ( $font_families as $font_family ) {
 		$slug = $font_family['value'] ?? '';

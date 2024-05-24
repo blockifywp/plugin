@@ -30,11 +30,11 @@
       "default": ""
     },
     "lat": {
-      "type": "integer",
+      "type": "number",
       "default": 40.7127753
     },
     "lng": {
-      "type": "integer",
+      "type": "number",
       "default": -74.0059728
     },
     "address": {
@@ -42,7 +42,7 @@
       "default": "New York City, NY, USA"
     },
     "zoom": {
-      "type": "integer",
+      "type": "number",
       "default": 10
     },
     "height": {
@@ -72,6 +72,5 @@
   },
   "editorScript": "file:index.js",
   "editorStyle": "file:index.css",
-  "script": "file:view.js",
-  "style": "file:view.css"
+  "script": "file:view.js"
 }

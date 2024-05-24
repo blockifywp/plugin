@@ -26,7 +26,7 @@ use function wp_list_pluck;
  */
 function get_child_themes(): array {
 	return [
-		'agencify',
+		'adaptify',
 		'blockify',
 		'brandify',
 		'codeify',
@@ -103,25 +103,6 @@ function add_pro_patterns( array $dirs ): array {
 
 	return $dirs;
 }
-
-add_filter( 'blockify_patterns', __NAMESPACE__ . '\\add_utility_patterns' );
-/**
- * Adds utility patterns.
- *
- * @since 1.0.0
- *
- * @param array $categories The patterns.
- *
- * @return array
- */
-function add_utility_patterns( array $categories ): array {
-	$categories['utility']['dark-mode-toggle']          = DIR . 'patterns/utility/dark-mode-toggle.php';
-	$categories['utility']['dark-mode-toggle-switch']   = DIR . 'patterns/utility/dark-mode-toggle-switch.php';
-	$categories['utility']['dark-mode-toggle-dropdown'] = DIR . 'patterns/utility/dark-mode-toggle-dropdown.php';
-
-	return $categories;
-}
-
 
 add_action( 'init', __NAMESPACE__ . '\\add_placeholder_patterns', 11 );
 /**

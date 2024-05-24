@@ -275,14 +275,22 @@ function fetch_cloud_content( ?string $key = null ): array {
 
 	$permissions = 0777;
 
+	// Delete existing cache.
+	if ( is_dir( $cache_dir ) ) {
+		unlink( $cache_dir );
+	}
+
+	// Create cache directory.
 	if ( ! is_dir( $cache_dir ) ) {
 		mkdir( $cache_dir, $permissions, true );
 	}
 
+	// Attempt to set permissions.
 	if ( ! is_writable( $cache_dir ) ) {
 		chmod( $cache_dir, $permissions );
 	}
 
+	// Failed to set permissions.
 	if ( ! is_writable( $cache_dir ) ) {
 		return [
 			'success' => false,
@@ -395,6 +403,12 @@ function content_needs_updating(): bool {
 
 		$needs_update = $remote_timestamp > $local_timestamp;
 	}
+
+	set_transient(
+		$transient_key,
+		$needs_update,
+		DAY_IN_SECONDS
+	);
 
 	return $needs_update;
 }

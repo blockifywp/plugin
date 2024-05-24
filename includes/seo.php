@@ -21,6 +21,13 @@ add_action( 'wp_head', __NAMESPACE__ . '\fallback_meta_description', 2 );
  * @return void
  */
 function fallback_meta_description() {
+	$options      = get_option( 'blockify', [] );
+	$use_fallback = $options['fallbackMetaDescription'] ?? true;
+
+	if ( ! $use_fallback ) {
+		return;
+	}
+
 	$seo_plugins = [
 		'wordpress-seo/wp-seo.php',
 		'all-in-one-seo-pack/all_in_one_seo_pack.php',

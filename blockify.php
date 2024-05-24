@@ -19,7 +19,9 @@ namespace Blockify\Plugin;
 
 use function add_action;
 use function esc_html__;
+use function file_exists;
 use function get_template;
+use function get_template_directory;
 use function printf;
 use function version_compare;
 use function wp_get_theme;
@@ -31,9 +33,10 @@ const FILE = __FILE__;
 ( static function (): void {
 	$theme         = get_template();
 	$theme_version = wp_get_theme( $theme )->get( 'Version' );
+	$has_framework = file_exists( get_template_directory() . '/vendor/blockify/framework' );
 	$min_version   = '1.5.0';
 
-	if ( $theme === 'blockify' && version_compare( $theme_version, $min_version, '<' ) ) {
+	if ( ( $theme === 'blockify' || $has_framework ) && version_compare( $theme_version, $min_version, '<' ) ) {
 		add_action(
 			'admin_notices',
 			static function () use ( $min_version ): void {
@@ -59,7 +62,9 @@ const FILE = __FILE__;
 	require_once DIR . 'includes/framework.php';
 	require_once DIR . 'includes/icons.php';
 	require_once DIR . 'includes/license.php';
+	require_once DIR . 'includes/maps.php';
 	require_once DIR . 'includes/patterns.php';
 	require_once DIR . 'includes/seo.php';
 	require_once DIR . 'includes/settings.php';
 } )();
+
